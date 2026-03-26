@@ -60,4 +60,7 @@ print("[Server] TradeService loaded.")
 require(Services.EventService)
 print("[Server] EventService loaded.")
 
+require(Services.LeaderboardService)
+print("[Server] LeaderboardService loaded.")
+
 print("[Server] Crystal Pets Simulator – all services online.")

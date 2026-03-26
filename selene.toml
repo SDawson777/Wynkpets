@@ -1,0 +1,27 @@
+# selene.toml
+# Luau linting configuration.
+# Run: selene src/
+# Docs: https://kampfkarren.github.io/selene/
+
+[config]
+# Use the Roblox standard library so global APIs (game, workspace, etc.) are recognised.
+standard_library = "roblox"
+
+# Treat warnings as errors in CI; comment out for local dev if too noisy.
+# error_on_warnings = true
+
+[rules]
+# Allow the Luau 'continue' keyword (not in standard Lua 5.1 selene stdlib).
+# Already handled by standard_library = "roblox".
+
+# Allow trailing commas (common Luau style).
+# No rule needed; selene doesn't flag these.
+
+# Disallow using 'wait()' (deprecated Roblox API – prefer task.wait).
+deprecated = "warn"
+
+# Flag unused variables.
+unused_variable = "warn"
+
+# Disallow shadowing outer variables.
+shadowing = "warn"

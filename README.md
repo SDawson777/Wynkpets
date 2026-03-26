@@ -26,6 +26,9 @@ A top-revenue-oriented **Pet + Mining Simulator** for Roblox, built in Luau usin
 
 ```
 default.project.json          ← Rojo project config (maps src/ → Roblox tree)
+aftman.toml                   ← Tool version lock (rojo, selene, stylua, wally)
+selene.toml                   ← Luau linter config
+stylua.toml                   ← Luau code formatter config
 src/
   shared/
     Config/
@@ -45,6 +48,7 @@ src/
       MultiplierUtil.luau     ← Calculates effective coin/mine/luck mults
   server/
     init.server.luau          ← Bootstrap: create remotes, load services
+    MapSetup.server.luau      ← Procedural world geometry (rocks, zones, pads)
     Services/
       DataService.luau        ← DataStore save/load with session lock + retries
       MiningService.luau      ← Rock hits, ore drops, auto-sell loop
@@ -54,6 +58,7 @@ src/
       QuestService.luau       ← Quest/achievement tracking + daily rewards
       TradeService.luau       ← P2P pet trading
       EventService.luau       ← Limited-time event framework + admin commands
+      LeaderboardService.luau ← OrderedDataStore leaderboards + leaderstats panel
   client/
     init.client.luau          ← Bootstrap: wait for remotes, load controllers
     Controllers/
@@ -66,14 +71,50 @@ src/
 
 ---
 
-## 🛠 Setup (Rojo Workflow)
+## 🛠 Getting Started
 
-1. Install [Rojo](https://rojo.space/) (VS Code extension + CLI)
-2. Install [Roblox Studio](https://create.roblox.com/docs/studio/setting-up-roblox-studio)
-3. Clone this repo and open the workspace folder
-4. In a terminal: `rojo serve`
-5. In Roblox Studio: connect via the Rojo plugin → **Connect**
-6. Place rocks in the Workspace and tag them with a `RockId` attribute matching `MiningConfig.Rocks[].id`
+### Prerequisites
+
+| Tool | Purpose | Install |
+|------|---------|---------|
+| [Rojo](https://rojo.space/) | Sync code → Studio | `aftman install` |
+| [Roblox Studio](https://create.roblox.com/docs/studio/setting-up-roblox-studio) | Game editor | From Roblox website |
+| [aftman](https://github.com/LPGhatguy/aftman) | Tool version manager | See aftman README |
+
+### Workflow
+
+```bash
+# 1. Install all tools (Rojo, Selene, StyLua, Wally) at pinned versions
+aftman install
+
+# 2. Start the Rojo dev server
+rojo serve
+
+# 3. In Roblox Studio, open the Rojo plugin and click Connect
+#    Your code syncs live — save any .luau file to see it update instantly.
+
+# 4. Hit Play (F5) in Studio to test.
+#    MapSetup.server.luau auto-generates the full map on run — no manual asset placement needed.
+```
+
+### Linting & Formatting
+
+```bash
+# Lint all Luau files
+selene src/
+
+# Auto-format all Luau files
+stylua src/
+```
+
+### Building a Place File
+
+```bash
+# Builds a .rbxlx place file (useful for CI or sharing)
+rojo build --output game.rbxlx
+
+# game.rbxlx is in .gitignore — commit the source, not the binary.
+```
 
 ---
 
@@ -158,13 +199,54 @@ src/
 
 ---
 
+## 🏆 Leaderboards
+
+`LeaderboardService` maintains three `OrderedDataStore` boards and Roblox's built-in `leaderstats` panel:
+
+| Board       | Metric                    |
+|-------------|---------------------------|
+| MostCoins   | Lifetime coins earned     |
+| MostRebirths| Total rebirths completed  |
+| MostPets    | Total eggs hatched        |
+
+The `leaderstats` folder (Coins, Rebirths, Pets) is created on every player join so they appear automatically in the Roblox player list.
+
+---
+
+## 🗺 Procedural Map
+
+`MapSetup.server.luau` runs at game start and generates the entire playable world:
+
+| Zone             | X range     | Rocks                         | Special pads         |
+|------------------|-------------|-------------------------------|----------------------|
+| Spawn Island     | X = -380    | —                             | Portal → World 1     |
+| Starter Mine     | X = -200→-50| Coal & Copper rocks (3×5=15)  | Sell, Eggs, Rebirth  |
+| Crystal Caverns  | X = 50→200  | Silver & Gemstone rocks (3×5=15)| Sell, Eggs         |
+| Starstone Abyss  | X = 300→500 | Crystal & Starstone rocks (4×6=24)| Sell, Eggs      |
+
+No manual Studio work is needed — rock nodes are spawned with `RockId` attributes pre-set.
+
+---
+
 ## 🚀 Launching Your MVP
 
-1. Publish the game to Roblox
-2. Create gamepasses/dev products on the Creator Hub and update `assetId` values in `GamepassConfig.luau`
-3. Build and publish rock models in Studio, setting `RockId` attributes to match `MiningConfig`
-4. Set admin `UserIds` in `EventService.luau` → `ADMIN_USER_IDS`
-5. Balance economy parameters in `EconomyConfig.luau` and `MiningConfig.luau`
+```bash
+# Step 1 – install tools
+aftman install
+
+# Step 2 – sync to Studio
+rojo serve
+# Then connect in Studio → run with F5 to test immediately
+
+# Step 3 – publish
+# File → Publish to Roblox in Studio
+```
+
+**Pre-launch checklist:**
+- [ ] Create gamepasses/dev products on Creator Hub, update `assetId` in `GamepassConfig.luau`
+- [ ] Add your Roblox `UserId` to `ADMIN_USER_IDS` in `EventService.luau`
+- [ ] Review economy values in `EconomyConfig.luau` and `MiningConfig.luau`
+- [ ] Set `DataStoreName` in `DataService.luau` if you want a clean slate
 
 ---
 
