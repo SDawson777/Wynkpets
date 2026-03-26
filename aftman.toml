@@ -1,0 +1,10 @@
+# aftman.toml
+# Toolchain manager configuration for Crystal Pets Simulator.
+# Install aftman: https://github.com/LPGhatguy/aftman
+# Then run: aftman install
+
+[tools]
+rojo      = "rojo-rbx/rojo@7.6.1"
+selene    = "Kampfkarren/selene@0.27.1"
+wally     = "UpliftGames/wally@0.3.2"
+stylua    = "JohnnyMorganz/StyLua@0.20.0"
