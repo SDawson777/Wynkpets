@@ -1,38 +1,7 @@
-# ─── Roblox Studio build artifacts ──────────────────────────────────────────
-*.rbxlx
 *.rbxl
+*.rbxlx
 *.rbxm
 *.rbxmx
-
-# ─── Rojo generated files ────────────────────────────────────────────────────
-# Uncomment if you want to commit the built place file:
-# !game.rbxlx
-
-# ─── Toolchain binaries (aftman/foreman managed) ─────────────────────────────
-.aftman/
-.foreman/
-
-# ─── Wally packages ──────────────────────────────────────────────────────────
-Packages/
-DevPackages/
-ServerPackages/
-
-# ─── OS and editor artifacts ─────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
-*.swp
-*.swo
-*~
-
-# ─── VS Code ─────────────────────────────────────────────────────────────────
-.vscode/settings.json
-.vscode/launch.json
-
-# ─── Selene cache ────────────────────────────────────────────────────────────
-.selene/
-
-# ─── Node / npm (if any tooling uses it) ────────────────────────────────────
-node_modules/
-
-# ─── Luau type-check cache ───────────────────────────────────────────────────
-*.luau-typecheck-cache
+*.lock

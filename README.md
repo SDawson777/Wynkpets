@@ -1,255 +1,137 @@
-# Wynkpets — Crystal Pets Simulator
+# Wynkpets 🐾
 
-> **Repository name:** `Wynkpets` | **Game working title:** `Crystal Pets Simulator` | **Rojo project name:** `CrystalPetsSimulator`
+A **Roblox Pet Simulator** — hatch eggs, collect pets, unlock zones, rebirth for multipliers, and compete for the rarest pets.
 
-A top-revenue-oriented **Pet + Mining Simulator** for Roblox, built in Luau using the [Rojo](https://rojo.space/) workflow.
-
----
-
-## 🎮 Game Overview
-
-**Working title:** Crystal Pets Simulator  
-**Platform:** Roblox (Luau)  
-**Genre:** Simulator (Pet + Mining)
-
-### Core Loop
-1. **Mine** crystals and ores by clicking rocks
-2. **Sell** ores for coins
-3. **Hatch** eggs with coins or gems to get pets
-4. **Equip** pets for permanent multiplier bonuses
-5. **Unlock** new worlds with rarer ores and pets
-6. **Rebirth** to reset progress for permanent prestige bonuses
-
----
-
-## 📁 Project Structure
-
-```
-default.project.json          ← Rojo project config (maps src/ → Roblox tree)
-aftman.toml                   ← Tool version lock (rojo, selene, stylua, wally)
-selene.toml                   ← Luau linter config
-stylua.toml                   ← Luau code formatter config
-src/
-  shared/
-    Config/
-      EconomyConfig.luau      ← Currency values, ore prices, rebirth costs
-      MiningConfig.luau       ← Tools, rocks, HP, ore tables, swing cooldown
-      PetConfig.luau          ← 30 pets, 8 rarities, slot limits
-      EggConfig.luau          ← 8 eggs, hatch pools, costs, auto-hatch config
-      WorldConfig.luau        ← 3 worlds, unlock costs, rebirth requirements
-      GamepassConfig.luau     ← 8 gamepasses + dev products (consumables)
-      ShopConfig.luau         ← In-game shop items, daily rewards
-      QuestConfig.luau        ← Daily / weekly quests + achievements
-      RemoteConfig.luau       ← All RemoteEvent / RemoteFunction names
-    Modules/
-      DataTemplate.luau       ← Default player save-data schema
-      WeightedRandom.luau     ← Weighted-random picker (eggs, ore drops)
-      FormatNumber.luau       ← K/M/B/T number formatting
-      MultiplierUtil.luau     ← Calculates effective coin/mine/luck mults
-  server/
-    init.server.luau          ← Bootstrap: create remotes, load services
-    MapSetup.server.luau      ← Procedural world geometry (rocks, zones, pads)
-    Services/
-      DataService.luau        ← DataStore save/load with session lock + retries
-      MiningService.luau      ← Rock hits, ore drops, auto-sell loop
-      PetService.luau         ← Egg hatching, equip/unequip, auto-hatch loop
-      ShopService.luau        ← Shop purchases, world unlocks, gamepass grants
-      RebirthService.luau     ← Rebirth validation and stat reset
-      QuestService.luau       ← Quest/achievement tracking + daily rewards
-      TradeService.luau       ← P2P pet trading
-      EventService.luau       ← Limited-time event framework + admin commands
-      LeaderboardService.luau ← OrderedDataStore leaderboards + leaderstats panel
-  client/
-    init.client.luau          ← Bootstrap: wait for remotes, load controllers
-    Controllers/
-      ClientData.luau         ← Client-side data cache (synced from server)
-      UIController.luau       ← HUD (coins, gems, sell button, notifications)
-      MiningController.luau   ← Click/tap → MineRock remote + client prediction
-      PetController.luau      ← Pet inventory GUI + egg hatch GUI
-      ShopController.luau     ← Shop GUI, rebirth GUI, quest/achievement GUI
-```
-
----
-
-## 🛠 Getting Started
+## Quick Start
 
 ### Prerequisites
+- [Roblox Studio](https://create.roblox.com/)
+- [Rojo](https://rojo.space/) (VS Code extension or CLI)
 
-| Tool | Purpose | Install |
-|------|---------|---------|
-| [Rojo](https://rojo.space/) | Sync code → Studio | `aftman install` |
-| [Roblox Studio](https://create.roblox.com/docs/studio/setting-up-roblox-studio) | Game editor | From Roblox website |
-| [aftman](https://github.com/LPGhatguy/aftman) | Tool version manager | See aftman README |
-
-### Workflow
-
+### Setup
 ```bash
-# 1. Install all tools (Rojo, Selene, StyLua, Wally) at pinned versions
+# 1. Clone the repo
+git clone https://github.com/SDawson777/Wynkpets.git
+cd Wynkpets
+
+# 2. Install Rojo CLI (if not using the VS Code extension)
 aftman install
 
-# 2. Start the Rojo dev server
+# 3. Start Rojo dev server
 rojo serve
 
-# 3. In Roblox Studio, open the Rojo plugin and click Connect
-#    Your code syncs live — save any .luau file to see it update instantly.
-
-# 4. Hit Play (F5) in Studio to test.
-#    MapSetup.server.luau auto-generates the full map on run — no manual asset placement needed.
+# 4. In Roblox Studio, connect via the Rojo plugin
 ```
 
-### Linting & Formatting
+## Architecture
 
-```bash
-# Lint all Luau files
-selene src/
-
-# Auto-format all Luau files
-stylua src/
+```
+src/
+├── shared/              → ReplicatedStorage
+│   ├── Types.luau           Type definitions
+│   ├── Network.luau         Centralized RemoteEvent system
+│   ├── Configs/             Game data (pets, eggs, zones, shop, rebirth, quests)
+│   └── Utils/               NumberFormat, TableUtil
+├── server/              → ServerScriptService
+│   ├── init.server.luau     Boot script (loads all services)
+│   └── Services/            12 server services
+│       ├── DataService          DataStore persistence, auto-save, retry
+│       ├── CurrencyService      Coins/Gems with multiplier stacking
+│       ├── PetService           Inventory, equip/unequip, pet index
+│       ├── EggService           Weighted hatching, golden/rainbow variants
+│       ├── ZoneService          Zone unlock & teleport
+│       ├── RebirthService       Prestige system
+│       ├── GamepassService      MarketplaceService integration
+│       ├── ShopService          Dev product processing, boosts
+│       ├── RewardService        Login streaks, daily quests
+│       ├── AdminService         Debug commands (gated by ADMIN_IDS)
+│       ├── AntiExploitService   Rate limiting, speed checks
+│       └── CoinSpawnerService   World coin spawning & collection
+├── client/              → StarterPlayerScripts
+│   ├── init.client.luau     Boot script (loads all controllers)
+│   └── Controllers/         5 client controllers
+│       ├── CurrencyController   Local currency tracking
+│       ├── PetController        Visual pet models orbiting player
+│       ├── HatchController      Hatch animation & result display
+│       ├── ZoneController       Zone state tracking
+│       └── ShopController       Purchase request helpers
+└── gui/                 → StarterGui
+    ├── MainHUD              Currency display, side menu, notifications
+    ├── ShopGui              Gamepasses & dev products (tabbed)
+    ├── EggGui               Egg selection with hatch chances
+    ├── PetInventoryGui      Pet grid with equip/sort
+    ├── RebirthGui           Prestige progression & confirm
+    ├── ZoneGui              Zone list with teleport/unlock
+    └── QuestGui             Daily quests & login streak
 ```
 
-### Building a Place File
+All game logic is **server-authoritative**. The client sends requests via `Network.FireServer()`, the server validates and responds.
 
-```bash
-# Builds a .rbxlx place file (useful for CI or sharing)
-rojo build --output game.rbxlx
+## Game Content (MVP)
 
-# game.rbxlx is in .gitignore — commit the source, not the binary.
+| Category | Count | Details |
+|----------|-------|---------|
+| Zones | 3 | Starter Meadow (free), Forest Grove (1K), Crystal Caves (25K) |
+| Eggs | 6 | 2 per zone, 100–250K coins |
+| Pets | 31 | Common → Secret rarity, Golden & Rainbow variants |
+| Gamepasses | 5 | 2x Coins, 2x Gems, Auto Hatch, Triple Hatch, VIP |
+| Dev Products | 3 | Luck Boost, Coin Boost, Starter Pack |
+| Rebirth Tiers | 10 | 1.5x → 20x multiplier, +1 → +5 equip slots |
+| Daily Quests | 6 types | 3 assigned per day, 7-day login streak |
+
+## Adding Content
+
+### New Pet
+Add an entry to `src/shared/Configs/PetConfig.luau`:
+```lua
+{ Id = "my_pet", Name = "My Pet", Rarity = "Epic", Power = 100, Zone = "starter_meadow", Description = "A cool pet" },
+```
+Then add it to an egg's `Pets` table in `EggConfig.luau` with a `Weight`.
+
+### New Egg
+Add to `src/shared/Configs/EggConfig.luau`:
+```lua
+{ Id = "new_egg", Name = "New Egg", Zone = "starter_meadow", Cost = 500, Currency = "Coins", Pets = { ... } },
 ```
 
----
+### New Zone
+Add to `src/shared/Configs/ZoneConfig.luau` with `Id`, `Name`, `UnlockCost`, `SpawnPosition`, `CoinMultiplier`, `Color`, `Description`.
 
-## 💰 Economy at a Glance
+### New Gamepass / Dev Product
+Add to `GamepassConfig.luau` or `DevProductConfig.luau`. Replace `ProductId = 0` with the real Roblox asset ID after publishing.
 
-| Ore         | Coins / unit |
-|-------------|-------------|
-| Coal        | 1           |
-| Copper      | 3           |
-| Iron        | 8           |
-| Gold        | 55          |
-| Diamond     | 150         |
-| Crystal     | 40,000      |
-| Starstone   | 100,000     |
+## Placeholder IDs
 
-**Rebirth cost formula:** `1,000,000 × 5^n` (n = current rebirth count)
+Before publishing, replace all `ProductId = 0` values:
+- `src/shared/Configs/GamepassConfig.luau` — 5 gamepass IDs
+- `src/shared/Configs/DevProductConfig.luau` — 3 dev product IDs
+- `src/server/Services/AdminService.luau` — `ADMIN_IDS` table with your Roblox user IDs
 
----
+## Admin Commands
 
-## 🐾 Pet Rarities & Multipliers
+Chat commands (requires your user ID in `ADMIN_IDS`):
 
-| Rarity    | Approx. Chance | Coin Mult | Mine Mult |
-|-----------|----------------|-----------|-----------|
-| Common    | ~55%           | +0.05×    | +0.05×    |
-| Uncommon  | ~28%           | +0.12×    | +0.12×    |
-| Rare      | ~11%           | +0.30×    | +0.30×    |
-| Epic      | ~4.4%          | +0.75×    | +0.75×    |
-| Legendary | ~1.1%          | +2.00×    | +2.00×    |
-| Mythic    | ~0.28%         | +5.00×    | +5.00×    |
-| Divine    | ~0.06%         | +15.00×   | +15.00×   |
-| Secret    | ~0.01%         | +50.00×   | +50.00×   |
+| Command | Description |
+|---------|-------------|
+| `/addcoins [amount]` | Add coins |
+| `/addgems [amount]` | Add gems |
+| `/setcoins [amount]` | Set exact coins |
+| `/givepet [petId]` | Give yourself a pet |
+| `/unlockall` | Unlock all zones |
+| `/resetdata` | Reset your player data |
+| `/givegamepass [id]` | Grant a gamepass |
+| `/setrebirth [level]` | Set rebirth level |
+| `/boost [type] [seconds]` | Activate a boost |
+| `/help` | List all commands |
 
----
+## Tech Stack
 
-## 🥚 Eggs (MVP: 8)
+- **Language:** Luau (Roblox)
+- **Build Tool:** Rojo (filesystem → Roblox Studio sync)
+- **Data:** DataStoreService with retry logic & auto-save (120s)
+- **Pattern:** Service/Controller (server services, client controllers)
+- **Network:** Centralized RemoteEvent/RemoteFunction system
 
-| Egg         | Cost         | World |
-|-------------|-------------|-------|
-| Starter Egg | 500 🪙      | 1     |
-| Mine Egg    | 5,000 🪙    | 1     |
-| Crystal Egg | 100,000 🪙  | 2     |
-| Gem Egg     | 1,000,000 🪙| 2     |
-| Void Egg    | 100 💎      | 3     |
-| Premium Egg | 250 💎      | Any   |
-| Event Egg   | 50 tokens   | Any   |
-| Mythic Egg  | 500 💎      | 3     |
+## License
 
----
-
-## 🎫 Gamepasses (8)
-
-| Pass             | Robux | Effect                           |
-|------------------|-------|----------------------------------|
-| 2× Coins         | 199   | +1× coin multiplier (permanent)  |
-| 2× Mining        | 199   | +1× mine multiplier (permanent)  |
-| Extra Pet Slots  | 299   | +3 equip slots (max 6)           |
-| Auto-Sell        | 149   | Sell ores automatically          |
-| Auto-Hatch       | 149   | Auto-hatch eggs                  |
-| VIP              | 499   | +10% all gains + VIP zone        |
-| Speed Boost      | 99    | +25% mining speed                |
-| Max Luck         | 399   | +2× hatch luck                   |
-
----
-
-## 🌍 Worlds (MVP: 3)
-
-| World             | Unlock Cost | Rebirth Gate | Ores                       |
-|-------------------|-------------|--------------|----------------------------|
-| Starter Mine      | Free        | 0            | Coal, Copper, Iron         |
-| Crystal Caverns   | 1M 🪙       | 1            | Silver, Gold, Diamond, Emerald, Ruby |
-| Starstone Abyss   | 500 💎      | 3            | Crystal, Amethyst, Obsidian, Sapphire, Starstone |
-
----
-
-## 🔒 Anti-Exploit Architecture
-
-- **Server-authoritative**: all currency, pets, and progression are only ever modified server-side
-- **Timing validation**: `MiningService` checks swing interval server-side (50 ms tolerance for latency)
-- **Input validation**: all `OnServerEvent` handlers validate argument types before processing
-- **DataStore retries**: exponential backoff (up to 3 attempts) on save/load failures
-- **Session lock pattern**: data is loaded per-session; no cross-server duplication
-
----
-
-## 🏆 Leaderboards
-
-`LeaderboardService` maintains three `OrderedDataStore` boards and Roblox's built-in `leaderstats` panel:
-
-| Board       | Metric                    |
-|-------------|---------------------------|
-| MostCoins   | Lifetime coins earned     |
-| MostRebirths| Total rebirths completed  |
-| MostPets    | Total eggs hatched        |
-
-The `leaderstats` folder (Coins, Rebirths, Pets) is created on every player join so they appear automatically in the Roblox player list.
-
----
-
-## 🗺 Procedural Map
-
-`MapSetup.server.luau` runs at game start and generates the entire playable world:
-
-| Zone             | X range     | Rocks                         | Special pads         |
-|------------------|-------------|-------------------------------|----------------------|
-| Spawn Island     | X = -380    | —                             | Portal → World 1     |
-| Starter Mine     | X = -200→-50| Coal & Copper rocks (3×5=15)  | Sell, Eggs, Rebirth  |
-| Crystal Caverns  | X = 50→200  | Silver & Gemstone rocks (3×5=15)| Sell, Eggs         |
-| Starstone Abyss  | X = 300→500 | Crystal & Starstone rocks (4×6=24)| Sell, Eggs      |
-
-No manual Studio work is needed — rock nodes are spawned with `RockId` attributes pre-set.
-
----
-
-## 🚀 Launching Your MVP
-
-```bash
-# Step 1 – install tools
-aftman install
-
-# Step 2 – sync to Studio
-rojo serve
-# Then connect in Studio → run with F5 to test immediately
-
-# Step 3 – publish
-# File → Publish to Roblox in Studio
-```
-
-**Pre-launch checklist:**
-- [ ] Create gamepasses/dev products on Creator Hub, update `assetId` in `GamepassConfig.luau`
-- [ ] Add your Roblox `UserId` to `ADMIN_USER_IDS` in `EventService.luau`
-- [ ] Review economy values in `EconomyConfig.luau` and `MiningConfig.luau`
-- [ ] Set `DataStoreName` in `DataService.luau` if you want a clean slate
-
----
-
-## 📝 License
-
-MIT — see [LICENSE](LICENSE) for details.
+Private — all rights reserved.

@@ -1,64 +1,94 @@
--- RebirthService.luau
--- Handles rebirth (prestige) progression.
+--[[
+    RebirthService.luau
+    Handles the rebirth/prestige system.
+    Server-authoritative.
+]]
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local Network = require(Shared:WaitForChild("Network"))
+local RebirthConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RebirthConfig"))
 
-local DataService   = require(script.Parent.DataService)
-local EconomyConfig = require(ReplicatedStorage.Shared.Config.EconomyConfig)
-
-local Events = ReplicatedStorage.Shared.Remotes.Events
+local DataService
+local CurrencyService
 
 local RebirthService = {}
 
--- ─── Calculate rebirth cost ──────────────────────────────────────────────────
+-- Perform a rebirth for a player
+function RebirthService.Rebirth(player: Player): boolean
+    local data = DataService.GetData(player)
+    if not data then return false end
 
-function RebirthService.getRebirthCost(rebirthCount: number): number
-    return math.floor(
-        EconomyConfig.BaseRebirthCost * (EconomyConfig.RebirthCostScale ^ rebirthCount)
-    )
-end
+    local currentRebirths = data.Rebirths or 0
+    local nextTier = RebirthConfig.GetNextTier(currentRebirths)
 
--- ─── Process rebirth ─────────────────────────────────────────────────────────
-
-local function doRebirth(player: Player)
-    local data = DataService.get(player)
-    if not data then return end
-
-    local cost = RebirthService.getRebirthCost(data.Rebirths)
-    if data.Coins < cost then
-        Events.PurchaseResult:FireClient(player, false,
-            ("Need %d coins to rebirth (you have %d)."):format(cost, data.Coins))
-        return
+    if not nextTier then
+        Network.FireClient("ShowNotification", player, "You've reached the maximum rebirth level!", "Warning")
+        return false
     end
 
-    -- Consume coins
-    data.Coins = data.Coins - cost
+    -- Check if player can afford rebirth
+    if not CurrencyService.CanAfford(player, "Coins", nextTier.Cost) then
+        Network.FireClient("ShowNotification", player,
+            "Not enough Coins! Need " .. tostring(nextTier.Cost), "Warning")
+        return false
+    end
 
-    -- Increment rebirth count
-    data.Rebirths        = data.Rebirths        + 1
-    data.Stats.totalRebirths = data.Stats.totalRebirths + 1
+    -- === Perform Rebirth ===
 
-    -- Calculate new rebirth bonus
-    -- Each rebirth adds +0.1 additive multiplier (so 10 rebirths = +1× bonus = 2× total base)
-    data.RebirthBonus = data.Rebirths * 0.1
+    -- Reset coins
+    data.Coins = 0
 
-    -- Reset progression (keep pets, gems, gamepasses)
-    data.Ores         = {}
-    data.CurrentWorld = 1
-    data.CurrentTool  = "wooden_pickaxe"
-    data.OwnedTools   = { "wooden_pickaxe" }
-    -- Keep UnlockedWorlds so they see their old worlds but reset current to 1
-    data.UnlockedWorlds = { 1 }
+    -- Reset unlocked zones (keep starter)
+    data.UnlockedZones = { "starter_meadow" }
+
+    -- Increment rebirth level
+    data.Rebirths = currentRebirths + 1
+
+    -- Set new multiplier
+    data.RebirthMultiplier = nextTier.Multiplier
+
+    -- Update equip slots
+    data.MaxEquipSlots = RebirthConfig.GetTotalEquipSlots(data.Rebirths)
 
     -- Notify client
-    Events.CoinsUpdated:FireClient(player, data.Coins)
-    Events.RebirthCompleted:FireClient(player, data.Rebirths, data.RebirthBonus)
+    Network.FireClient("CurrencyUpdated", player, "Coins", data.Coins)
+    Network.FireClient("RebirthCompleted", player, {
+        Rebirths = data.Rebirths,
+        Multiplier = data.RebirthMultiplier,
+        MaxEquipSlots = data.MaxEquipSlots,
+    })
+    Network.FireClient("ShowNotification", player,
+        "Rebirth " .. data.Rebirths .. "! " .. nextTier.Multiplier .. "x multiplier!", "Success")
+
+    return true
 end
 
--- ─── RemoteEvent handler ─────────────────────────────────────────────────────
+-- Get rebirth info for display
+function RebirthService.GetRebirthInfo(player: Player)
+    local data = DataService.GetData(player)
+    if not data then return nil end
 
-Events.RequestRebirth.OnServerEvent:Connect(function(player: Player)
-    doRebirth(player)
-end)
+    local currentRebirths = data.Rebirths or 0
+    local nextTier = RebirthConfig.GetNextTier(currentRebirths)
+
+    return {
+        CurrentRebirths = currentRebirths,
+        CurrentMultiplier = data.RebirthMultiplier or 1.0,
+        CurrentEquipSlots = data.MaxEquipSlots or RebirthConfig.BaseEquipSlots,
+        NextTier = nextTier,
+        CanRebirth = nextTier and CurrencyService.CanAfford(player, "Coins", nextTier.Cost),
+    }
+end
+
+-- Initialize
+function RebirthService.Init(dataService, currencyService)
+    DataService = dataService
+    CurrencyService = currencyService
+
+    Network.OnServerEvent("RequestRebirth", function(player: Player)
+        RebirthService.Rebirth(player)
+    end)
+end
 
 return RebirthService

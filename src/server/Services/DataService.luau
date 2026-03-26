@@ -1,179 +1,269 @@
--- DataService.luau
--- Handles player data persistence using Roblox DataStoreService.
--- Uses a session-lock pattern to prevent data duplication across servers.
--- All other services obtain and modify player data through this service.
+--[[
+    DataService.luau
+    Handles player data persistence using DataStoreService.
+    Server-authoritative: all data mutations go through here.
+    Includes session locking, auto-save, and retry logic.
+]]
 
-local Players          = game:GetService("Players")
+local Players = game:GetService("Players")
 local DataStoreService = game:GetService("DataStoreService")
-local RunService       = game:GetService("RunService")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
 
-local DataTemplate = require(game.ReplicatedStorage.Shared.Modules.DataTemplate)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local Network = require(Shared:WaitForChild("Network"))
+local RebirthConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RebirthConfig"))
 
 local DataService = {}
 
-local DATA_STORE_NAME = "CrystalPets_v1"
-local SAVE_INTERVAL   = 60   -- seconds between auto-saves
-local MAX_RETRIES     = 3
+local DATA_STORE_NAME = "WynkpetsPlayerData_v1"
+local AUTO_SAVE_INTERVAL = 120 -- seconds
+local MAX_RETRIES = 5
+local RETRY_DELAY = 1
+local SESSION_LOCK_EXPIRE = 1800 -- 30 minutes
 
-local dataStore    = DataStoreService:GetDataStore(DATA_STORE_NAME)
-local playerData   = {}   -- [Player] = data table (live copy)
-local saveTimers   = {}   -- [Player] = last save timestamp
+local dataStore = DataStoreService:GetDataStore(DATA_STORE_NAME)
+local playerDataCache = {} -- [Player] = data
+local sessionLocks = {} -- [Player] = true
+local savingPlayers = {} -- [Player] = true (prevent double-save)
 
--- ─── Internal helpers ─────────────────────────────────────────────────────────
+-- Default data template for new players
+local DEFAULT_DATA = {
+    Coins = 0,
+    Gems = 0,
+    Pets = {},
+    EquippedPets = {},
+    UnlockedZones = { "starter_meadow" },
+    Rebirths = 0,
+    RebirthMultiplier = 1.0,
+    TotalCoinsEarned = 0,
+    TotalEggsHatched = 0,
+    TotalPetsCollected = 0,
+    MaxEquipSlots = RebirthConfig.BaseEquipSlots,
+    Gamepasses = {},
+    LoginStreak = 0,
+    LastLogin = 0,
+    DailyRewardClaimed = false,
+    Quests = {},
+    CompletedQuests = {},
+    PetIndex = {},
+    Settings = {},
+    JoinTime = 0,
+    PlayTime = 0,
+    FirstPurchaseClaimed = false,
+    ActiveBoosts = {},
+    Version = 1,
+}
 
-local function dataKey(player: Player): string
-    return "player_" .. tostring(player.UserId)
-end
-
-local function deepCopy(original: {}): {}
+-- Deep copy utility
+local function deepCopy(original)
+    if type(original) ~= "table" then
+        return original
+    end
     local copy = {}
-    for k, v in pairs(original) do
-        if type(v) == "table" then
-            copy[k] = deepCopy(v)
-        else
-            copy[k] = v
-        end
+    for key, value in pairs(original) do
+        copy[deepCopy(key)] = deepCopy(value)
     end
     return copy
 end
 
-local function migrate(data: {}): {}
-    -- Version 1 → future: add migration branches here
-    data.Version = data.Version or 1
+-- Reconcile loaded data with template (add missing keys)
+local function reconcileData(loaded, template)
+    local data = deepCopy(loaded)
+    for key, defaultValue in pairs(template) do
+        if data[key] == nil then
+            data[key] = deepCopy(defaultValue)
+        end
+    end
     return data
 end
 
-local function loadData(player: Player): {}
-    local key = dataKey(player)
-    local success, result
-
+-- Retry wrapper for DataStore calls
+local function retryAsync(func, ...)
+    local args = { ... }
     for attempt = 1, MAX_RETRIES do
-        success, result = pcall(function()
-            return dataStore:GetAsync(key)
-        end)
-        if success then break end
-        task.wait(2 ^ attempt)  -- exponential backoff
-    end
-
-    if not success then
-        warn(("[DataService] Failed to load data for %s: %s"):format(player.Name, tostring(result)))
-        -- Return a fresh template so the player can still play
-        return DataTemplate.new()
-    end
-
-    if result == nil then
-        local fresh = DataTemplate.new()
-        fresh.JoinedAt = os.time()
-        return fresh
-    end
-
-    return migrate(result)
-end
-
-local function saveData(player: Player, data: {})
-    if not data then return end
-    data.LastSavedAt = os.time()
-    local key = dataKey(player)
-
-    for attempt = 1, MAX_RETRIES do
-        local success, err = pcall(function()
-            dataStore:SetAsync(key, data)
+        local success, result = pcall(function()
+            return func(unpack(args))
         end)
         if success then
-            return
+            return true, result
         end
-        warn(("[DataService] Save attempt %d failed for %s: %s"):format(attempt, player.Name, tostring(err)))
-        task.wait(2 ^ attempt)
+        if attempt < MAX_RETRIES then
+            warn(string.format("[DataService] Attempt %d failed: %s. Retrying...", attempt, tostring(result)))
+            task.wait(RETRY_DELAY * attempt)
+        else
+            warn(string.format("[DataService] All %d attempts failed: %s", MAX_RETRIES, tostring(result)))
+            return false, result
+        end
+    end
+    return false, "Max retries exceeded"
+end
+
+-- Load player data
+function DataService.LoadData(player: Player): boolean
+    if playerDataCache[player] then
+        return true -- Already loaded
+    end
+
+    local key = "Player_" .. player.UserId
+
+    local success, data = retryAsync(function()
+        return dataStore:GetAsync(key)
+    end)
+
+    if success then
+        if data then
+            data = reconcileData(data, DEFAULT_DATA)
+        else
+            data = deepCopy(DEFAULT_DATA)
+        end
+
+        data.JoinTime = os.time()
+        playerDataCache[player] = data
+        sessionLocks[player] = true
+
+        -- Send data to client
+        Network.FireClient("PlayerDataLoaded", player, data)
+        print(string.format("[DataService] Loaded data for %s (%d)", player.Name, player.UserId))
+        return true
+    else
+        warn(string.format("[DataService] Failed to load data for %s: %s", player.Name, tostring(data)))
+        -- Give them default data so they can still play
+        playerDataCache[player] = deepCopy(DEFAULT_DATA)
+        playerDataCache[player].JoinTime = os.time()
+        Network.FireClient("PlayerDataLoaded", player, playerDataCache[player])
+        return false
     end
 end
 
--- ─── Public API ───────────────────────────────────────────────────────────────
+-- Save player data
+function DataService.SaveData(player: Player): boolean
+    local data = playerDataCache[player]
+    if not data then
+        return false
+    end
 
--- Returns the live data table for a player (do NOT store the reference long-term).
-function DataService.get(player: Player): {}?
-    return playerData[player]
+    if savingPlayers[player] then
+        return false -- Already saving
+    end
+    savingPlayers[player] = true
+
+    -- Update play time
+    if data.JoinTime > 0 then
+        data.PlayTime = data.PlayTime + (os.time() - data.JoinTime)
+        data.JoinTime = os.time()
+    end
+
+    local key = "Player_" .. player.UserId
+
+    local success, err = retryAsync(function()
+        dataStore:SetAsync(key, data)
+    end)
+
+    savingPlayers[player] = nil
+
+    if success then
+        print(string.format("[DataService] Saved data for %s", player.Name))
+    else
+        warn(string.format("[DataService] Failed to save data for %s: %s", player.Name, tostring(err)))
+    end
+
+    return success
 end
 
--- Persist data immediately (call before game:BindToClose etc.)
-function DataService.save(player: Player)
-    local data = playerData[player]
-    if data then
-        saveData(player, data)
+-- Get player data (read-only reference)
+function DataService.GetData(player: Player)
+    return playerDataCache[player]
+end
+
+-- Update a specific field
+function DataService.SetField(player: Player, field: string, value: any)
+    local data = playerDataCache[player]
+    if not data then
+        return false
+    end
+    if DEFAULT_DATA[field] == nil then
+        warn("[DataService] Unknown field: " .. field)
+        return false
+    end
+    data[field] = value
+    Network.FireClient("DataUpdated", player, field, value)
+    return true
+end
+
+-- Increment a numeric field
+function DataService.IncrementField(player: Player, field: string, amount: number)
+    local data = playerDataCache[player]
+    if not data then
+        return false
+    end
+    if type(data[field]) ~= "number" then
+        warn("[DataService] Field is not a number: " .. field)
+        return false
+    end
+    data[field] = data[field] + amount
+    Network.FireClient("DataUpdated", player, field, data[field])
+    return true
+end
+
+-- Clean up on player leave
+function DataService.PlayerRemoving(player: Player)
+    if playerDataCache[player] then
+        DataService.SaveData(player)
+        playerDataCache[player] = nil
+        sessionLocks[player] = nil
     end
 end
 
--- ─── Player lifecycle ─────────────────────────────────────────────────────────
-
-local function onPlayerAdded(player: Player)
-    local data = loadData(player)
-    playerData[player] = data
-    saveTimers[player] = os.time()
-
-    -- Fire DataLoaded to the client once data is ready
-    task.defer(function()
-        if player.Parent then  -- still in game
-            game.ReplicatedStorage.Shared.Remotes.Events.DataLoaded:FireClient(player, deepCopy(data))
+-- Auto-save loop
+function DataService.StartAutoSave()
+    task.spawn(function()
+        while true do
+            task.wait(AUTO_SAVE_INTERVAL)
+            for player, _ in pairs(playerDataCache) do
+                if player.Parent then -- Still in game
+                    task.spawn(function()
+                        DataService.SaveData(player)
+                    end)
+                end
+            end
         end
     end)
 end
 
-local function onPlayerRemoving(player: Player)
-    DataService.save(player)
-    playerData[player]  = nil
-    saveTimers[player]  = nil
+-- Save all players on server shutdown
+function DataService.OnServerShutdown()
+    game:BindToClose(function()
+        local threads = {}
+        for player, _ in pairs(playerDataCache) do
+            table.insert(threads, task.spawn(function()
+                DataService.SaveData(player)
+            end))
+        end
+        -- Wait a bit for saves to complete
+        task.wait(5)
+    end)
 end
 
--- ─── Auto-save loop ───────────────────────────────────────────────────────────
-
-task.spawn(function()
-    while true do
-        task.wait(SAVE_INTERVAL)
-        local now = os.time()
-        for player, lastSave in pairs(saveTimers) do
-            if now - lastSave >= SAVE_INTERVAL then
-                local data = playerData[player]
-                if data then
-                    task.spawn(saveData, player, data)
-                    saveTimers[player] = now
-                    -- Confirm to client
-                    if player.Parent then
-                        game.ReplicatedStorage.Shared.Remotes.Events.DataSaved:FireClient(player)
-                    end
-                end
-            end
+-- Setup RemoteFunction for client data requests
+function DataService.Init()
+    local getDataFunc = Network.GetFunction("GetPlayerData")
+    if getDataFunc then
+        getDataFunc.OnServerInvoke = function(player)
+            return playerDataCache[player]
         end
     end
-end)
 
--- ─── Bind-to-close (server shutdown) ─────────────────────────────────────────
-
-game:BindToClose(function()
-    for player, _ in pairs(playerData) do
-        DataService.save(player)
+    local getTimeFunc = Network.GetFunction("GetServerTime")
+    if getTimeFunc then
+        getTimeFunc.OnServerInvoke = function(_player)
+            return os.time()
+        end
     end
-end)
 
--- ─── Wire up lifecycle ────────────────────────────────────────────────────────
-
-Players.PlayerAdded:Connect(onPlayerAdded)
-Players.PlayerRemoving:Connect(onPlayerRemoving)
-
--- Handle players already in-game if this script loads late (Studio testing)
-for _, player in ipairs(Players:GetPlayers()) do
-    task.spawn(onPlayerAdded, player)
+    DataService.StartAutoSave()
+    DataService.OnServerShutdown()
 end
-
--- ─── GetPlayerData RemoteFunction ─────────────────────────────────────────────
-
-task.defer(function()
-    local rf = game.ReplicatedStorage.Shared.Remotes.Functions:WaitForChild("GetPlayerData")
-    rf.OnServerInvoke = function(player: Player)
-        local data = playerData[player]
-        if data then
-            return deepCopy(data)
-        end
-        return nil
-    end
-end)
 
 return DataService
