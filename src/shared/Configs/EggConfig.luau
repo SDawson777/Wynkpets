@@ -1,7 +1,7 @@
 --[[
     EggConfig.luau
     All egg definitions with hatch tables
-    MVP: 6 eggs across 3 zones
+    16 eggs across 8 zones
 ]]
 
 local EggConfig = {}
@@ -114,6 +114,186 @@ EggConfig.Eggs = {
             { PetId = "topazstrike",   Weight = 20 },
             { PetId = "emeraldwyrm",   Weight = 12 },
             { PetId = "cosmicnova",    Weight = 5 },
+        },
+    },
+
+    -- ═══════════════════════════════════════
+    -- ZONE 4: VOLCANIC RIDGE
+    -- ═══════════════════════════════════════
+    {
+        Id = "magma_egg",
+        Name = "Magma Egg",
+        Zone = "volcanic_ridge",
+        Cost = 500000,
+        Currency = "Coins",
+        HatchTime = 5.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "cinderkit",     Weight = 35 },
+            { PetId = "scorchpup",     Weight = 28 },
+            { PetId = "flamefang",     Weight = 20 },
+            { PetId = "magmahowl",     Weight = 12 },
+            { PetId = "volcanowyrm",   Weight = 5 },
+        },
+    },
+    {
+        Id = "inferno_egg",
+        Name = "Inferno Egg",
+        Zone = "volcanic_ridge",
+        Cost = 2000000,
+        Currency = "Coins",
+        HatchTime = 6.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "ashmote",       Weight = 30 },
+            { PetId = "blazeclaw",     Weight = 25 },
+            { PetId = "pyronix",       Weight = 22 },
+            { PetId = "infernotitan",  Weight = 15 },
+            { PetId = "moltendrake",   Weight = 8 },
+        },
+    },
+
+    -- ═══════════════════════════════════════
+    -- ZONE 5: FROZEN TUNDRA
+    -- ═══════════════════════════════════════
+    {
+        Id = "frost_egg",
+        Name = "Frost Egg",
+        Zone = "frozen_tundra",
+        Cost = 5000000,
+        Currency = "Coins",
+        HatchTime = 6.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "snowpuff",      Weight = 35 },
+            { PetId = "icepaw",        Weight = 28 },
+            { PetId = "frostbite",     Weight = 20 },
+            { PetId = "glacierheart",  Weight = 12 },
+            { PetId = "blizzardwolf",  Weight = 5 },
+        },
+    },
+    {
+        Id = "arctic_egg",
+        Name = "Arctic Egg",
+        Zone = "frozen_tundra",
+        Cost = 15000000,
+        Currency = "Coins",
+        HatchTime = 7.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "sleetstep",     Weight = 30 },
+            { PetId = "hailshard",     Weight = 25 },
+            { PetId = "permafrost",    Weight = 22 },
+            { PetId = "aurorabear",    Weight = 15 },
+            { PetId = "absolutezero",  Weight = 8 },
+        },
+    },
+
+    -- ═══════════════════════════════════════
+    -- ZONE 6: CELESTIAL GARDEN
+    -- ═══════════════════════════════════════
+    {
+        Id = "starlight_egg",
+        Name = "Starlight Egg",
+        Zone = "celestial_garden",
+        Cost = 50000000,
+        Currency = "Coins",
+        HatchTime = 7.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "petalwisp",         Weight = 35 },
+            { PetId = "moonbloom",         Weight = 28 },
+            { PetId = "stardust",          Weight = 20 },
+            { PetId = "nebulafawn",        Weight = 12 },
+            { PetId = "celestialunicorn",  Weight = 5 },
+        },
+    },
+    {
+        Id = "cosmic_bloom_egg",
+        Name = "Cosmic Bloom Egg",
+        Zone = "celestial_garden",
+        Cost = 150000000,
+        Currency = "Coins",
+        HatchTime = 8.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "astralsprout",      Weight = 30 },
+            { PetId = "galaxyvine",        Weight = 25 },
+            { PetId = "solarflare",        Weight = 22 },
+            { PetId = "cosmosdragon",      Weight = 15 },
+            { PetId = "etherealphoenix",   Weight = 8 },
+        },
+    },
+
+    -- ═══════════════════════════════════════
+    -- ZONE 7: SHADOW REALM
+    -- ═══════════════════════════════════════
+    {
+        Id = "dusk_egg",
+        Name = "Dusk Egg",
+        Zone = "shadow_realm",
+        Cost = 500000000,
+        Currency = "Coins",
+        HatchTime = 8.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "shadowmite",    Weight = 35 },
+            { PetId = "nightcrawl",    Weight = 28 },
+            { PetId = "gloomfang",     Weight = 20 },
+            { PetId = "voidhound",     Weight = 12 },
+            { PetId = "abyssalking",   Weight = 5 },
+        },
+    },
+    {
+        Id = "abyss_egg",
+        Name = "Abyss Egg",
+        Zone = "shadow_realm",
+        Cost = 2000000000,
+        Currency = "Coins",
+        HatchTime = 9.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "darkwhisper",       Weight = 30 },
+            { PetId = "phantomblade",      Weight = 25 },
+            { PetId = "dreadlord",         Weight = 22 },
+            { PetId = "oblivionserpent",   Weight = 15 },
+            { PetId = "shadowmonarch",     Weight = 8 },
+        },
+    },
+
+    -- ═══════════════════════════════════════
+    -- ZONE 8: COSMIC VOID
+    -- ═══════════════════════════════════════
+    {
+        Id = "void_egg",
+        Name = "Void Egg",
+        Zone = "cosmic_void",
+        Cost = 10000000000,
+        Currency = "Coins",
+        HatchTime = 9.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "voidmote",      Weight = 35 },
+            { PetId = "nebulawyrm",    Weight = 28 },
+            { PetId = "singularity",   Weight = 20 },
+            { PetId = "quantumwolf",   Weight = 12 },
+            { PetId = "cosmicreaper",  Weight = 5 },
+        },
+    },
+    {
+        Id = "eternity_egg",
+        Name = "Eternity Egg",
+        Zone = "cosmic_void",
+        Cost = 50000000000,
+        Currency = "Coins",
+        HatchTime = 10.0,
+        Image = "rbxassetid://0",
+        Pets = {
+            { PetId = "starforger",        Weight = 30 },
+            { PetId = "dimensionweaver",   Weight = 25 },
+            { PetId = "infinitybeast",     Weight = 22 },
+            { PetId = "omnigod",           Weight = 15 },
+            { PetId = "realityshatter",    Weight = 8 },
         },
     },
 }

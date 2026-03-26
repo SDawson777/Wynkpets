@@ -9,6 +9,9 @@ local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
 
 local DataService -- Forward declaration, set in Init
+local RewardService
+local AntiExploitService
+local PetLevelService
 
 local CurrencyService = {}
 
@@ -153,10 +156,15 @@ function CurrencyService.GetEquippedPetPower(player: Player): number
 end
 
 -- Set up coin collection remote
-function CurrencyService.Init(dataService)
+function CurrencyService.Init(dataService, rewardService, antiExploitService, petLevelService)
     DataService = dataService
+    RewardService = rewardService
+    AntiExploitService = antiExploitService
+    PetLevelService = petLevelService
 
     Network.OnServerEvent("CollectCoin", function(player: Player, zoneId: string)
+        if not AntiExploitService.CheckRateLimit(player, "CollectCoin") then return end
+
         -- Validate zone access
         local data = DataService.GetData(player)
         if not data then return end
@@ -176,7 +184,17 @@ function CurrencyService.Init(dataService)
         if not unlocked then return end
 
         -- Add coins based on zone value
-        CurrencyService.Add(player, "Coins", zone.CoinValue, true)
+        local amount = CurrencyService.Add(player, "Coins", zone.CoinValue, true)
+
+        -- Track quest progress
+        if amount > 0 and RewardService then
+            RewardService.UpdateQuestProgress(player, "CollectCoins", amount)
+        end
+
+        -- Grant XP to equipped pets
+        if amount > 0 and PetLevelService then
+            PetLevelService.GrantXP(player, amount)
+        end
     end)
 end
 

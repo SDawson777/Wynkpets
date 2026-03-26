@@ -15,12 +15,15 @@ local GamepassConfig = require(Shared:WaitForChild("Configs"):WaitForChild("Game
 local DataService -- Forward declarations
 local CurrencyService
 local PetService
+local RewardService
+local AntiExploitService
 
 local EggService = {}
 
 -- Rate limiting per player
 local lastHatchTime = {} -- [Player] = tick
 local HATCH_COOLDOWN = 0.5 -- Minimum seconds between hatches
+local autoHatchPlayers = {} -- [Player] = { enabled: boolean, eggId: string }
 
 -- Select a pet from an egg's hatch table using weighted random
 local function selectPet(egg, luckMultiplier: number): string
@@ -180,6 +183,18 @@ function EggService.HatchEgg(player: Player, eggId: string)
     -- Update stats
     data.TotalEggsHatched = (data.TotalEggsHatched or 0) + hatchCount
 
+    -- Track quest progress
+    if RewardService then
+        RewardService.UpdateQuestProgress(player, "HatchEggs", hatchCount)
+        -- Check for rare+ hatches
+        for _, result in ipairs(results) do
+            local rarityOrder = RarityConfig.Tiers[result.Rarity] and RarityConfig.Tiers[result.Rarity].Order or 1
+            if rarityOrder >= 2 then -- Rare or better
+                RewardService.UpdateQuestProgress(player, "HatchRarity", 1)
+            end
+        end
+    end
+
     -- Send results to client for animation
     if #results > 0 then
         Network.FireClient("HatchResult", player, results, egg.HatchTime)
@@ -187,20 +202,55 @@ function EggService.HatchEgg(player: Player, eggId: string)
 end
 
 -- Initialize
-function EggService.Init(dataService, currencyService, petService)
+function EggService.Init(dataService, currencyService, petService, rewardService, antiExploitService)
     DataService = dataService
     CurrencyService = currencyService
     PetService = petService
+    RewardService = rewardService
+    AntiExploitService = antiExploitService
 
     Network.OnServerEvent("HatchEgg", function(player: Player, eggId: string)
         if type(eggId) ~= "string" then return end
+        if not AntiExploitService.CheckRateLimit(player, "HatchEgg") then return end
         EggService.HatchEgg(player, eggId)
+    end)
+
+    Network.OnServerEvent("AutoHatchToggle", function(player: Player, eggId: string)
+        if type(eggId) ~= "string" then return end
+        local data = DataService.GetData(player)
+        if not data then return end
+        if not (data.Gamepasses and data.Gamepasses["auto_hatch"]) then
+            Network.FireClient("ShowNotification", player, "You need the Auto Hatch gamepass!", "Warning")
+            return
+        end
+        if autoHatchPlayers[player] and autoHatchPlayers[player].enabled then
+            autoHatchPlayers[player] = nil
+            Network.FireClient("ShowNotification", player, "Auto Hatch disabled", "Info")
+        else
+            autoHatchPlayers[player] = { enabled = true, eggId = eggId }
+            Network.FireClient("ShowNotification", player, "Auto Hatch enabled!", "Success")
+        end
+    end)
+
+    -- Auto-hatch loop
+    task.spawn(function()
+        while true do
+            task.wait(1)
+            for plr, state in pairs(autoHatchPlayers) do
+                if state.enabled and plr.Parent then
+                    task.spawn(function()
+                        EggService.HatchEgg(plr, state.eggId)
+                    end)
+                end
+            end
+        end
     end)
 end
 
 -- Clean up on player leave
 function EggService.PlayerRemoving(player: Player)
     lastHatchTime[player] = nil
+    autoHatchPlayers[player] = nil
 end
 
 return EggService

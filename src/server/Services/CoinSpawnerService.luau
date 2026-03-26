@@ -130,31 +130,95 @@ function CoinSpawnerService.SpawnZoneCoins(zone)
                     end
                 end)
 
-                -- The actual currency addition is handled by CurrencyService via the CollectCoin event
-                -- We fire from client side, but we also need to fire here for the server
-                local Network = require(Shared:WaitForChild("Network"))
-                Network.FireClient("CollectCoin", player, zone.Id)
+                -- Currency is granted via the client firing CollectCoin to the server,
+                -- which CurrencyService handles. No server-side grant needed here.
             end)
         end
     end
 end
 
--- Create zone ground platforms
+-- Create zone ground platforms with themed environments
 function CoinSpawnerService.CreateZonePlatforms()
+    -- Zone-specific materials and props
+    local zoneThemes = {
+        starter_meadow = {
+            Material = Enum.Material.Grass,
+            PropColor = Color3.fromRGB(60, 140, 40),
+            Props = { "tree", "flower", "bush" },
+        },
+        forest_grove = {
+            Material = Enum.Material.LeafyGrass,
+            PropColor = Color3.fromRGB(30, 100, 30),
+            Props = { "bigtree", "mushroom", "vine" },
+        },
+        crystal_caves = {
+            Material = Enum.Material.Slate,
+            PropColor = Color3.fromRGB(120, 80, 220),
+            Props = { "crystal", "stalagmite", "gem" },
+        },
+        volcanic_ridge = {
+            Material = Enum.Material.Basalt,
+            PropColor = Color3.fromRGB(200, 60, 20),
+            Props = { "lavarock", "ember", "vent" },
+        },
+        frozen_tundra = {
+            Material = Enum.Material.Glacier,
+            PropColor = Color3.fromRGB(180, 220, 255),
+            Props = { "icespike", "snowdrift", "frostcrystal" },
+        },
+        celestial_garden = {
+            Material = Enum.Material.Marble,
+            PropColor = Color3.fromRGB(200, 150, 255),
+            Props = { "starflower", "moonpillar", "cloudpuff" },
+        },
+        shadow_realm = {
+            Material = Enum.Material.Slate,
+            PropColor = Color3.fromRGB(80, 30, 100),
+            Props = { "darkthorn", "voidcrystal", "shadowpillar" },
+        },
+        cosmic_void = {
+            Material = Enum.Material.Neon,
+            PropColor = Color3.fromRGB(30, 0, 60),
+            Props = { "neonpillar", "voidorb", "stargate" },
+        },
+    }
+
     for _, zone in ipairs(ZoneConfig.Zones) do
         local zoneFolder = getOrCreateZoneFolder(zone.Id)
+        local theme = zoneThemes[zone.Id]
+        local material = theme and theme.Material or Enum.Material.Grass
 
-        -- Ground platform
+        -- Main ground platform (larger)
         local ground = Instance.new("Part")
         ground.Name = "Ground"
-        ground.Size = Vector3.new(150, 1, 150)
-        ground.Position = zone.SpawnPosition - Vector3.new(0, 0.5, 0)
+        ground.Size = Vector3.new(160, 2, 160)
+        ground.Position = zone.SpawnPosition - Vector3.new(0, 1, 0)
         ground.Anchored = true
         ground.BrickColor = BrickColor.new(zone.Color)
-        ground.Material = Enum.Material.Grass
+        ground.Material = material
         ground.TopSurface = Enum.SurfaceType.Smooth
         ground.BottomSurface = Enum.SurfaceType.Smooth
         ground.Parent = zoneFolder
+
+        -- Raised border ring
+        local borderParts = {
+            { Size = Vector3.new(164, 3, 2), Offset = Vector3.new(0, 0, 81) },
+            { Size = Vector3.new(164, 3, 2), Offset = Vector3.new(0, 0, -81) },
+            { Size = Vector3.new(2, 3, 164), Offset = Vector3.new(81, 0, 0) },
+            { Size = Vector3.new(2, 3, 164), Offset = Vector3.new(-81, 0, 0) },
+        }
+
+        for i, border in ipairs(borderParts) do
+            local wall = Instance.new("Part")
+            wall.Name = "Border_" .. i
+            wall.Size = border.Size
+            wall.Position = zone.SpawnPosition + border.Offset + Vector3.new(0, 0.5, 0)
+            wall.Anchored = true
+            wall.CanCollide = true
+            wall.Material = Enum.Material.Marble
+            wall.Color = zone.Color
+            wall.Parent = zoneFolder
+        end
 
         -- Zone label
         local billboard = Instance.new("BillboardGui")
@@ -174,6 +238,139 @@ function CoinSpawnerService.CreateZonePlatforms()
         label.Font = Enum.Font.GothamBold
         label.TextScaled = true
         label.Parent = billboard
+
+        -- Spawn decorative props
+        if theme then
+            local propsFolder = Instance.new("Folder")
+            propsFolder.Name = "Props"
+            propsFolder.Parent = zoneFolder
+
+            local propColor = theme.PropColor
+            for j = 1, 12 do
+                local angle = (j / 12) * math.pi * 2
+                local radius = math.random(25, 65)
+                local x = zone.SpawnPosition.X + math.cos(angle) * radius
+                local z = zone.SpawnPosition.Z + math.sin(angle) * radius
+
+                local propType = theme.Props[((j - 1) % #theme.Props) + 1]
+
+                if propType == "tree" or propType == "bigtree" then
+                    local trunk = Instance.new("Part")
+                    trunk.Name = "Trunk_" .. j
+                    trunk.Size = Vector3.new(2, propType == "bigtree" and 12 or 8, 2)
+                    trunk.Position = Vector3.new(x, zone.SpawnPosition.Y + trunk.Size.Y / 2, z)
+                    trunk.Anchored = true
+                    trunk.CanCollide = true
+                    trunk.Material = Enum.Material.Wood
+                    trunk.Color = Color3.fromRGB(100, 70, 40)
+                    trunk.Parent = propsFolder
+
+                    local canopy = Instance.new("Part")
+                    canopy.Name = "Canopy_" .. j
+                    canopy.Shape = Enum.PartType.Ball
+                    canopy.Size = Vector3.new(8, 6, 8) * (propType == "bigtree" and 1.5 or 1)
+                    canopy.Position = Vector3.new(x, zone.SpawnPosition.Y + trunk.Size.Y + 2, z)
+                    canopy.Anchored = true
+                    canopy.CanCollide = false
+                    canopy.Material = Enum.Material.Grass
+                    canopy.Color = propColor
+                    canopy.Parent = propsFolder
+
+                elseif propType == "crystal" or propType == "icespike" or propType == "frostcrystal" or propType == "darkthorn" or propType == "neonpillar" then
+                    local spike = Instance.new("Part")
+                    spike.Name = "Crystal_" .. j
+                    spike.Size = Vector3.new(1.5, math.random(4, 10), 1.5)
+                    spike.Position = Vector3.new(x, zone.SpawnPosition.Y + spike.Size.Y / 2, z)
+                    spike.Anchored = true
+                    spike.CanCollide = true
+                    spike.Material = Enum.Material.Neon
+                    spike.Color = propColor
+                    spike.CFrame = CFrame.new(spike.Position) * CFrame.Angles(
+                        math.rad(math.random(-15, 15)), math.rad(math.random(0, 360)), math.rad(math.random(-15, 15))
+                    )
+                    spike.Parent = propsFolder
+
+                elseif propType == "flower" or propType == "starflower" then
+                    local stem = Instance.new("Part")
+                    stem.Name = "Flower_" .. j
+                    stem.Size = Vector3.new(0.3, 2, 0.3)
+                    stem.Position = Vector3.new(x, zone.SpawnPosition.Y + 1, z)
+                    stem.Anchored = true
+                    stem.CanCollide = false
+                    stem.Material = Enum.Material.Grass
+                    stem.Color = Color3.fromRGB(50, 150, 50)
+                    stem.Parent = propsFolder
+
+                    local bloom = Instance.new("Part")
+                    bloom.Name = "Bloom_" .. j
+                    bloom.Shape = Enum.PartType.Ball
+                    bloom.Size = Vector3.new(1.5, 1, 1.5)
+                    bloom.Position = Vector3.new(x, zone.SpawnPosition.Y + 2.5, z)
+                    bloom.Anchored = true
+                    bloom.CanCollide = false
+                    bloom.Material = propType == "starflower" and Enum.Material.Neon or Enum.Material.SmoothPlastic
+                    bloom.Color = propColor
+                    bloom.Parent = propsFolder
+
+                elseif propType == "mushroom" then
+                    local mStem = Instance.new("Part")
+                    mStem.Name = "MushStem_" .. j
+                    mStem.Size = Vector3.new(1, 3, 1)
+                    mStem.Position = Vector3.new(x, zone.SpawnPosition.Y + 1.5, z)
+                    mStem.Anchored = true
+                    mStem.CanCollide = false
+                    mStem.Material = Enum.Material.SmoothPlastic
+                    mStem.Color = Color3.fromRGB(230, 220, 200)
+                    mStem.Parent = propsFolder
+
+                    local cap = Instance.new("Part")
+                    cap.Name = "MushCap_" .. j
+                    cap.Shape = Enum.PartType.Ball
+                    cap.Size = Vector3.new(3, 2, 3)
+                    cap.Position = Vector3.new(x, zone.SpawnPosition.Y + 3.5, z)
+                    cap.Anchored = true
+                    cap.CanCollide = false
+                    cap.Material = Enum.Material.SmoothPlastic
+                    cap.Color = propColor
+                    cap.Parent = propsFolder
+
+                elseif propType == "lavarock" or propType == "stalagmite" then
+                    local rock = Instance.new("Part")
+                    rock.Name = "Rock_" .. j
+                    rock.Size = Vector3.new(math.random(2, 4), math.random(2, 5), math.random(2, 4))
+                    rock.Position = Vector3.new(x, zone.SpawnPosition.Y + rock.Size.Y / 2, z)
+                    rock.Anchored = true
+                    rock.CanCollide = true
+                    rock.Material = Enum.Material.Basalt
+                    rock.Color = propColor
+                    rock.Parent = propsFolder
+
+                elseif propType == "ember" or propType == "voidorb" then
+                    local orb = Instance.new("Part")
+                    orb.Name = "Orb_" .. j
+                    orb.Shape = Enum.PartType.Ball
+                    orb.Size = Vector3.new(2, 2, 2)
+                    orb.Position = Vector3.new(x, zone.SpawnPosition.Y + 4, z)
+                    orb.Anchored = true
+                    orb.CanCollide = false
+                    orb.Material = Enum.Material.Neon
+                    orb.Color = propColor
+                    orb.Transparency = 0.3
+                    orb.Parent = propsFolder
+
+                else
+                    local pillar = Instance.new("Part")
+                    pillar.Name = "Prop_" .. j
+                    pillar.Size = Vector3.new(2, math.random(3, 8), 2)
+                    pillar.Position = Vector3.new(x, zone.SpawnPosition.Y + pillar.Size.Y / 2, z)
+                    pillar.Anchored = true
+                    pillar.CanCollide = true
+                    pillar.Material = Enum.Material.SmoothPlastic
+                    pillar.Color = propColor
+                    pillar.Parent = propsFolder
+                end
+            end
+        end
     end
 end
 

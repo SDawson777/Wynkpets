@@ -143,8 +143,8 @@ gemsLabel.Parent = gemsFrame
 
 local sideButtons = Instance.new("Frame")
 sideButtons.Name = "SideButtons"
-sideButtons.Size = UDim2.new(0, 60, 0, 350)
-sideButtons.Position = UDim2.new(1, -70, 0.5, -175)
+sideButtons.Size = UDim2.new(0, 60, 0, 500)
+sideButtons.Position = UDim2.new(1, -70, 0.5, -250)
 sideButtons.BackgroundTransparency = 1
 sideButtons.Parent = screenGui
 
@@ -160,6 +160,11 @@ local buttonConfigs = {
     { Name = "Zones",   Icon = "🗺️", Color = Color3.fromRGB(100, 180, 255) },
     { Name = "Rebirth", Icon = "⭐", Color = Color3.fromRGB(255, 100, 150) },
     { Name = "Quests",  Icon = "📋", Color = Color3.fromRGB(200, 150, 255) },
+    { Name = "Fuse",    Icon = "🔮", Color = Color3.fromRGB(255, 100, 200) },
+    { Name = "Index",   Icon = "📖", Color = Color3.fromRGB(180, 130, 255) },
+    { Name = "Trade",   Icon = "🤝", Color = Color3.fromRGB(100, 200, 255) },
+    { Name = "Ranks",   Icon = "🏆", Color = Color3.fromRGB(255, 200, 50) },
+    { Name = "Achieve", Icon = "🎖️", Color = Color3.fromRGB(255, 180, 50) },
 }
 
 for _, config in ipairs(buttonConfigs) do
@@ -321,6 +326,85 @@ rebirthLabel.TextSize = 13
 rebirthLabel.Parent = rebirthBar
 
 -- ═══════════════════════════════════════
+-- BOOST TIMER DISPLAY (Top left)
+-- ═══════════════════════════════════════
+
+local boostFrame = Instance.new("Frame")
+boostFrame.Name = "BoostTimers"
+boostFrame.Size = UDim2.new(0, 200, 0, 80)
+boostFrame.Position = UDim2.new(0, 10, 0, 10)
+boostFrame.BackgroundTransparency = 1
+boostFrame.Parent = screenGui
+
+local boostLayout = Instance.new("UIListLayout")
+boostLayout.Padding = UDim.new(0, 4)
+boostLayout.Parent = boostFrame
+
+local activeBoosts = {}
+local boostLabels = {}
+
+local boostDisplayNames = {
+    Luck = "🍀 Luck x2",
+    Coins = "🪙 Coins x2",
+    XP = "⚡ XP x2",
+    HatchSpeed = "🥚 Hatch x2",
+}
+
+local function updateBoostTimers()
+    local now = os.time()
+    for boostType, expiry in pairs(activeBoosts) do
+        local remaining = expiry - now
+        if remaining <= 0 then
+            activeBoosts[boostType] = nil
+            if boostLabels[boostType] then
+                boostLabels[boostType]:Destroy()
+                boostLabels[boostType] = nil
+            end
+        else
+            if not boostLabels[boostType] then
+                local label = Instance.new("Frame")
+                label.Size = UDim2.new(1, 0, 0, 24)
+                label.BackgroundColor3 = Color3.fromRGB(25, 25, 40)
+                label.BackgroundTransparency = 0.3
+                label.BorderSizePixel = 0
+                label.Parent = boostFrame
+
+                local lCorner = Instance.new("UICorner")
+                lCorner.CornerRadius = UDim.new(0, 8)
+                lCorner.Parent = label
+
+                local lStroke = Instance.new("UIStroke")
+                lStroke.Color = Color3.fromRGB(100, 255, 100)
+                lStroke.Thickness = 1
+                lStroke.Parent = label
+
+                local lText = Instance.new("TextLabel")
+                lText.Name = "Text"
+                lText.Size = UDim2.new(1, -10, 1, 0)
+                lText.Position = UDim2.new(0, 5, 0, 0)
+                lText.BackgroundTransparency = 1
+                lText.TextColor3 = Color3.fromRGB(150, 255, 150)
+                lText.Font = Enum.Font.GothamBold
+                lText.TextSize = 11
+                lText.TextXAlignment = Enum.TextXAlignment.Left
+                lText.Parent = label
+
+                boostLabels[boostType] = label
+            end
+
+            local displayName = boostDisplayNames[boostType] or boostType
+            local mins = math.floor(remaining / 60)
+            local secs = remaining % 60
+            local timeText = string.format("%d:%02d", mins, secs)
+            local textLabel = boostLabels[boostType]:FindFirstChild("Text")
+            if textLabel then
+                textLabel.Text = displayName .. " - " .. timeText
+            end
+        end
+    end
+end
+
+-- ═══════════════════════════════════════
 -- EVENT CONNECTIONS
 -- ═══════════════════════════════════════
 
@@ -369,11 +453,43 @@ Network.OnClientEvent("RebirthCompleted", function(data)
     rebirthLabel.Text = "⭐ Rebirth " .. (data.Rebirths or 0) .. " | " .. (data.Multiplier or 1) .. "x"
 end)
 
+-- Boost timer events
+Network.OnClientEvent("BoostActivated", function(boostType, expiry)
+    activeBoosts[boostType] = expiry
+    updateBoostTimers()
+end)
+
+Network.OnClientEvent("BoostExpired", function(boostType)
+    activeBoosts[boostType] = nil
+    if boostLabels[boostType] then
+        boostLabels[boostType]:Destroy()
+        boostLabels[boostType] = nil
+    end
+end)
+
+-- Boost timer update loop
+task.spawn(function()
+    while true do
+        task.wait(1)
+        updateBoostTimers()
+    end
+end)
+
 -- Initial data load
 Network.OnClientEvent("PlayerDataLoaded", function(data)
     coinsLabel.Text = NumberFormat.Abbreviate(data.Coins or 0)
     gemsLabel.Text = NumberFormat.Abbreviate(data.Gems or 0)
     rebirthLabel.Text = "⭐ Rebirth " .. (data.Rebirths or 0) .. " | " .. (data.RebirthMultiplier or 1) .. "x"
+
+    -- Hydrate active boosts
+    if data.ActiveBoosts then
+        for boostType, expiry in pairs(data.ActiveBoosts) do
+            if expiry > os.time() then
+                activeBoosts[boostType] = expiry
+            end
+        end
+        updateBoostTimers()
+    end
 end)
 
 print("[GUI] MainHUD loaded")

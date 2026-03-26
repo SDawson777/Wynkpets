@@ -14,6 +14,7 @@ local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
 local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig"))
 local RarityConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RarityConfig"))
+local PetLevelConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetLevelConfig"))
 
 -- ═══════════════════════════════════════
 -- SCREEN GUI
@@ -246,7 +247,8 @@ local function refreshPets()
         powerLabel.Size = UDim2.new(1, 0, 0, 14)
         powerLabel.Position = UDim2.new(0, 0, 0, 78)
         powerLabel.BackgroundTransparency = 1
-        powerLabel.Text = "⚡" .. petInfo.Power
+        local effectivePower = math.floor(petInfo.Power * PetLevelConfig.GetPowerMultiplier(pet.Level or 1))
+        powerLabel.Text = "⚡" .. effectivePower .. " Lv." .. (pet.Level or 1)
         powerLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
         powerLabel.Font = Enum.Font.Gotham
         powerLabel.TextSize = 10
@@ -276,6 +278,108 @@ local function refreshPets()
             actionBtn.BackgroundColor3 = Color3.fromRGB(50, 180, 80)
             actionBtn.MouseButton1Click:Connect(function()
                 Network.FireServer("EquipPet", pet.UUID)
+            end)
+        end
+
+        -- Delete button (only for non-equipped pets)
+        if not pet.Equipped then
+            local deleteBtn = Instance.new("TextButton")
+            deleteBtn.Size = UDim2.new(0, 20, 0, 20)
+            deleteBtn.Position = UDim2.new(1, -24, 0, 4)
+            deleteBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+            deleteBtn.Text = "X"
+            deleteBtn.TextColor3 = Color3.new(1, 1, 1)
+            deleteBtn.Font = Enum.Font.GothamBold
+            deleteBtn.TextSize = 10
+            deleteBtn.ZIndex = 2
+            deleteBtn.Parent = card
+
+            local dbCorner = Instance.new("UICorner")
+            dbCorner.CornerRadius = UDim.new(0, 6)
+            dbCorner.Parent = deleteBtn
+
+            deleteBtn.MouseButton1Click:Connect(function()
+                -- Confirmation dialog
+                local confirmGui = Instance.new("ScreenGui")
+                confirmGui.Name = "DeleteConfirm"
+                confirmGui.DisplayOrder = 50
+                confirmGui.Parent = playerGui
+
+                local confirmOverlay = Instance.new("TextButton")
+                confirmOverlay.Size = UDim2.new(1, 0, 1, 0)
+                confirmOverlay.BackgroundColor3 = Color3.new(0, 0, 0)
+                confirmOverlay.BackgroundTransparency = 0.5
+                confirmOverlay.Text = ""
+                confirmOverlay.AutoButtonColor = false
+                confirmOverlay.Parent = confirmGui
+
+                local confirmFrame = Instance.new("Frame")
+                confirmFrame.Size = UDim2.new(0, 280, 0, 140)
+                confirmFrame.Position = UDim2.new(0.5, -140, 0.5, -70)
+                confirmFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 40)
+                confirmFrame.BorderSizePixel = 0
+                confirmFrame.Parent = confirmGui
+
+                local cfCorner = Instance.new("UICorner")
+                cfCorner.CornerRadius = UDim.new(0, 12)
+                cfCorner.Parent = confirmFrame
+
+                local cfStroke = Instance.new("UIStroke")
+                cfStroke.Color = Color3.fromRGB(200, 50, 50)
+                cfStroke.Thickness = 2
+                cfStroke.Parent = confirmFrame
+
+                local confirmText = Instance.new("TextLabel")
+                confirmText.Size = UDim2.new(1, -20, 0, 60)
+                confirmText.Position = UDim2.new(0, 10, 0, 10)
+                confirmText.BackgroundTransparency = 1
+                confirmText.Text = "Delete " .. petInfo.Name .. "?"
+                confirmText.TextColor3 = Color3.new(1, 1, 1)
+                confirmText.Font = Enum.Font.GothamBold
+                confirmText.TextSize = 18
+                confirmText.TextWrapped = true
+                confirmText.Parent = confirmFrame
+
+                local yesBtn = Instance.new("TextButton")
+                yesBtn.Size = UDim2.new(0, 100, 0, 36)
+                yesBtn.Position = UDim2.new(0.5, -110, 1, -50)
+                yesBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+                yesBtn.Text = "Delete"
+                yesBtn.TextColor3 = Color3.new(1, 1, 1)
+                yesBtn.Font = Enum.Font.GothamBold
+                yesBtn.TextSize = 14
+                yesBtn.Parent = confirmFrame
+
+                local ybCorner = Instance.new("UICorner")
+                ybCorner.CornerRadius = UDim.new(0, 8)
+                ybCorner.Parent = yesBtn
+
+                local noBtn = Instance.new("TextButton")
+                noBtn.Size = UDim2.new(0, 100, 0, 36)
+                noBtn.Position = UDim2.new(0.5, 10, 1, -50)
+                noBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+                noBtn.Text = "Cancel"
+                noBtn.TextColor3 = Color3.new(1, 1, 1)
+                noBtn.Font = Enum.Font.GothamBold
+                noBtn.TextSize = 14
+                noBtn.Parent = confirmFrame
+
+                local nbCorner = Instance.new("UICorner")
+                nbCorner.CornerRadius = UDim.new(0, 8)
+                nbCorner.Parent = noBtn
+
+                yesBtn.MouseButton1Click:Connect(function()
+                    Network.FireServer("DeletePet", pet.UUID)
+                    confirmGui:Destroy()
+                end)
+
+                noBtn.MouseButton1Click:Connect(function()
+                    confirmGui:Destroy()
+                end)
+
+                confirmOverlay.MouseButton1Click:Connect(function()
+                    confirmGui:Destroy()
+                end)
             end)
         end
 

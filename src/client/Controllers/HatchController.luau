@@ -18,6 +18,8 @@ local HatchController = {}
 
 local isHatching = false
 local resultCallbacks = {}
+local autoHatchEnabled = false
+local autoHatchEggId = nil
 
 -- Register callback for hatch results
 function HatchController.OnResult(callback: (any) -> ())
@@ -253,6 +255,20 @@ local function playHatchAnimation(results, hatchTime: number)
             end
         end)
     end)
+end
+
+function HatchController.ToggleAutoHatch(eggId: string)
+    autoHatchEnabled = not autoHatchEnabled
+    autoHatchEggId = autoHatchEnabled and eggId or nil
+    Network.FireServer("AutoHatchToggle", eggId)
+end
+
+function HatchController.IsAutoHatching(): boolean
+    return autoHatchEnabled
+end
+
+function HatchController.GetAutoHatchEggId(): string?
+    return autoHatchEggId
 end
 
 -- Initialize

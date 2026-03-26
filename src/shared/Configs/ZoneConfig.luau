@@ -1,7 +1,7 @@
 --[[
     ZoneConfig.luau
     Zone definitions and unlock requirements
-    MVP: 3 zones
+    8 zones from starter to endgame
 ]]
 
 local ZoneConfig = {}
@@ -45,6 +45,71 @@ ZoneConfig.Zones = {
         SpawnPosition = Vector3.new(400, 5, 0),
         CoinSpawnRate = 2.0,
         CoinValue = 10,
+    },
+    {
+        Id = "volcanic_ridge",
+        Name = "Volcanic Ridge",
+        Order = 4,
+        UnlockCost = 100000,
+        UnlockCurrency = "Coins",
+        CoinMultiplier = 25.0,
+        Description = "A smoldering ridge where magma flows beneath the surface.",
+        Color = Color3.fromRGB(220, 80, 30),
+        SpawnPosition = Vector3.new(600, 5, 0),
+        CoinSpawnRate = 2.5,
+        CoinValue = 25,
+    },
+    {
+        Id = "frozen_tundra",
+        Name = "Frozen Tundra",
+        Order = 5,
+        UnlockCost = 500000,
+        UnlockCurrency = "Coins",
+        CoinMultiplier = 60.0,
+        Description = "An icy wasteland where only the hardiest creatures survive.",
+        Color = Color3.fromRGB(150, 220, 255),
+        SpawnPosition = Vector3.new(800, 5, 0),
+        CoinSpawnRate = 3.0,
+        CoinValue = 60,
+    },
+    {
+        Id = "celestial_garden",
+        Name = "Celestial Garden",
+        Order = 6,
+        UnlockCost = 2000000,
+        UnlockCurrency = "Coins",
+        CoinMultiplier = 150.0,
+        Description = "A garden floating among the stars, blooming with magic.",
+        Color = Color3.fromRGB(200, 150, 255),
+        SpawnPosition = Vector3.new(1000, 5, 0),
+        CoinSpawnRate = 3.5,
+        CoinValue = 150,
+    },
+    {
+        Id = "shadow_realm",
+        Name = "Shadow Realm",
+        Order = 7,
+        UnlockCost = 10000000,
+        UnlockCurrency = "Coins",
+        CoinMultiplier = 400.0,
+        Description = "A dark dimension where shadows take physical form.",
+        Color = Color3.fromRGB(60, 20, 80),
+        SpawnPosition = Vector3.new(1200, 5, 0),
+        CoinSpawnRate = 4.0,
+        CoinValue = 400,
+    },
+    {
+        Id = "cosmic_void",
+        Name = "Cosmic Void",
+        Order = 8,
+        UnlockCost = 50000000,
+        UnlockCurrency = "Coins",
+        CoinMultiplier = 1000.0,
+        Description = "The edge of existence where reality unravels into pure energy.",
+        Color = Color3.fromRGB(20, 0, 50),
+        SpawnPosition = Vector3.new(1400, 5, 0),
+        CoinSpawnRate = 5.0,
+        CoinValue = 1000,
     },
 }
 

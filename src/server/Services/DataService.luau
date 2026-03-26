@@ -41,8 +41,10 @@ local DEFAULT_DATA = {
     TotalEggsHatched = 0,
     TotalPetsCollected = 0,
     MaxEquipSlots = RebirthConfig.BaseEquipSlots,
+    MaxPetStorage = 200,
     Gamepasses = {},
     LoginStreak = 0,
+    LoginDays = 0,
     LastLogin = 0,
     DailyRewardClaimed = false,
     Quests = {},
@@ -53,6 +55,9 @@ local DEFAULT_DATA = {
     PlayTime = 0,
     FirstPurchaseClaimed = false,
     ActiveBoosts = {},
+    Achievements = {},
+    TradesCompleted = 0,
+    PetsFused = 0,
     Version = 1,
 }
 

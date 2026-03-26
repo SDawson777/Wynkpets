@@ -101,6 +101,8 @@ eggLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 eggLayout.Parent = eggScroll
 
 local unlockedZones = { "starter_meadow" }
+local ownedGamepasses = {}
+local autoHatchEggId = nil
 
 -- Populate eggs
 local function refreshEggs()
@@ -223,6 +225,42 @@ local function refreshEggs()
             hatchBtn.AutoButtonColor = false
         end
 
+        -- Auto-hatch button (only if player owns auto_hatch gamepass)
+        if isUnlocked and ownedGamepasses["auto_hatch"] then
+            local autoBtn = Instance.new("TextButton")
+            autoBtn.Size = UDim2.new(0, 60, 0, 24)
+            autoBtn.Position = UDim2.new(0.5, -30, 1, -78)
+            autoBtn.Font = Enum.Font.GothamBold
+            autoBtn.TextSize = 11
+            autoBtn.Parent = card
+
+            local autoCorner = Instance.new("UICorner")
+            autoCorner.CornerRadius = UDim.new(0, 6)
+            autoCorner.Parent = autoBtn
+
+            if autoHatchEggId == egg.Id then
+                autoBtn.Text = "AUTO: ON"
+                autoBtn.BackgroundColor3 = Color3.fromRGB(50, 200, 80)
+                autoBtn.TextColor3 = Color3.new(1, 1, 1)
+            else
+                autoBtn.Text = "AUTO"
+                autoBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+                autoBtn.TextColor3 = Color3.fromRGB(180, 180, 180)
+            end
+
+            autoBtn.MouseButton1Click:Connect(function()
+                if autoHatchEggId == egg.Id then
+                    autoHatchEggId = nil
+                else
+                    autoHatchEggId = egg.Id
+                end
+                Network.FireServer("AutoHatchToggle", egg.Id)
+                if screenGui.Enabled then
+                    refreshEggs()
+                end
+            end)
+        end
+
         card.Parent = eggScroll
     end
 end
@@ -285,6 +323,14 @@ end)
 
 Network.OnClientEvent("PlayerDataLoaded", function(data)
     unlockedZones = data.UnlockedZones or { "starter_meadow" }
+    ownedGamepasses = data.Gamepasses or {}
+end)
+
+Network.OnClientEvent("GamepassOwned", function(gamepassId)
+    ownedGamepasses[gamepassId] = true
+    if screenGui.Enabled then
+        refreshEggs()
+    end
 end)
 
 print("[GUI] EggGui loaded")

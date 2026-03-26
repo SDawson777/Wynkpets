@@ -11,6 +11,7 @@ local RebirthConfig = require(Shared:WaitForChild("Configs"):WaitForChild("Rebir
 
 local DataService
 local CurrencyService
+local AntiExploitService
 
 local RebirthService = {}
 
@@ -82,11 +83,13 @@ function RebirthService.GetRebirthInfo(player: Player)
 end
 
 -- Initialize
-function RebirthService.Init(dataService, currencyService)
+function RebirthService.Init(dataService, currencyService, antiExploitService)
     DataService = dataService
     CurrencyService = currencyService
+    AntiExploitService = antiExploitService
 
     Network.OnServerEvent("RequestRebirth", function(player: Player)
+        if not AntiExploitService.CheckRateLimit(player, "RequestRebirth") then return end
         RebirthService.Rebirth(player)
     end)
 end

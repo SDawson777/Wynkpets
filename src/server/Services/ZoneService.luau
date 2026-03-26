@@ -11,6 +11,8 @@ local ZoneConfig = require(Shared:WaitForChild("Configs"):WaitForChild("ZoneConf
 
 local DataService
 local CurrencyService
+local RewardService
+local AntiExploitService
 
 local ZoneService = {}
 
@@ -95,17 +97,25 @@ function ZoneService.TeleportToZone(player: Player, zoneId: string)
         local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
         if humanoidRootPart then
             humanoidRootPart.CFrame = CFrame.new(zone.SpawnPosition)
+
+            -- Track quest progress
+            if RewardService then
+                RewardService.UpdateQuestProgress(player, "VisitZones", 1)
+            end
         end
     end
 end
 
 -- Initialize
-function ZoneService.Init(dataService, currencyService)
+function ZoneService.Init(dataService, currencyService, rewardService, antiExploitService)
     DataService = dataService
     CurrencyService = currencyService
+    RewardService = rewardService
+    AntiExploitService = antiExploitService
 
     Network.OnServerEvent("UnlockZone", function(player: Player, zoneId: string)
         if type(zoneId) ~= "string" then return end
+        if not AntiExploitService.CheckRateLimit(player, "UnlockZone") then return end
         ZoneService.UnlockZone(player, zoneId)
     end)
 

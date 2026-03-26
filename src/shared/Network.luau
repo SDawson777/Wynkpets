@@ -22,7 +22,10 @@ Network.Events = {
     "EquipPet",                  -- Client -> Server: request equip
     "UnequipPet",                -- Client -> Server: request unequip
     "DeletePet",                 -- Client -> Server: request delete
-    
+    "PetLevelUp",               -- Server -> Client: pet leveled up
+    "FusePets",                  -- Client -> Server: request pet fusion
+    "FuseResult",                -- Server -> Client: fusion result
+
     -- Eggs / Hatching
     "HatchEgg",                  -- Client -> Server: request hatch
     "HatchResult",               -- Server -> Client: hatch result (pet data)
@@ -59,8 +62,35 @@ Network.Events = {
     -- Admin
     "AdminCommand",              -- Client -> Server: admin command
     
+    -- Trading
+    "TradeRequest",              -- Client -> Server / Server -> Client: trade request
+    "TradeAccepted",             -- Client -> Server / Server -> Client: trade accepted
+    "TradeDeclined",             -- Client -> Server: trade declined
+    "TradeUpdated",              -- Client -> Server / Server -> Client: offer updated
+    "TradeCancelled",            -- Client -> Server / Server -> Client: trade cancelled
+    "TradeConfirmed",            -- Client -> Server: confirm trade
+    "TradeCompleted",            -- Server -> Client: trade completed
+
     -- UI Notifications
     "ShowNotification",          -- Server -> Client: show a notification
+
+    -- NPC interactions (Server -> Client: open GUI)
+    "OpenShop",
+    "OpenTrade",
+    "OpenFuse",
+    "OpenRebirth",
+
+    -- Leaderboards
+    "RequestLeaderboard",        -- Client -> Server: request leaderboard data
+    "LeaderboardData",           -- Server -> Client: leaderboard data
+
+    -- Achievements
+    "AchievementUnlocked",       -- Server -> Client: achievement unlocked
+
+    -- Server Events
+    "ServerEvent",               -- Server -> Client: event started
+    "ServerEventEnded",          -- Server -> Client: event ended
+    "RequestActiveEvent",        -- Client -> Server: check active event
 }
 
 -- All remote function names (for request-response patterns)

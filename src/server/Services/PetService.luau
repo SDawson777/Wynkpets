@@ -12,6 +12,8 @@ local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig
 local RebirthConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RebirthConfig"))
 
 local DataService -- Forward declaration
+local RewardService
+local AntiExploitService
 
 local PetService = {}
 
@@ -143,6 +145,12 @@ function PetService.EquipPet(player: Player, petUUID: string): boolean
 
     Network.FireClient("PetEquipped", player, petUUID)
     Network.FireClient("PetsUpdated", player, data.Pets)
+
+    -- Track quest progress
+    if RewardService then
+        RewardService.UpdateQuestProgress(player, "EquipPets", 1)
+    end
+
     return true
 end
 
@@ -187,11 +195,14 @@ function PetService.GetEquippedPets(player: Player)
 end
 
 -- Initialize remote events
-function PetService.Init(dataService)
+function PetService.Init(dataService, rewardService, antiExploitService)
     DataService = dataService
+    RewardService = rewardService
+    AntiExploitService = antiExploitService
 
     Network.OnServerEvent("EquipPet", function(player: Player, petUUID: string)
         if type(petUUID) ~= "string" then return end
+        if not AntiExploitService.CheckRateLimit(player, "EquipPet") then return end
         PetService.EquipPet(player, petUUID)
     end)
 
