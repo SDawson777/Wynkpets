@@ -1,0 +1,11 @@
+# stylua.toml
+# Code-style configuration for StyLua.
+# Run: stylua src/
+# Docs: https://github.com/JohnnyMorganz/StyLua
+
+column_width = 100
+line_endings = "Unix"
+indent_type  = "Spaces"
+indent_width = 4
+quote_style  = "AutoPreferDouble"
+call_parentheses = "Always"
