@@ -8,10 +8,15 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
 local RebirthConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RebirthConfig"))
+local LaunchConfig = require(Shared:WaitForChild("Configs"):WaitForChild("LaunchConfig"))
 
 local DataService
 local CurrencyService
 local AntiExploitService
+local EvolutionService      -- set via RebirthService.SetEvolutionService
+local AnalyticsService      -- set via RebirthService.SetAnalyticsService
+local BattlePassService     -- set via RebirthService.SetBattlePassService
+local EntitlementService    -- set via RebirthService.SetEntitlementService
 
 local RebirthService = {}
 
@@ -49,8 +54,14 @@ function RebirthService.Rebirth(player: Player): boolean
     -- Set new multiplier
     data.RebirthMultiplier = nextTier.Multiplier
 
-    -- Update equip slots
-    data.MaxEquipSlots = RebirthConfig.GetTotalEquipSlots(data.Rebirths)
+    -- Update equip slots (base from rebirth tiers + extra_equip gamepass bonus)
+    local extraSlots = EntitlementService and EntitlementService.GetExtraEquipSlots(player) or 0
+    data.MaxEquipSlots = RebirthConfig.GetTotalEquipSlots(data.Rebirths) + extraSlots
+
+    -- Track analytics
+    if AnalyticsService then
+        AnalyticsService.TrackRebirth(player, data.Rebirths)
+    end
 
     -- Notify client
     Network.FireClient("CurrencyUpdated", player, "Coins", data.Coins)
@@ -61,6 +72,15 @@ function RebirthService.Rebirth(player: Player): boolean
     })
     Network.FireClient("ShowNotification", player,
         "Rebirth " .. data.Rebirths .. "! " .. nextTier.Multiplier .. "x multiplier!", "Success")
+
+    -- Award evolution materials for rebirth
+    if EvolutionService then
+        EvolutionService.TryAwardShards(player, "Rebirth")
+    end
+    -- Battle Pass XP: +2,000 XP per rebirth (major commitment reward)
+    if BattlePassService then
+        BattlePassService.AddXP(player, 2000, "rebirth")
+    end
 
     return true
 end
@@ -88,10 +108,20 @@ function RebirthService.Init(dataService, currencyService, antiExploitService)
     CurrencyService = currencyService
     AntiExploitService = antiExploitService
 
+    if not LaunchConfig.IsFeatureEnabled("Rebirth") then
+        print("[LaunchConfig] RebirthService disabled — skipping handler registration")
+        return
+    end
+
     Network.OnServerEvent("RequestRebirth", function(player: Player)
         if not AntiExploitService.CheckRateLimit(player, "RequestRebirth") then return end
         RebirthService.Rebirth(player)
     end)
 end
+
+function RebirthService.SetEvolutionService(es) EvolutionService = es end
+function RebirthService.SetAnalyticsService(as) AnalyticsService = as end
+function RebirthService.SetBattlePassService(bps) BattlePassService = bps end
+function RebirthService.SetEntitlementService(ents) EntitlementService = ents end
 
 return RebirthService

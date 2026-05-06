@@ -14,6 +14,7 @@ local playerGui = player:WaitForChild("PlayerGui")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
 local NumberFormat = require(Shared:WaitForChild("Utils"):WaitForChild("NumberFormat"))
+local LaunchConfig = require(Shared:WaitForChild("Configs"):WaitForChild("LaunchConfig"))
 
 -- ═══════════════════════════════════════
 -- SCREEN GUI
@@ -163,8 +164,13 @@ local buttonConfigs = {
     { Name = "Fuse",    Icon = "🔮", Color = Color3.fromRGB(255, 100, 200) },
     { Name = "Index",   Icon = "📖", Color = Color3.fromRGB(180, 130, 255) },
     { Name = "Trade",   Icon = "🤝", Color = Color3.fromRGB(100, 200, 255) },
+    { Name = "Daily",   Icon = "📅", Color = Color3.fromRGB(255, 180, 50) },
+    { Name = "Spin",    Icon = "🎰", Color = Color3.fromRGB(255, 50, 80) },
     { Name = "Ranks",   Icon = "🏆", Color = Color3.fromRGB(255, 200, 50) },
-    { Name = "Achieve", Icon = "🎖️", Color = Color3.fromRGB(255, 180, 50) },
+    { Name = "Achieve",    Icon = "🎖️", Color = Color3.fromRGB(255, 180, 50) },
+    { Name = "BattlePass", Icon = "⚔️",  Color = Color3.fromRGB(70, 45, 160) },
+    { Name = "Evolution",  Icon = "✨",  Color = Color3.fromRGB(200, 80, 200) },
+    { Name = "Expedition", Icon = "🧭", Color = Color3.fromRGB(80, 180, 140) },
 }
 
 for _, config in ipairs(buttonConfigs) do
@@ -217,6 +223,23 @@ for _, config in ipairs(buttonConfigs) do
             Size = UDim2.new(0, 54, 0, 54)
         }):Play()
     end)
+end
+
+-- Hide buttons for features disabled by LaunchConfig
+local FEATURE_BUTTON_MAP = {
+    RebirthButton    = "Rebirth",
+    FuseButton       = "Fusion",
+    SpinButton       = "Wheel",
+    TradeButton      = "Trading",
+    BattlePassButton = "BattlePass",
+    EvolutionButton  = "Evolution",
+    ExpeditionButton = "Expedition",
+}
+for btnName, featureId in pairs(FEATURE_BUTTON_MAP) do
+    local btn = sideButtons:FindFirstChild(btnName)
+    if btn and not LaunchConfig.IsFeatureEnabled(featureId) then
+        btn.Visible = false
+    end
 end
 
 -- ═══════════════════════════════════════
@@ -493,3 +516,161 @@ Network.OnClientEvent("PlayerDataLoaded", function(data)
 end)
 
 print("[GUI] MainHUD loaded")
+
+-- ═══════════════════════════════════════
+-- SCROLLING ANNOUNCEMENT TICKER (top of screen)
+-- ═══════════════════════════════════════
+
+local tickerFrame = Instance.new("Frame")
+tickerFrame.Name = "Ticker"
+tickerFrame.Size = UDim2.new(1, 0, 0, 22)
+tickerFrame.Position = UDim2.new(0, 0, 0, 0)
+tickerFrame.BackgroundColor3 = Color3.fromRGB(15, 10, 30)
+tickerFrame.BackgroundTransparency = 0.3
+tickerFrame.BorderSizePixel = 0
+tickerFrame.ClipsDescendants = true
+tickerFrame.Parent = screenGui
+
+local tickerQueue = {}
+local tickerRunning = false
+
+local function addTickerMessage(msg: string, color: Color3?)
+    table.insert(tickerQueue, { Text = msg, Color = color or Color3.fromRGB(255, 220, 80) })
+    if not tickerRunning then
+        tickerRunning = true
+        task.spawn(function()
+            while #tickerQueue > 0 do
+                local item = table.remove(tickerQueue, 1)
+                local label = Instance.new("TextLabel")
+                label.Size = UDim2.new(0, 600, 1, 0)
+                label.Position = UDim2.new(1, 0, 0, 0)
+                label.BackgroundTransparency = 1
+                label.Text = item.Text
+                label.TextColor3 = item.Color
+                label.Font = Enum.Font.GothamBold
+                label.TextSize = 13
+                label.TextXAlignment = Enum.TextXAlignment.Left
+                label.Parent = tickerFrame
+
+                -- Scroll from right to left
+                local tween = TweenService:Create(label, TweenInfo.new(8, Enum.EasingStyle.Linear), {
+                    Position = UDim2.new(-1, -600, 0, 0)
+                })
+                tween:Play()
+                task.delay(3, function()
+                    -- Allow next message after 3 seconds
+                end)
+                tween.Completed:Wait()
+                label:Destroy()
+            end
+            tickerRunning = false
+        end)
+    end
+end
+
+-- Pipe hatch announcements to ticker
+Network.OnClientEvent("ShowNotification", function(message: string, notifType: string)
+    if notifType == "Hatch" then
+        addTickerMessage(message, Color3.fromRGB(255, 180, 50))
+    end
+end)
+
+-- ═══════════════════════════════════════
+-- MILESTONE POPUP SYSTEM
+-- ═══════════════════════════════════════
+
+local lastMilestones = {}
+
+local function checkMilestones(data)
+    local coins = data.Coins or 0
+    local eggs = data.TotalEggsHatched or 0
+    local pets = data.TotalPetsCollected or 0
+
+    local milestones = {
+        { Key = "coins_1000", Check = coins >= 1000, Text = "MILESTONE: 1,000 Coins earned!" },
+        { Key = "coins_10000", Check = coins >= 10000, Text = "MILESTONE: 10,000 Coins earned!" },
+        { Key = "coins_100000", Check = coins >= 100000, Text = "MILESTONE: 100K Coins! You're getting rich!" },
+        { Key = "coins_1000000", Check = coins >= 1000000, Text = "MILESTONE: 1 MILLION Coins!" },
+        { Key = "eggs_10", Check = eggs >= 10, Text = "MILESTONE: 10 Eggs Hatched!" },
+        { Key = "eggs_50", Check = eggs >= 50, Text = "MILESTONE: 50 Eggs Hatched! Egg master!" },
+        { Key = "eggs_100", Check = eggs >= 100, Text = "MILESTONE: 100 Eggs Hatched!" },
+        { Key = "pets_10", Check = pets >= 10, Text = "MILESTONE: 10 Pets Collected!" },
+        { Key = "pets_25", Check = pets >= 25, Text = "MILESTONE: 25 Pets! Growing collection!" },
+    }
+
+    for _, m in ipairs(milestones) do
+        if m.Check and not lastMilestones[m.Key] then
+            lastMilestones[m.Key] = true
+            showNotification(m.Text, "Success")
+            addTickerMessage(m.Text, Color3.fromRGB(100, 255, 100))
+        end
+    end
+end
+
+-- Check milestones when data updates
+Network.OnClientEvent("DataUpdated", function(field, value)
+    -- We'll check on currency updates as a proxy
+end)
+
+Network.OnClientEvent("CurrencyUpdated", function(currency: string, amount: number)
+    -- Trigger milestone check with approximate data
+    if currency == "Coins" then
+        checkMilestones({ Coins = amount, TotalEggsHatched = 0, TotalPetsCollected = 0 })
+    end
+end)
+
+-- Obstacle hit: golden invincibility highlight for 3 seconds
+Network.OnClientEvent("ObstacleHit", function()
+    local character = player.Character
+    if not character then return end
+    -- Remove any existing highlight first
+    local existing = character:FindFirstChild("InvincibilityHighlight")
+    if existing then existing:Destroy() end
+
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "InvincibilityHighlight"
+    highlight.FillColor = Color3.fromRGB(255, 220, 50)
+    highlight.OutlineColor = Color3.fromRGB(255, 180, 0)
+    highlight.FillTransparency = 0.5
+    highlight.Parent = character
+    task.delay(3, function()
+        if highlight.Parent then
+            highlight:Destroy()
+        end
+    end)
+end)
+
+-- Secret token counter display
+local secretFrame = Instance.new("Frame")
+secretFrame.Name = "SecretCounter"
+secretFrame.Size = UDim2.new(0, 140, 0, 22)
+secretFrame.Position = UDim2.new(0.5, -70, 0, 95)
+secretFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 40)
+secretFrame.BackgroundTransparency = 0.3
+secretFrame.Parent = screenGui
+
+local secretCorner = Instance.new("UICorner")
+secretCorner.CornerRadius = UDim.new(0, 8)
+secretCorner.Parent = secretFrame
+
+local secretStroke = Instance.new("UIStroke")
+secretStroke.Color = Color3.fromRGB(255, 200, 50)
+secretStroke.Thickness = 1
+secretStroke.Parent = secretFrame
+
+local secretLabel = Instance.new("TextLabel")
+secretLabel.Size = UDim2.new(1, 0, 1, 0)
+secretLabel.BackgroundTransparency = 1
+secretLabel.Text = "Secrets: 0/24"
+secretLabel.TextColor3 = Color3.fromRGB(255, 215, 80)
+secretLabel.Font = Enum.Font.GothamBold
+secretLabel.TextSize = 13
+secretLabel.Parent = secretFrame
+
+Network.OnClientEvent("SecretTokenCollected", function(_zoneId, _tokenIndex, count)
+    secretLabel.Text = "Secrets: " .. tostring(count) .. "/24"
+end)
+
+Network.OnClientEvent("SecretTokenCount", function(count)
+    secretLabel.Text = "Secrets: " .. tostring(count) .. "/24"
+end)

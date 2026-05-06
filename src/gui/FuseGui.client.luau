@@ -17,6 +17,7 @@ local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig
 local RarityConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RarityConfig"))
 local FuseConfig = require(Shared:WaitForChild("Configs"):WaitForChild("FuseConfig"))
 local NumberFormat = require(Shared:WaitForChild("Utils"):WaitForChild("NumberFormat"))
+local PetVisualUtil = require(Shared:WaitForChild("Utils"):WaitForChild("PetVisualUtil"))
 
 -- ═══════════════════════════════════════
 -- SCREEN GUI
@@ -218,23 +219,14 @@ local function updateSlots()
                     local petInfo = PetConfig.GetPet(pet.PetId)
                     if petInfo then
                         local rarityInfo = RarityConfig.Tiers[petInfo.Rarity]
-                        local icon = Instance.new("Frame")
-                        icon.Name = "Icon"
-                        icon.Size = UDim2.new(0, 40, 0, 40)
-                        icon.Position = UDim2.new(0.5, -20, 0, 10)
-                        icon.Parent = slot
+                        local iconContainer = Instance.new("Frame")
+                        iconContainer.Name = "Icon"
+                        iconContainer.Size = UDim2.new(0, 40, 0, 40)
+                        iconContainer.Position = UDim2.new(0.5, -20, 0, 10)
+                        iconContainer.BackgroundTransparency = 1
+                        iconContainer.Parent = slot
 
-                        local iCorner = Instance.new("UICorner")
-                        iCorner.CornerRadius = UDim.new(1, 0)
-                        iCorner.Parent = icon
-
-                        if pet.Golden then
-                            icon.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
-                        elseif pet.Rainbow then
-                            icon.BackgroundColor3 = Color3.fromRGB(255, 100, 255)
-                        else
-                            icon.BackgroundColor3 = rarityInfo and rarityInfo.Color or Color3.fromRGB(150, 150, 150)
-                        end
+                        PetVisualUtil.CreateIcon(iconContainer, petInfo, pet, UDim2.new(1, 0, 1, 0))
 
                         local nameL = Instance.new("TextLabel")
                         nameL.Name = "Name"
@@ -358,22 +350,13 @@ local function refreshSelector()
         cStroke.Parent = card
 
         -- Icon
-        local icon = Instance.new("Frame")
-        icon.Size = UDim2.new(0, 36, 0, 36)
-        icon.Position = UDim2.new(0.5, -18, 0, 6)
-        icon.Parent = card
+        local iconContainer = Instance.new("Frame")
+        iconContainer.Size = UDim2.new(0, 36, 0, 36)
+        iconContainer.Position = UDim2.new(0.5, -18, 0, 6)
+        iconContainer.BackgroundTransparency = 1
+        iconContainer.Parent = card
 
-        local iCorner = Instance.new("UICorner")
-        iCorner.CornerRadius = UDim.new(1, 0)
-        iCorner.Parent = icon
-
-        if pet.Golden then
-            icon.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
-        elseif pet.Rainbow then
-            icon.BackgroundColor3 = Color3.fromRGB(255, 100, 255)
-        else
-            icon.BackgroundColor3 = rarityInfo and rarityInfo.Color or Color3.fromRGB(150, 150, 150)
-        end
+        PetVisualUtil.CreateIcon(iconContainer, petInfo, pet, UDim2.new(1, 0, 1, 0))
 
         -- Name
         local nameLabel = Instance.new("TextLabel")

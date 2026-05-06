@@ -12,6 +12,9 @@ local Network = require(Shared:WaitForChild("Network"))
 local GamepassConfig = require(Shared:WaitForChild("Configs"):WaitForChild("GamepassConfig"))
 
 local DataService
+local SubscriptionService   -- late-bound
+local AnalyticsService      -- late-bound
+local EntitlementService    -- late-bound
 
 local GamepassService = {}
 
@@ -31,7 +34,23 @@ function GamepassService.GiveGamepass(player: Player, gamepassId: string)
         data.Gamepasses = {}
     end
 
+    local alreadyGranted = data.Gamepasses[gamepassId] == true
     data.Gamepasses[gamepassId] = true
+
+    -- Sync EntitlementService cache so effects apply immediately (no rejoin needed)
+    if EntitlementService then
+        EntitlementService.GavePass(player, gamepassId)
+    end
+
+    -- Apply one-time persistent data effects (idempotent — only on first grant)
+    if not alreadyGranted then
+        local gp = GamepassConfig.GetGamepass(gamepassId)
+        if gp and gp.ExtraEquipSlots then
+            data.MaxEquipSlots = (data.MaxEquipSlots or 3) + gp.ExtraEquipSlots
+            Network.FireClient("DataUpdated", player, "MaxEquipSlots", data.MaxEquipSlots)
+        end
+    end
+
     Network.FireClient("GamepassOwned", player, gamepassId)
     Network.FireClient("ShowNotification", player,
         "Gamepass activated: " .. (GamepassConfig.GetGamepass(gamepassId) and GamepassConfig.GetGamepass(gamepassId).Name or gamepassId) .. "!",
@@ -41,9 +60,9 @@ end
 -- Verify ownership with Roblox on join
 function GamepassService.VerifyOwnership(player: Player)
     for _, gp in ipairs(GamepassConfig.Gamepasses) do
-        if gp.ProductId > 0 then
+        if gp.GamepassId and gp.GamepassId > 0 then
             local success, owns = pcall(function()
-                return MarketplaceService:UserOwnsGamePassAsync(player.UserId, gp.ProductId)
+                return MarketplaceService:UserOwnsGamePassAsync(player.UserId, gp.GamepassId)
             end)
             if success and owns then
                 GamepassService.GiveGamepass(player, gp.Id)
@@ -60,7 +79,7 @@ function GamepassService.Init(dataService)
     Network.OnServerEvent("PurchaseGamepass", function(player: Player, gamepassId: string)
         if type(gamepassId) ~= "string" then return end
         local gp = GamepassConfig.GetGamepass(gamepassId)
-        if not gp or gp.ProductId <= 0 then return end
+        if not gp or not gp.GamepassId or gp.GamepassId <= 0 then return end
 
         -- Already owns it?
         if GamepassService.OwnsGamepass(player, gamepassId) then
@@ -69,17 +88,43 @@ function GamepassService.Init(dataService)
         end
 
         -- Prompt purchase through Roblox
-        MarketplaceService:PromptGamePassPurchase(player, gp.ProductId)
+        if AnalyticsService then
+            AnalyticsService.TrackPurchaseStarted(player, gamepassId, gp.Price)
+        end
+        MarketplaceService:PromptGamePassPurchase(player, gp.GamepassId)
     end)
 
     -- Handle completed gamepass purchases
     MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(player, gamepassId, wasPurchased)
         if not wasPurchased then return end
-        local gp = GamepassConfig.GamepassByProductId[gamepassId]
+        local gp = GamepassConfig.GamepassByGamepassId[gamepassId]
         if gp then
             GamepassService.GiveGamepass(player, gp.Id)
+            -- Track completed purchase
+            if AnalyticsService then
+                AnalyticsService.TrackPurchaseCompleted(player, gp.Id, gp.Price)
+            end
+            -- If this pass corresponds to a subscription tier, grant it
+            if SubscriptionService then
+                SubscriptionService.GrantFromGamepass(player, gamepassId)
+            end
         end
     end)
+end
+
+-- Late-bind SubscriptionService to avoid circular dependency
+function GamepassService.SetSubscriptionService(svc)
+    SubscriptionService = svc
+end
+
+-- Late-bind EntitlementService (needed for cache sync and ExtraEquipSlots)
+function GamepassService.SetEntitlementService(ents)
+    EntitlementService = ents
+end
+
+-- Late-bind AnalyticsService
+function GamepassService.SetAnalyticsService(as)
+    AnalyticsService = as
 end
 
 return GamepassService

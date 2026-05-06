@@ -31,36 +31,24 @@
     },
     "Workspace": {
       "$className": "Workspace",
-      "$properties": {
-        "FilteringEnabled": true
-      },
-      "Baseplate": {
-        "$className": "Part",
-        "$properties": {
-          "Size": [512, 20, 512],
-          "Position": [0, -10, 0],
-          "Anchored": true,
-          "BrickColor": "Medium stone grey",
-          "Material": "Grass"
-        }
-      },
+
       "SpawnLocation": {
         "$className": "SpawnLocation",
         "$properties": {
           "Size": [6, 1, 6],
-          "Position": [0, 1, 0],
+          "Position": [0, 5.5, 0],
           "Anchored": true,
-          "BrickColor": "Medium stone grey"
+          "Neutral": true
         }
       }
     },
     "Lighting": {
       "$className": "Lighting",
       "$properties": {
-        "Ambient": [70, 70, 70],
+        "Ambient": { "Color3": [0.274, 0.274, 0.274] },
         "Brightness": 2,
         "ClockTime": 14,
-        "OutdoorAmbient": [128, 128, 128]
+        "OutdoorAmbient": { "Color3": [0.502, 0.502, 0.502] }
       }
     }
   }

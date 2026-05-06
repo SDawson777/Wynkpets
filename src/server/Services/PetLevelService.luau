@@ -11,6 +11,8 @@ local PetLevelConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetL
 local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig"))
 
 local DataService
+local DailyRotationService
+local PetDisplayService
 local PetLevelService = {}
 
 -- Grant XP to all equipped pets
@@ -18,11 +20,20 @@ function PetLevelService.GrantXP(player: Player, amount: number)
     local data = DataService.GetData(player)
     if not data or amount <= 0 then return end
 
+    -- Apply daily rotation XP boost
+    local xpAmount = amount
+    if DailyRotationService then
+        local theme = DailyRotationService.GetDailyTheme()
+        if theme and theme.BoostType == "XP" then
+            xpAmount = math.floor(xpAmount * theme.BoostMultiplier)
+        end
+    end
+
     local equippedPets = data.EquippedPets or {}
     if #equippedPets == 0 then return end
 
     -- Split XP evenly among equipped pets
-    local xpPerPet = math.floor(amount / #equippedPets)
+    local xpPerPet = math.floor(xpAmount / #equippedPets)
     if xpPerPet <= 0 then return end
 
     for _, petUUID in ipairs(equippedPets) do
@@ -54,15 +65,16 @@ function PetLevelService.GrantXP(player: Player, amount: number)
                     Network.FireClient("PetLevelUp", player, pet.UUID, pet.Level, petName)
                     Network.FireClient("ShowNotification", player,
                         petName .. " leveled up to " .. pet.Level .. "!", "Success")
+                    -- Update orbiting pet power label in realtime
+                    if PetDisplayService then
+                        PetDisplayService.UpdatePetPower(player, pet.UUID, pet.Level)
+                    end
                 end
 
                 break
             end
         end
     end
-
-    -- Update client with new pet data
-    Network.FireClient("PetsUpdated", player, data.Pets)
 end
 
 -- Get the effective power of a pet (base power * level multiplier * variant multiplier)
@@ -76,6 +88,14 @@ end
 -- Initialize
 function PetLevelService.Init(dataService)
     DataService = dataService
+end
+
+function PetLevelService.SetPetDisplayService(petDisplayService)
+    PetDisplayService = petDisplayService
+end
+
+function PetLevelService.SetDailyRotationService(dailyRotationService)
+    DailyRotationService = dailyRotationService
 end
 
 return PetLevelService

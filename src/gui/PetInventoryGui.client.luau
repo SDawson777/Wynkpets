@@ -15,6 +15,7 @@ local Network = require(Shared:WaitForChild("Network"))
 local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig"))
 local RarityConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RarityConfig"))
 local PetLevelConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetLevelConfig"))
+local PetVisualUtil = require(Shared:WaitForChild("Utils"):WaitForChild("PetVisualUtil"))
 
 -- ═══════════════════════════════════════
 -- SCREEN GUI
@@ -212,23 +213,14 @@ local function refreshPets()
         cStroke.Thickness = pet.Equipped and 2.5 or 1.5
         cStroke.Parent = card
 
-        -- Pet icon (colored circle)
-        local icon = Instance.new("Frame")
-        icon.Size = UDim2.new(0, 50, 0, 50)
-        icon.Position = UDim2.new(0.5, -25, 0, 8)
-        icon.Parent = card
+        -- Pet icon (image or fallback colored circle)
+        local iconContainer = Instance.new("Frame")
+        iconContainer.Size = UDim2.new(0, 50, 0, 50)
+        iconContainer.Position = UDim2.new(0.5, -25, 0, 8)
+        iconContainer.BackgroundTransparency = 1
+        iconContainer.Parent = card
 
-        local iCorner = Instance.new("UICorner")
-        iCorner.CornerRadius = UDim.new(1, 0)
-        iCorner.Parent = icon
-
-        if pet.Golden then
-            icon.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
-        elseif pet.Rainbow then
-            icon.BackgroundColor3 = Color3.fromRGB(255, 100, 255)
-        else
-            icon.BackgroundColor3 = rarityInfo and rarityInfo.Color or Color3.fromRGB(150, 150, 150)
-        end
+        PetVisualUtil.CreateIcon(iconContainer, petInfo, pet, UDim2.new(1, 0, 1, 0))
 
         -- Name
         local nameLabel = Instance.new("TextLabel")
@@ -281,11 +273,37 @@ local function refreshPets()
             end)
         end
 
-        -- Delete button (only for non-equipped pets)
+        -- Delete / Lock buttons (only for non-equipped pets)
         if not pet.Equipped then
-            local deleteBtn = Instance.new("TextButton")
-            deleteBtn.Size = UDim2.new(0, 20, 0, 20)
-            deleteBtn.Position = UDim2.new(1, -24, 0, 4)
+            -- Lock/Unlock toggle button (top-left of card)
+            local lockBtn = Instance.new("TextButton")
+            lockBtn.Size = UDim2.new(0, 20, 0, 20)
+            lockBtn.Position = UDim2.new(0, 4, 0, 4)
+            lockBtn.BackgroundColor3 = pet.Locked and Color3.fromRGB(255, 180, 0) or Color3.fromRGB(60, 60, 80)
+            lockBtn.Text = pet.Locked and "🔒" or "🔓"
+            lockBtn.TextColor3 = Color3.new(1, 1, 1)
+            lockBtn.Font = Enum.Font.GothamBold
+            lockBtn.TextSize = 10
+            lockBtn.ZIndex = 2
+            lockBtn.Parent = card
+
+            local lbCorner = Instance.new("UICorner")
+            lbCorner.CornerRadius = UDim.new(0, 5)
+            lbCorner.Parent = lockBtn
+
+            lockBtn.MouseButton1Click:Connect(function()
+                if pet.Locked then
+                    Network.FireServer("UnlockPet", pet.UUID)
+                else
+                    Network.FireServer("LockPet", pet.UUID)
+                end
+            end)
+
+            -- Delete button only available for unlocked pets
+            if not pet.Locked then
+                local deleteBtn = Instance.new("TextButton")
+                deleteBtn.Size = UDim2.new(0, 20, 0, 20)
+                deleteBtn.Position = UDim2.new(1, -24, 0, 4)
             deleteBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
             deleteBtn.Text = "X"
             deleteBtn.TextColor3 = Color3.new(1, 1, 1)
@@ -381,6 +399,7 @@ local function refreshPets()
                     confirmGui:Destroy()
                 end)
             end)
+            end -- if not pet.Locked
         end
 
         card.Parent = petScroll

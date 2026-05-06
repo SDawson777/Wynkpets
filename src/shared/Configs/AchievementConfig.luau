@@ -142,14 +142,22 @@ AchievementConfig.Achievements = {
         Reward = { Currency = "Gems", Amount = 500 },
     },
 
-    -- Coin milestones
+    -- Coin milestones (reward COINS to create a coin feedback loop)
     {
         Id = "coins_10k",
         Name = "Getting Rich",
         Description = "Earn 10,000 total coins",
         Type = "TotalCoinsEarned",
         Goal = 10000,
-        Reward = { Currency = "Gems", Amount = 10 },
+        Reward = { Currency = "Coins", Amount = 2500 },
+    },
+    {
+        Id = "coins_100k",
+        Name = "Six Figures",
+        Description = "Earn 100,000 total coins",
+        Type = "TotalCoinsEarned",
+        Goal = 100000,
+        Reward = { Currency = "Coins", Amount = 25000 },
     },
     {
         Id = "coins_1m",
@@ -157,7 +165,15 @@ AchievementConfig.Achievements = {
         Description = "Earn 1,000,000 total coins",
         Type = "TotalCoinsEarned",
         Goal = 1000000,
-        Reward = { Currency = "Gems", Amount = 100 },
+        Reward = { Currency = "Coins", Amount = 250000 },
+    },
+    {
+        Id = "coins_100m",
+        Name = "Tycoon",
+        Description = "Earn 100,000,000 total coins",
+        Type = "TotalCoinsEarned",
+        Goal = 100000000,
+        Reward = { Currency = "Coins", Amount = 25000000 },
     },
     {
         Id = "coins_1b",
@@ -166,6 +182,14 @@ AchievementConfig.Achievements = {
         Type = "TotalCoinsEarned",
         Goal = 1000000000,
         Reward = { Currency = "Gems", Amount = 500 },
+    },
+    {
+        Id = "coins_1t",
+        Name = "Trillionaire",
+        Description = "Earn 1,000,000,000,000 total coins",
+        Type = "TotalCoinsEarned",
+        Goal = 1000000000000,
+        Reward = { Currency = "Gems", Amount = 2000 },
     },
 
     -- Rarity milestones
@@ -280,6 +304,58 @@ AchievementConfig.Achievements = {
         Type = "LoginDays",
         Goal = 30,
         Reward = { Currency = "Gems", Amount = 150 },
+    },
+
+    -- Special eggs
+    {
+        Id = "special_egg_1",
+        Name = "Lucky Find",
+        Description = "Claim your first Special Egg",
+        Type = "SpecialEggsClaimed",
+        Goal = 1,
+        Reward = { Currency = "Gems", Amount = 25 },
+    },
+    {
+        Id = "special_egg_10",
+        Name = "Egg Hunter",
+        Description = "Claim 10 Special Eggs",
+        Type = "SpecialEggsClaimed",
+        Goal = 10,
+        Reward = { Currency = "Gems", Amount = 100 },
+    },
+
+    -- Secrets
+    {
+        Id = "secret_1",
+        Name = "First Secret",
+        Description = "Find your first secret token",
+        Type = "SecretTokensFound",
+        Goal = 1,
+        Reward = { Currency = "Gems", Amount = 10 },
+    },
+    {
+        Id = "secret_12",
+        Name = "Secret Seeker",
+        Description = "Find 12 secret tokens",
+        Type = "SecretTokensFound",
+        Goal = 12,
+        Reward = { Currency = "Gems", Amount = 50 },
+    },
+    {
+        Id = "secret_all",
+        Name = "Master Explorer",
+        Description = "Find all 24 secret tokens",
+        Type = "SecretTokensFound",
+        Goal = 24,
+        Reward = { Currency = "Gems", Amount = 500 },
+    },
+    {
+        Id = "secret_zone",
+        Name = "Hidden Paradise",
+        Description = "Unlock the Secret Garden",
+        Type = "SecretZoneUnlocked",
+        Goal = 1,
+        Reward = { Currency = "Gems", Amount = 200 },
     },
 }
 

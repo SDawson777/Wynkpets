@@ -58,7 +58,20 @@ controllersModule.Name = "Controllers"
 controllersModule.Parent = player
 
 -- Notification system
+-- Dedup guard: Warning-tier toasts with the same text are clamped to once per
+-- 5 seconds.  This is a safety net for edge cases where the server sends a
+-- rejection toast before the client-side hatch-button guard takes effect
+-- (e.g. race condition between a CurrencyUpdated event and a manual click).
+local _notifLastShown = {}  -- [message] = tick() of last display
+local NOTIF_DEDUP_SECS = 5
+
 Network.OnClientEvent("ShowNotification", function(message: string, notifType: string)
+    if notifType == "Warning" then
+        local now = tick()
+        local last = _notifLastShown[message]
+        if last and (now - last) < NOTIF_DEDUP_SECS then return end
+        _notifLastShown[message] = now
+    end
     -- This will be picked up by the MainHUD GUI
     local playerGui = player:WaitForChild("PlayerGui")
     local mainHud = playerGui:FindFirstChild("MainHUD")
@@ -68,6 +81,45 @@ Network.OnClientEvent("ShowNotification", function(message: string, notifType: s
             notifEvent:Fire(message, notifType)
         end
     end
+end)
+
+-- Coin floating text (rendered client-side only so other players don't see it)
+Network.OnClientEvent("CoinFloatText", function(position: Vector3, text: string, color: Color3)
+    local Workspace = game:GetService("Workspace")
+    local part = Instance.new("Part")
+    part.Size = Vector3.new(0.1, 0.1, 0.1)
+    part.Position = position + Vector3.new(0, 3, 0)
+    part.Anchored = true
+    part.CanCollide = false
+    part.Transparency = 1
+    part.Parent = Workspace
+
+    local billboard = Instance.new("BillboardGui")
+    billboard.Size = UDim2.new(0, 120, 0, 40)
+    billboard.AlwaysOnTop = true
+    billboard.Parent = part
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.BackgroundTransparency = 1
+    label.Text = text
+    label.TextColor3 = color
+    label.TextStrokeTransparency = 0
+    label.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    label.Font = Enum.Font.GothamBold
+    label.TextScaled = true
+    label.Parent = billboard
+
+    task.spawn(function()
+        local startY = part.Position.Y
+        for i = 0, 20 do
+            part.Position = Vector3.new(part.Position.X, startY + i * 0.15, part.Position.Z)
+            label.TextTransparency = i / 20
+            label.TextStrokeTransparency = i / 20
+            task.wait(0.03)
+        end
+        part:Destroy()
+    end)
 end)
 
 -- Set up coin collection (clicking coins in the world)

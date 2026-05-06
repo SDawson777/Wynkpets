@@ -9,6 +9,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
 local TradeConfig = require(Shared:WaitForChild("Configs"):WaitForChild("TradeConfig"))
+local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig"))
+local LaunchConfig = require(Shared:WaitForChild("Configs"):WaitForChild("LaunchConfig"))
 
 local DataService
 local PetService
@@ -52,7 +54,18 @@ local function getPlayerSide(trade, player)
     return 2
 end
 
--- Validate all pets in an offer belong to the player and are not equipped
+-- Update PetIndex for recipient when a pet arrives via trade
+local function updatePetIndex(data, pet)
+    local indexKey = pet.PetId
+    if pet.Golden then indexKey = pet.PetId .. "_golden" end
+    if pet.Rainbow then indexKey = pet.PetId .. "_rainbow" end
+    for _, entry in ipairs(data.PetIndex or {}) do
+        if entry == indexKey then return end
+    end
+    table.insert(data.PetIndex, indexKey)
+end
+
+-- Validate all pets in an offer belong to the player, are not equipped, and are not locked
 local function validateOffer(player, petUUIDs)
     local data = DataService.GetData(player)
     if not data then return false end
@@ -62,6 +75,7 @@ local function validateOffer(player, petUUIDs)
         for _, pet in ipairs(data.Pets or {}) do
             if pet.UUID == uuid then
                 if pet.Equipped then return false end
+                if pet.Locked  then return false end
                 found = true
                 break
             end
@@ -71,9 +85,63 @@ local function validateOffer(player, petUUIDs)
     return true
 end
 
+-- Resolve UUIDs to pet info for display on the other player's client
+local function resolveOfferPets(player, petUUIDs)
+    local data = DataService.GetData(player)
+    if not data then return {} end
+    local resolved = {}
+    for _, uuid in ipairs(petUUIDs) do
+        for _, pet in ipairs(data.Pets or {}) do
+            if pet.UUID == uuid then
+                local petInfo = PetConfig.GetPet(pet.PetId)
+                table.insert(resolved, {
+                    UUID = uuid,
+                    PetId = pet.PetId,
+                    Name = petInfo and petInfo.Name or pet.PetId,
+                    Rarity = petInfo and petInfo.Rarity or "Common",
+                    Power = petInfo and petInfo.Power or 1,
+                    Golden = pet.Golden,
+                    Rainbow = pet.Rainbow,
+                })
+                break
+            end
+        end
+    end
+    return resolved
+end
+
+-- Send trade state to both players with per-player perspective
+local function broadcastTradeState(trade)
+    -- Player1 gets: myOffer = offer1 UUIDs, theirOffer = resolved offer2 pets
+    local offer2Resolved = resolveOfferPets(trade.player2, trade.offer2)
+    local offer1Resolved = resolveOfferPets(trade.player1, trade.offer1)
+
+    Network.FireClient("TradeUpdated", trade.player1, {
+        MyOffer = trade.offer1,       -- UUIDs (client has own pet data)
+        TheirOffer = offer2Resolved,  -- Full pet info from other player
+        MyGems = trade.gems1,
+        TheirGems = trade.gems2,
+        MyAccepted = trade.accepted1,
+        TheirAccepted = trade.accepted2,
+    })
+    Network.FireClient("TradeUpdated", trade.player2, {
+        MyOffer = trade.offer2,       -- UUIDs
+        TheirOffer = offer1Resolved,  -- Full pet info from other player
+        MyGems = trade.gems2,
+        TheirGems = trade.gems1,
+        MyAccepted = trade.accepted2,
+        TheirAccepted = trade.accepted1,
+    })
+end
+
 function TradeService.Init(dataService, petService)
     DataService = dataService
     PetService = petService
+
+    if not LaunchConfig.IsFeatureEnabled("Trading") then
+        print("[LaunchConfig] TradeService disabled — skipping handler registration")
+        return
+    end
 
     -- Request to trade with another player
     Network.OnServerEvent("TradeRequest", function(player: Player, targetPlayer: Player)
@@ -96,6 +164,18 @@ function TradeService.Init(dataService, petService)
         end
         if playerTrades[targetPlayer] then
             Network.FireClient("ShowNotification", player, "That player is already trading!", "Warning")
+            return
+        end
+
+        -- Roblox compliance: check IsPaidItemTradingAllowed for both parties.
+        -- Players in restricted regions must not participate in paid item trading.
+        -- Wrap each call in pcall per Roblox API documentation.
+        local PolicyService = game:GetService("PolicyService")
+        local ok1, pol1 = pcall(function() return PolicyService:GetPolicyInfoForPlayerAsync(player) end)
+        local ok2, pol2 = pcall(function() return PolicyService:GetPolicyInfoForPlayerAsync(targetPlayer) end)
+        if (ok1 and not pol1.IsPaidItemTradingAllowed) or (ok2 and not pol2.IsPaidItemTradingAllowed) then
+            Network.FireClient("ShowNotification", player,
+                "Paid item trading is not available in your region or your target's region.", "Warning")
             return
         end
 
@@ -174,8 +254,7 @@ function TradeService.Init(dataService, petService)
 
         -- Notify both players
         local other = getOtherPlayer(trade, player)
-        Network.FireClient("TradeUpdated", trade.player1, trade.offer1, trade.offer2, trade.gems1, trade.gems2, trade.accepted1, trade.accepted2)
-        Network.FireClient("TradeUpdated", trade.player2, trade.offer1, trade.offer2, trade.gems1, trade.gems2, trade.accepted1, trade.accepted2)
+        broadcastTradeState(trade)
     end)
 
     -- Accept (phase 1)
@@ -191,8 +270,7 @@ function TradeService.Init(dataService, petService)
         if not (side == 1 and trade.accepted1 or side == 2 and trade.accepted2) then
             if side == 1 then trade.accepted1 = true else trade.accepted2 = true end
 
-            Network.FireClient("TradeUpdated", trade.player1, trade.offer1, trade.offer2, trade.gems1, trade.gems2, trade.accepted1, trade.accepted2)
-            Network.FireClient("TradeUpdated", trade.player2, trade.offer1, trade.offer2, trade.gems1, trade.gems2, trade.accepted1, trade.accepted2)
+            broadcastTradeState(trade)
 
             -- If both accepted, move to confirm phase
             if trade.accepted1 and trade.accepted2 then
@@ -209,6 +287,11 @@ function TradeService.Init(dataService, petService)
 
         if trade.confirmed1 and trade.confirmed2 then
             -- Execute trade!
+            -- Guard: both players must still be in-game
+            if not trade.player1.Parent or not trade.player2.Parent then
+                cancelTrade(tradeId, "Trade failed: a player disconnected")
+                return
+            end
             -- Final validation
             if not validateOffer(trade.player1, trade.offer1) or not validateOffer(trade.player2, trade.offer2) then
                 cancelTrade(tradeId, "Trade failed: invalid items")
@@ -234,6 +317,7 @@ function TradeService.Init(dataService, petService)
                     if pet.UUID == uuid then
                         table.remove(data1.Pets, i)
                         table.insert(data2.Pets, pet)
+                        updatePetIndex(data2, pet)
                         break
                     end
                 end
@@ -245,6 +329,7 @@ function TradeService.Init(dataService, petService)
                     if pet.UUID == uuid then
                         table.remove(data2.Pets, i)
                         table.insert(data1.Pets, pet)
+                        updatePetIndex(data1, pet)
                         break
                     end
                 end
@@ -271,6 +356,10 @@ function TradeService.Init(dataService, petService)
             Network.FireClient("ShowNotification", trade.player1, "Trade completed!", "Success")
             Network.FireClient("ShowNotification", trade.player2, "Trade completed!", "Success")
 
+            -- Track trade stats
+            data1.TradesCompleted = (data1.TradesCompleted or 0) + 1
+            data2.TradesCompleted = (data2.TradesCompleted or 0) + 1
+
             tradeCooldowns[trade.player1] = tick()
             tradeCooldowns[trade.player2] = tick()
 
@@ -278,8 +367,7 @@ function TradeService.Init(dataService, petService)
             playerTrades[trade.player2] = nil
             activeTrades[tradeId] = nil
         else
-            Network.FireClient("TradeUpdated", trade.player1, trade.offer1, trade.offer2, trade.gems1, trade.gems2, trade.accepted1, trade.accepted2)
-            Network.FireClient("TradeUpdated", trade.player2, trade.offer1, trade.offer2, trade.gems1, trade.gems2, trade.accepted1, trade.accepted2)
+            broadcastTradeState(trade)
         end
     end)
 

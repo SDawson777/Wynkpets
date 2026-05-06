@@ -7,6 +7,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
+local LaunchConfig = require(Shared:WaitForChild("Configs"):WaitForChild("LaunchConfig"))
 
 local DataService
 
@@ -102,6 +103,11 @@ end
 
 function EventService.Init(dataService)
     DataService = dataService
+
+    if not LaunchConfig.IsFeatureEnabled("Events") then
+        print("[LaunchConfig] EventService disabled — skipping auto-trigger loop")
+        return
+    end
 
     -- Random event trigger based on player count
     task.spawn(function()

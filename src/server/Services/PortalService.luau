@@ -170,12 +170,12 @@ local function createPortal(fromZone, toZone)
         -- Check if zone is unlocked
         if ZoneService.IsZoneUnlocked(player, toZone.Id) then
             -- Teleport
-            ZoneService.TeleportToZone(player, toZone.Id)
+            ZoneService.TeleportToZone(player, toZone.Id, true)
         else
             -- Try to unlock
             local success = ZoneService.UnlockZone(player, toZone.Id)
             if success then
-                ZoneService.TeleportToZone(player, toZone.Id)
+                ZoneService.TeleportToZone(player, toZone.Id, true)
             end
         end
     end)

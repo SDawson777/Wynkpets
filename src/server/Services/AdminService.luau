@@ -7,6 +7,9 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local Network = require(Shared:WaitForChild("Network"))
+local EventConfig = require(Shared:WaitForChild("Configs"):WaitForChild("EventConfig"))
+local LaunchConfig = require(Shared:WaitForChild("Configs"):WaitForChild("LaunchConfig"))
+local GamepassConfig = require(Shared:WaitForChild("Configs"):WaitForChild("GamepassConfig"))
 
 local DataService
 local CurrencyService
@@ -102,16 +105,18 @@ end
 
 commands["givegamepass"] = function(player, args)
     local gamepassId = args[1]
-    if gamepassId then
-        local data = DataService.GetData(player)
-        if data then
-            if not data.Gamepasses then data.Gamepasses = {} end
-            data.Gamepasses[gamepassId] = true
-            Network.FireClient("GamepassOwned", player, gamepassId)
-            return "Gave gamepass: " .. gamepassId
-        end
+    -- Validate against the known gamepass whitelist to prevent arbitrary data-key injection
+    if not gamepassId or not GamepassConfig.GetGamepass(gamepassId) then
+        return "Usage: givegamepass <gamepassId>  (use a valid Id from GamepassConfig)"
     end
-    return "Usage: givegamepass <gamepassId>"
+    local data = DataService.GetData(player)
+    if data then
+        if not data.Gamepasses then data.Gamepasses = {} end
+        data.Gamepasses[gamepassId] = true
+        Network.FireClient("GamepassOwned", player, gamepassId)
+        return "Gave gamepass: " .. gamepassId
+    end
+    return "Failed to get player data"
 end
 
 commands["setrebirth"] = function(player, args)
@@ -135,6 +140,11 @@ end
 commands["boost"] = function(player, args)
     local boostType = args[1] or "Luck"
     local duration = tonumber(args[2]) or 1800
+    -- Validate boostType against known values to prevent arbitrary data-key injection
+    local VALID_BOOST_TYPES = { Coins = true, Luck = true, XP = true, HatchSpeed = true }
+    if not VALID_BOOST_TYPES[boostType] then
+        return "Invalid boost type. Valid: Coins, Luck, XP, HatchSpeed"
+    end
     local data = DataService.GetData(player)
     if data then
         if not data.ActiveBoosts then data.ActiveBoosts = {} end
@@ -151,6 +161,51 @@ commands["help"] = function(_player, _args)
     end
     table.sort(cmds)
     return "Commands: " .. table.concat(cmds, ", ")
+end
+
+commands["setphase"] = function(_player, args)
+    local phase = args[1]
+    local valid = { beta = true, soft_launch = true, full_launch = true }
+    if not valid[phase] then
+        return "Usage: setphase <beta|soft_launch|full_launch>"
+    end
+    LaunchConfig.Phase = phase
+    local snapshot = { Phase = phase, Features = LaunchConfig.Features, Monetization = LaunchConfig.Monetization }
+    for _, p in ipairs(game:GetService("Players"):GetPlayers()) do
+        Network.FireClient("LaunchFeaturesSnapshot", p, snapshot)
+    end
+    return "Phase → " .. phase
+end
+
+commands["togglefeature"] = function(_player, args)
+    local key = args[1]
+    if not key or LaunchConfig.Features[key] == nil then
+        return "Usage: togglefeature <featureName>  (e.g. Trading, Wheel, BattlePass)"
+    end
+    LaunchConfig.Features[key] = not LaunchConfig.Features[key]
+    local snapshot = { Phase = LaunchConfig.Phase, Features = LaunchConfig.Features, Monetization = LaunchConfig.Monetization }
+    for _, p in ipairs(game:GetService("Players"):GetPlayers()) do
+        Network.FireClient("LaunchFeaturesSnapshot", p, snapshot)
+    end
+    return key .. " is now: " .. tostring(LaunchConfig.Features[key])
+end
+
+commands["setevent"] = function(_player, args)
+    local eventId = args[1]
+    if not eventId or eventId == "" then
+        return "Usage: setevent <eventId>"
+    end
+    -- Validate against known event IDs to prevent arbitrary config override
+    if not EventConfig.Events or not EventConfig.Events[eventId] then
+        return "Unknown eventId '" .. eventId .. "'. Check EventConfig.Events for valid IDs."
+    end
+    EventConfig.AdminOverrideId = eventId
+    return "Active event overridden to: " .. eventId
+end
+
+commands["clearevent"] = function(_player, _args)
+    EventConfig.AdminOverrideId = nil
+    return "Event override cleared. Using EventConfig.ActiveEventId = " .. tostring(EventConfig.ActiveEventId)
 end
 
 -- Process an admin command

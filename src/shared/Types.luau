@@ -11,6 +11,8 @@ export type PetData = {
     Rarity: Rarity,
     Power: number,
     Image: string,
+    GoldenImage: string?,
+    RainbowImage: string?,
     Golden: boolean,
     Rainbow: boolean,
 }
@@ -22,6 +24,7 @@ export type OwnedPet = {
     Golden: boolean,
     Rainbow: boolean,
     Level: number,
+    MutationId: string?,
 }
 
 export type EggData = {
@@ -84,8 +87,10 @@ export type PlayerData = {
     TotalEggsHatched: number,
     TotalPetsCollected: number,
     MaxEquipSlots: number,
+    MaxPetStorage: number,
     Gamepasses: { [string]: boolean },
     LoginStreak: number,
+    LoginDays: number,
     LastLogin: number,
     DailyRewardClaimed: boolean,
     Quests: { [string]: number },
@@ -96,6 +101,65 @@ export type PlayerData = {
     PlayTime: number,
     FirstPurchaseClaimed: boolean,
     ActiveBoosts: { [string]: number },
+    BoostInventory: { [string]: number },
+    BoostExpiry: number,
+    SpecialEggsClaimed: number,
+    SecretTokens: { [string]: boolean },
+    SecretTokensCount: number,
+    OffersClaimed: { [string]: boolean },
+    LimitedPurchases: { [string]: any },
+    Consumables: { [string]: number },
+    Materials: { [string]: number },
+    TotalRobuxSpent: number,
+    AnalyticsSummary: { [string]: number },
+    Achievements: { [string]: any },
+    TradesCompleted: number,
+    PetsFused: number,
+    WheelSpins: number,
+    Wheel: {
+        LastFreeSpinDay: string,
+        FreeSpinsUsedToday: number,
+        PaidSpinsAvailable: number,
+        TotalSpins: number,
+    },
+    -- Subscription / VIP
+    SubscriptionExpiry: number,
+    SubscriptionTier: string,
+    -- Weekly quests
+    WeeklyQuests: { [string]: { Progress: number, Completed: boolean, Claimed: boolean } },
+    WeeklyQuestReset: number,
+    WeeklyBonusClaimed: boolean?,
+    DailyQuestRerolls: number,
+    DailyQuestRerollReset: number,
+    -- Event shop
+    EventCoins: number,
+    EventProgress: { [string]: any },
+    EventPurchases: { [string]: number },
+    -- Session milestones
+    SessionMilestonesClaimed: { [number]: boolean },
+    -- Purchase history
+    PurchaseHistory: { any },
+    -- Starter pack
+    StarterPackShownAt: number,
+    StarterPackPurchased: boolean,
+    -- First-session onboarding
+    FirstSessionClaimed: boolean,
+    -- Pet Expeditions
+    Expeditions: {
+        Active: { {
+            SlotIndex: number,
+            ZoneId: string,
+            TierId: string,
+            PetUUID: string,
+            PetPower: number,
+            StartTime: number,
+            Duration: number,
+        } },
+        Completed: number,
+    },
+    -- Collected Eggs (field collection → hatchery hatching)
+    CollectedEggs: { [string]: number },  -- { [eggId] = count }
+    Version: number,
 }
 
 export type RebirthTier = {

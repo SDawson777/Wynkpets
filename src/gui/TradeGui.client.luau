@@ -16,6 +16,7 @@ local Network = require(Shared:WaitForChild("Network"))
 local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig"))
 local RarityConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RarityConfig"))
 local TradeConfig = require(Shared:WaitForChild("Configs"):WaitForChild("TradeConfig"))
+local PetVisualUtil = require(Shared:WaitForChild("Utils"):WaitForChild("PetVisualUtil"))
 
 -- ═══════════════════════════════════════
 -- SCREEN GUI
@@ -186,17 +187,16 @@ acceptBtn.MouseButton1Click:Connect(function()
     Network.FireServer("TradeConfirmed")
 end)
 
-local function refreshOfferDisplay(frame, petUUIDs, allPets)
-    -- Clear existing pet displays (keep label)
+-- Display offer in "Your Offer" panel using UUIDs + local pet data
+local function refreshMyOfferDisplay(frame, petUUIDs)
     for _, child in ipairs(frame:GetChildren()) do
         if child:IsA("Frame") then child:Destroy() end
     end
 
     local yOffset = 28
     for _, uuid in ipairs(petUUIDs) do
-        -- Find pet in allPets
         local pet = nil
-        for _, p in ipairs(allPets) do
+        for _, p in ipairs(pets) do
             if p.UUID == uuid then pet = p break end
         end
         if not pet then continue end
@@ -205,7 +205,7 @@ local function refreshOfferDisplay(frame, petUUIDs, allPets)
         local rarityInfo = RarityConfig.Tiers[petInfo.Rarity]
 
         local entry = Instance.new("Frame")
-        entry.Size = UDim2.new(1, -10, 0, 24)
+        entry.Size = UDim2.new(1, -10, 0, 28)
         entry.Position = UDim2.new(0, 5, 0, yOffset)
         entry.BackgroundColor3 = Color3.fromRGB(40, 40, 60)
         entry.BorderSizePixel = 0
@@ -215,27 +215,73 @@ local function refreshOfferDisplay(frame, petUUIDs, allPets)
         eCorner.CornerRadius = UDim.new(0, 6)
         eCorner.Parent = entry
 
-        local dot = Instance.new("Frame")
-        dot.Size = UDim2.new(0, 14, 0, 14)
-        dot.Position = UDim2.new(0, 4, 0.5, -7)
-        dot.BackgroundColor3 = rarityInfo and rarityInfo.Color or Color3.fromRGB(150, 150, 150)
-        dot.Parent = entry
-        local dotCorner = Instance.new("UICorner")
-        dotCorner.CornerRadius = UDim.new(1, 0)
-        dotCorner.Parent = dot
+        local iconContainer = Instance.new("Frame")
+        iconContainer.Size = UDim2.new(0, 20, 0, 20)
+        iconContainer.Position = UDim2.new(0, 4, 0.5, -10)
+        iconContainer.BackgroundTransparency = 1
+        iconContainer.Parent = entry
+
+        PetVisualUtil.CreateIcon(iconContainer, petInfo, pet, UDim2.new(1, 0, 1, 0))
 
         local nameL = Instance.new("TextLabel")
-        nameL.Size = UDim2.new(1, -24, 1, 0)
-        nameL.Position = UDim2.new(0, 22, 0, 0)
+        nameL.Size = UDim2.new(1, -30, 1, 0)
+        nameL.Position = UDim2.new(0, 28, 0, 0)
         nameL.BackgroundTransparency = 1
-        nameL.Text = petInfo.Name
+        nameL.Text = petInfo.Name .. (pet.Golden and " [G]" or "") .. (pet.Rainbow and " [R]" or "")
         nameL.TextColor3 = Color3.new(1, 1, 1)
         nameL.Font = Enum.Font.Gotham
         nameL.TextSize = 11
         nameL.TextXAlignment = Enum.TextXAlignment.Left
         nameL.Parent = entry
 
-        yOffset = yOffset + 28
+        yOffset = yOffset + 32
+    end
+end
+
+-- Display offer in "Their Offer" panel using resolved pet data from server
+local function refreshTheirOfferDisplay(frame, resolvedPets)
+    for _, child in ipairs(frame:GetChildren()) do
+        if child:IsA("Frame") then child:Destroy() end
+    end
+
+    local yOffset = 28
+    for _, petData in ipairs(resolvedPets) do
+        local petInfo = PetConfig.GetPet(petData.PetId)
+        local rarityInfo = RarityConfig.Tiers[petData.Rarity]
+
+        local entry = Instance.new("Frame")
+        entry.Size = UDim2.new(1, -10, 0, 28)
+        entry.Position = UDim2.new(0, 5, 0, yOffset)
+        entry.BackgroundColor3 = Color3.fromRGB(40, 40, 60)
+        entry.BorderSizePixel = 0
+        entry.Parent = frame
+
+        local eCorner = Instance.new("UICorner")
+        eCorner.CornerRadius = UDim.new(0, 6)
+        eCorner.Parent = entry
+
+        local iconContainer = Instance.new("Frame")
+        iconContainer.Size = UDim2.new(0, 20, 0, 20)
+        iconContainer.Position = UDim2.new(0, 4, 0.5, -10)
+        iconContainer.BackgroundTransparency = 1
+        iconContainer.Parent = entry
+
+        if petInfo then
+            PetVisualUtil.CreateIcon(iconContainer, petInfo, petData, UDim2.new(1, 0, 1, 0))
+        end
+
+        local nameL = Instance.new("TextLabel")
+        nameL.Size = UDim2.new(1, -30, 1, 0)
+        nameL.Position = UDim2.new(0, 28, 0, 0)
+        nameL.BackgroundTransparency = 1
+        nameL.Text = petData.Name .. (petData.Golden and " [G]" or "") .. (petData.Rainbow and " [R]" or "")
+        nameL.TextColor3 = Color3.new(1, 1, 1)
+        nameL.Font = Enum.Font.Gotham
+        nameL.TextSize = 11
+        nameL.TextXAlignment = Enum.TextXAlignment.Left
+        nameL.Parent = entry
+
+        yOffset = yOffset + 32
     end
 end
 
@@ -321,7 +367,7 @@ local function refreshMyPetSelector()
             end
             Network.FireServer("TradeUpdated", myOffer, 0)
             refreshMyPetSelector()
-            refreshOfferDisplay(yourOffer, myOffer, pets)
+            refreshMyOfferDisplay(yourOffer, myOffer)
         end)
 
         card.Parent = petScroll
@@ -334,8 +380,8 @@ local function openTrade()
     screenGui.Enabled = true
     statusLabel.Text = "Select pets to offer, then click Accept"
     refreshMyPetSelector()
-    refreshOfferDisplay(yourOffer, {}, pets)
-    refreshOfferDisplay(theirOffer, {}, {})
+    refreshMyOfferDisplay(yourOffer, {})
+    refreshTheirOfferDisplay(theirOffer, {})
     mainFrame.Size = UDim2.new(0, 0, 0, 0)
     mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
     TweenService:Create(mainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back), {
@@ -343,6 +389,14 @@ local function openTrade()
         Position = UDim2.new(0.5, -375, 0.5, -250),
     }):Play()
 end
+
+-- NPC Trade Master interaction
+Network.OnClientEvent("OpenTrade", function()
+    if not inTrade then
+        openTrade()
+        statusLabel.Text = "Find a nearby player to trade with!"
+    end
+end)
 
 -- Trade request received (show accept/decline prompts)
 Network.OnClientEvent("TradeRequest", function(senderName, senderId)
@@ -358,18 +412,16 @@ Network.OnClientEvent("TradeAccepted", function()
     statusLabel.Text = "Trade active - select your offer"
 end)
 
-Network.OnClientEvent("TradeUpdated", function(offer1, offer2, gems1, gems2, accepted1, accepted2)
-    -- Determine which side is ours
-    -- offer1 is always player1's offer. We need to determine our side
-    -- For simplicity, update both displays - the server sends us the right data
-    refreshOfferDisplay(yourOffer, offer1, pets)
-    refreshOfferDisplay(theirOffer, offer2, pets)
+Network.OnClientEvent("TradeUpdated", function(data)
+    -- Server sends per-player perspective: MyOffer (UUIDs), TheirOffer (resolved pet data)
+    refreshMyOfferDisplay(yourOffer, data.MyOffer or {})
+    refreshTheirOfferDisplay(theirOffer, data.TheirOffer or {})
 
-    if accepted1 and accepted2 then
+    if data.MyAccepted and data.TheirAccepted then
         acceptBtn.Text = "Confirm Trade"
         acceptBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
         statusLabel.Text = "Both accepted! Click Confirm to complete."
-    elseif accepted1 or accepted2 then
+    elseif data.MyAccepted or data.TheirAccepted then
         statusLabel.Text = "Waiting for both players to accept..."
     end
 end)

@@ -89,34 +89,103 @@ local function createNPC(config)
     local npcModel = Instance.new("Model")
     npcModel.Name = "NPC_" .. config.Id
 
-    -- Body (torso)
+    -- Body (torso) — wider and taller for visibility
     local body = Instance.new("Part")
     body.Name = "Body"
-    body.Size = Vector3.new(2, 3, 1.5)
-    body.Position = position + Vector3.new(0, 3, 0)
+    body.Size = Vector3.new(3, 3.5, 2)
+    body.Position = position + Vector3.new(0, 3.25, 0)
     body.Anchored = true
     body.CanCollide = true
     body.Material = Enum.Material.SmoothPlastic
     body.Color = config.Color
     body.Parent = npcModel
 
-    -- Head
+    -- Outfit front panel (apron / badge area)
+    local apron = Instance.new("Part")
+    apron.Name = "Apron"
+    apron.Size = Vector3.new(2.4, 2.2, 0.15)
+    apron.Position = position + Vector3.new(0, 3.2, -1.05)
+    apron.Anchored = true
+    apron.CanCollide = false
+    apron.Material = Enum.Material.SmoothPlastic
+    apron.Color = Color3.fromRGB(
+        math.clamp(math.floor(config.Color.R * 255 * 0.7), 0, 255),
+        math.clamp(math.floor(config.Color.G * 255 * 0.7), 0, 255),
+        math.clamp(math.floor(config.Color.B * 255 * 0.7), 0, 255)
+    )
+    apron.Parent = npcModel
+
+    -- Role label on the apron
+    local apronGui = Instance.new("SurfaceGui")
+    apronGui.Face = Enum.NormalId.Front
+    apronGui.SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud
+    apronGui.PixelsPerStud = 60
+    apronGui.Parent = apron
+
+    local roleLabel = Instance.new("TextLabel")
+    roleLabel.Size = UDim2.new(1, 0, 1, 0)
+    roleLabel.BackgroundTransparency = 1
+    roleLabel.Text = config.ActionText
+    roleLabel.TextColor3 = Color3.new(1, 1, 1)
+    roleLabel.Font = Enum.Font.GothamBold
+    roleLabel.TextScaled = true
+    roleLabel.Parent = apronGui
+
+    -- Head — slightly larger
     local head = Instance.new("Part")
     head.Name = "Head"
     head.Shape = Enum.PartType.Ball
-    head.Size = Vector3.new(2, 2, 2)
-    head.Position = position + Vector3.new(0, 5.5, 0)
+    head.Size = Vector3.new(2.6, 2.6, 2.6)
+    head.Position = position + Vector3.new(0, 6.1, 0)
     head.Anchored = true
     head.CanCollide = false
     head.Material = Enum.Material.SmoothPlastic
-    head.Color = Color3.fromRGB(255, 210, 170) -- Skin tone
+    head.Color = Color3.fromRGB(255, 210, 170)
     head.Parent = npcModel
+
+    -- Face decal (simple smiley using SurfaceGui)
+    local faceGui = Instance.new("SurfaceGui")
+    faceGui.Face = Enum.NormalId.Front
+    faceGui.SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud
+    faceGui.PixelsPerStud = 50
+    faceGui.Parent = head
+
+    local faceLabel = Instance.new("TextLabel")
+    faceLabel.Size = UDim2.new(1, 0, 1, 0)
+    faceLabel.BackgroundTransparency = 1
+    faceLabel.Text = "😊"
+    faceLabel.TextScaled = true
+    faceLabel.Parent = faceGui
+
+    -- Hat (color-coded cylinder on top of head)
+    local hat = Instance.new("Part")
+    hat.Name = "Hat"
+    hat.Shape = Enum.PartType.Cylinder
+    hat.Size = Vector3.new(0.8, 3, 3)
+    hat.CFrame = CFrame.new(position + Vector3.new(0, 7.8, 0)) * CFrame.Angles(0, 0, math.rad(90))
+    hat.Anchored = true
+    hat.CanCollide = false
+    hat.Material = Enum.Material.SmoothPlastic
+    hat.Color = config.Color
+    hat.Parent = npcModel
+
+    -- Hat brim
+    local brim = Instance.new("Part")
+    brim.Name = "Brim"
+    brim.Shape = Enum.PartType.Cylinder
+    brim.Size = Vector3.new(0.2, 3.8, 3.8)
+    brim.CFrame = CFrame.new(position + Vector3.new(0, 7.4, 0)) * CFrame.Angles(0, 0, math.rad(90))
+    brim.Anchored = true
+    brim.CanCollide = false
+    brim.Material = Enum.Material.SmoothPlastic
+    brim.Color = config.Color
+    brim.Parent = npcModel
 
     -- Left arm
     local leftArm = Instance.new("Part")
     leftArm.Name = "LeftArm"
-    leftArm.Size = Vector3.new(0.8, 2.5, 0.8)
-    leftArm.Position = position + Vector3.new(-1.4, 3, 0)
+    leftArm.Size = Vector3.new(1, 2.8, 1)
+    leftArm.Position = position + Vector3.new(-2, 3, 0)
     leftArm.Anchored = true
     leftArm.CanCollide = false
     leftArm.Material = Enum.Material.SmoothPlastic
@@ -126,29 +195,30 @@ local function createNPC(config)
     -- Right arm
     local rightArm = Instance.new("Part")
     rightArm.Name = "RightArm"
-    rightArm.Size = Vector3.new(0.8, 2.5, 0.8)
-    rightArm.Position = position + Vector3.new(1.4, 3, 0)
+    rightArm.Size = Vector3.new(1, 2.8, 1)
+    rightArm.Position = position + Vector3.new(2, 3, 0)
     rightArm.Anchored = true
     rightArm.CanCollide = false
     rightArm.Material = Enum.Material.SmoothPlastic
     rightArm.Color = config.Color
     rightArm.Parent = npcModel
 
-    -- Legs
+    -- Left leg
     local leftLeg = Instance.new("Part")
     leftLeg.Name = "LeftLeg"
-    leftLeg.Size = Vector3.new(0.9, 2, 0.9)
-    leftLeg.Position = position + Vector3.new(-0.5, 1, 0)
+    leftLeg.Size = Vector3.new(1.2, 2, 1.2)
+    leftLeg.Position = position + Vector3.new(-0.7, 1, 0)
     leftLeg.Anchored = true
     leftLeg.CanCollide = false
     leftLeg.Material = Enum.Material.SmoothPlastic
     leftLeg.Color = Color3.fromRGB(50, 50, 80)
     leftLeg.Parent = npcModel
 
+    -- Right leg
     local rightLeg = Instance.new("Part")
     rightLeg.Name = "RightLeg"
-    rightLeg.Size = Vector3.new(0.9, 2, 0.9)
-    rightLeg.Position = position + Vector3.new(0.5, 1, 0)
+    rightLeg.Size = Vector3.new(1.2, 2, 1.2)
+    rightLeg.Position = position + Vector3.new(0.7, 1, 0)
     rightLeg.Anchored = true
     rightLeg.CanCollide = false
     rightLeg.Material = Enum.Material.SmoothPlastic
@@ -159,7 +229,7 @@ local function createNPC(config)
     local billboard = Instance.new("BillboardGui")
     billboard.Name = "NPCLabel"
     billboard.Size = UDim2.new(0, 200, 0, 40)
-    billboard.StudsOffset = Vector3.new(0, 4, 0)
+    billboard.StudsOffset = Vector3.new(0, 5, 0)
     billboard.AlwaysOnTop = false
     billboard.Parent = head
 

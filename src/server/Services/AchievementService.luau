@@ -55,6 +55,15 @@ function AchievementService.CheckAllForPlayer(player: Player)
     AchievementService.CheckAchievements(player, "LoginDays", data.LoginDays or 0)
     AchievementService.CheckAchievements(player, "TradesCompleted", data.TradesCompleted or 0)
     AchievementService.CheckAchievements(player, "PetsFused", data.PetsFused or 0)
+    AchievementService.CheckAchievements(player, "SpecialEggsClaimed", data.SpecialEggsClaimed or 0)
+    AchievementService.CheckAchievements(player, "SecretTokensFound", data.SecretTokensCount or 0)
+
+    -- Secret zone unlocked check
+    local secretZoneUnlocked = 0
+    for _, z in ipairs(data.UnlockedZones or {}) do
+        if z == "secret_garden" then secretZoneUnlocked = 1 break end
+    end
+    AchievementService.CheckAchievements(player, "SecretZoneUnlocked", secretZoneUnlocked)
 
     -- Unique pets
     if data.PetIndex then
@@ -66,29 +75,24 @@ function AchievementService.CheckAllForPlayer(player: Player)
     end
 
     -- Golden / Rainbow / Mythic / Secret pet counts
+    -- Use O(1) counters maintained by PetService.AddPet/RemovePet instead of scanning all pets
     if data.Pets then
+        AchievementService.CheckAchievements(player, "GoldenPets", data.GoldenCount or 0)
+        AchievementService.CheckAchievements(player, "RainbowPets", data.RainbowCount or 0)
+        AchievementService.CheckAchievements(player, "MythicPets", data.MythicCount or 0)
+        AchievementService.CheckAchievements(player, "SecretPets", data.SecretCount or 0)
+        -- BestPetPower requires a scan (hard to track decrementally)
         local PetConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Configs"):WaitForChild("PetConfig"))
-        local goldenCount, rainbowCount, mythicCount, secretCount = 0, 0, 0, 0
         local bestPower = 0
-
         for _, pet in ipairs(data.Pets) do
-            if pet.Golden then goldenCount = goldenCount + 1 end
-            if pet.Rainbow then rainbowCount = rainbowCount + 1 end
             local petInfo = PetConfig.GetPet(pet.PetId)
             if petInfo then
-                if petInfo.Rarity == "Mythic" then mythicCount = mythicCount + 1 end
-                if petInfo.Rarity == "Secret" then secretCount = secretCount + 1 end
                 local power = petInfo.Power
                 if pet.Golden then power = power * 2.5 end
                 if pet.Rainbow then power = power * 5.0 end
                 if power > bestPower then bestPower = power end
             end
         end
-
-        AchievementService.CheckAchievements(player, "GoldenPets", goldenCount)
-        AchievementService.CheckAchievements(player, "RainbowPets", rainbowCount)
-        AchievementService.CheckAchievements(player, "MythicPets", mythicCount)
-        AchievementService.CheckAchievements(player, "SecretPets", secretCount)
         AchievementService.CheckAchievements(player, "BestPetPower", bestPower)
     end
 end

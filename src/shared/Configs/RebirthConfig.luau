@@ -58,24 +58,61 @@ RebirthConfig.KeptOnRebirth = {
 -- Base equip slots
 RebirthConfig.BaseEquipSlots = 3
 
-function RebirthConfig.GetTier(level: number)
-    for _, tier in ipairs(RebirthConfig.Tiers) do
-        if tier.Level == level then
-            return tier
+-- ── Infinite prestige (levels 26+) ───────────────────────────────────────────
+-- For levels beyond the static tier list, a formula generates the tier data.
+-- Formula design:
+--   Cost       = Tier 25 cost × (5 ^ (level - 25))   — each tier costs 5× more
+--   Multiplier = 300 × (1.15 ^ (level - 25))         — 15% stronger per tier
+--   BonusEquipSlots = +1 every 5 tiers beyond tier 25 (at tier 30, 35, 40, …)
+function RebirthConfig.GenerateTier(level: number)
+    if level <= 0 then return nil end
+    if level <= #RebirthConfig.Tiers then
+        -- Return the static entry for tiers 1–25
+        for _, tier in ipairs(RebirthConfig.Tiers) do
+            if tier.Level == level then return tier end
         end
+        return nil
     end
-    return nil
+    local beyond = level - 25
+    return {
+        Level           = level,
+        Cost            = math.floor(100000000000000 * (5 ^ beyond)),
+        Multiplier      = math.floor(300.0 * (1.15 ^ beyond) * 10) / 10,
+        BonusEquipSlots = (beyond % 5 == 0) and 1 or 0,
+        IsInfinite      = true,
+    }
+end
+
+-- GetTier: returns static tier for 1–25, formula tier for 26+
+function RebirthConfig.GetTier(level: number)
+    if level ~= level or level <= 0 then return nil end  -- NaN / invalid
+    if level <= #RebirthConfig.Tiers then
+        for _, tier in ipairs(RebirthConfig.Tiers) do
+            if tier.Level == level then return tier end
+        end
+        return nil
+    end
+    return RebirthConfig.GenerateTier(level)
 end
 
 function RebirthConfig.GetNextTier(currentRebirths: number)
     return RebirthConfig.GetTier(currentRebirths + 1)
 end
 
+-- GetTotalEquipSlots: sums static tiers then formula tiers beyond 25
 function RebirthConfig.GetTotalEquipSlots(rebirths: number): number
     local total = RebirthConfig.BaseEquipSlots
     for _, tier in ipairs(RebirthConfig.Tiers) do
         if tier.Level <= rebirths then
             total = total + tier.BonusEquipSlots
+        end
+    end
+    if rebirths > 25 then
+        for lvl = 26, rebirths do
+            local beyond = lvl - 25
+            if beyond % 5 == 0 then
+                total = total + 1
+            end
         end
     end
     return total

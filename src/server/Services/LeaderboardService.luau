@@ -26,6 +26,7 @@ local TOP_ENTRIES = 50
 
 local cachedLeaderboards = {} -- [category] = { data = {}, lastFetch = 0 }
 local datastores = {} -- [category] = OrderedDataStore
+local playerRequestCooldown = {} -- [Player] = last request tick (rate-limit leaderboard requests)
 
 function LeaderboardService.Init(dataService)
     DataService = dataService
@@ -51,9 +52,13 @@ function LeaderboardService.Init(dataService)
         end
     end)
 
-    -- Listen for leaderboard requests
+    -- Listen for leaderboard requests (rate-limited: 1 request per 5 s per player)
     Network.OnServerEvent("RequestLeaderboard", function(player, category)
         if type(category) ~= "string" then return end
+        local now = tick()
+        local last = playerRequestCooldown[player] or 0
+        if (now - last) < 5 then return end
+        playerRequestCooldown[player] = now
         local data = LeaderboardService.GetLeaderboard(category)
         Network.FireClient("LeaderboardData", player, category, data)
     end)
@@ -164,6 +169,7 @@ end
 
 -- Called when player leaves
 function LeaderboardService.PlayerRemoving(player: Player)
+    playerRequestCooldown[player] = nil
     task.spawn(function()
         LeaderboardService.UpdatePlayer(player)
     end)

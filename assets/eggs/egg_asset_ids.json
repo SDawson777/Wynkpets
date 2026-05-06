@@ -1,0 +1,82 @@
+{
+  "basic_egg": {
+    "name": "Basic Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://71530578168493"
+  },
+  "spotted_egg": {
+    "name": "Spotted Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://107793415303146"
+  },
+  "forest_egg": {
+    "name": "Forest Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://138135608847486"
+  },
+  "enchanted_egg": {
+    "name": "Enchanted Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://79266939756243"
+  },
+  "crystal_egg": {
+    "name": "Crystal Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://124181350534279"
+  },
+  "mythic_egg": {
+    "name": "Mythic Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://118573179077470"
+  },
+  "magma_egg": {
+    "name": "Magma Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://116319066477642"
+  },
+  "inferno_egg": {
+    "name": "Inferno Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://134190647448034"
+  },
+  "frost_egg": {
+    "name": "Frost Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://92851289431171"
+  },
+  "arctic_egg": {
+    "name": "Arctic Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://99383115331176"
+  },
+  "starlight_egg": {
+    "name": "Starlight Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://94643370466870"
+  },
+  "cosmic_bloom_egg": {
+    "name": "Cosmic Bloom Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://126467663965792"
+  },
+  "dusk_egg": {
+    "name": "Dusk Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://101221483541198"
+  },
+  "abyss_egg": {
+    "name": "Abyss Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://118466343085609"
+  },
+  "void_egg": {
+    "name": "Void Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://122446887186873"
+  },
+  "eternity_egg": {
+    "name": "Eternity Egg",
+    "rarity": null,
+    "assetId": "rbxassetid://114904294170841"
+  }
+}

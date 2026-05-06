@@ -22,12 +22,16 @@ Network.Events = {
     "EquipPet",                  -- Client -> Server: request equip
     "UnequipPet",                -- Client -> Server: request unequip
     "DeletePet",                 -- Client -> Server: request delete
+    "LockPet",                   -- Client -> Server: lock pet (prevent deletion/trade)
+    "UnlockPet",                 -- Client -> Server: unlock pet
     "PetLevelUp",               -- Server -> Client: pet leveled up
     "FusePets",                  -- Client -> Server: request pet fusion
     "FuseResult",                -- Server -> Client: fusion result
 
     -- Eggs / Hatching
-    "HatchEgg",                  -- Client -> Server: request hatch
+    "CollectEgg",                -- Client -> Server: collect egg from field
+    "CollectedEggsUpdated",      -- Server -> Client: updated { [eggId] = count }
+    "HatchEgg",                  -- Client -> Server: hatch collected egg from inventory
     "HatchResult",               -- Server -> Client: hatch result (pet data)
     "AutoHatchToggle",           -- Client -> Server: toggle auto hatch
     
@@ -48,6 +52,7 @@ Network.Events = {
     -- Rewards
     "ClaimDailyReward",          -- Client -> Server: claim daily
     "DailyRewardResult",         -- Server -> Client: daily reward result
+    "DailyRewardData",           -- Server -> Client: streak data after ProcessLogin
     "QuestUpdated",              -- Server -> Client: quest progress changed
     "ClaimQuestReward",          -- Client -> Server: claim quest reward
     
@@ -73,6 +78,7 @@ Network.Events = {
 
     -- UI Notifications
     "ShowNotification",          -- Server -> Client: show a notification
+    "CoinFloatText",             -- Server -> Client: floating coin text above collected coin
 
     -- NPC interactions (Server -> Client: open GUI)
     "OpenShop",
@@ -91,6 +97,138 @@ Network.Events = {
     "ServerEvent",               -- Server -> Client: event started
     "ServerEventEnded",          -- Server -> Client: event ended
     "RequestActiveEvent",        -- Client -> Server: check active event
+
+    -- Daily Rotation
+    "DailyRotation",             -- Server -> Client: today's rotation data
+    "RequestDailyRotation",      -- Client -> Server: request current rotation
+
+    -- Lucky Wheel
+    "ClaimWheelSpin",            -- Client -> Server: claim spin reward
+    "WheelSpinResult",           -- Server -> Client: spin result confirmation
+    "RequestWheelSpin",          -- Client -> Server: request free or paid wheel spin
+    "WheelSpinRejected",         -- Server -> Client: wheel spin rejected with reason
+    "WheelRewardGranted",        -- Server -> Client: authoritative reward grant notification
+    "PurchaseWheelSpin",         -- Client -> Server: prompt wheel spin dev product purchase
+
+    -- Engagement
+    "ServerAnnouncement",        -- Server -> Client: ticker announcements
+    "ClaimProgressReward",       -- Client -> Server: claim hatch progress reward
+
+    -- Special Eggs (rare random spawns)
+    "SpecialEggSpawned",         -- Server -> Client: special egg appeared in zone
+    "SpecialEggDespawned",       -- Server -> Client: special egg timed out
+    "SpecialEggClaimed",         -- Server -> Client: someone claimed it
+
+    -- Obstacles
+    "ObstacleHit",               -- Server -> Client: player hit obstacle, show invincibility
+
+    -- Secrets
+    "SecretTokenCollected",      -- Server -> Client: token found
+    "SecretTokenCount",          -- Server -> Client: current count on login
+    "OrbSetCompleted",           -- Server -> Client: player completed a zone orb set, pet unlocked
+    "OrbRespawned",              -- Server -> Client: an orb respawned globally
+    "OrbSetProgress",            -- Server -> Client: updated per-zone orb collection progress
+    "ZoneTeleported",            -- Server -> Client: player was teleported to a zone (for nav bar highlight)
+
+    -- Monetization: Offers
+    "OfferShown",                -- Server -> Client: show context-aware offer popup
+    "AcceptOffer",               -- Client -> Server: accept an offer
+    "DismissOffer",              -- Client -> Server: dismiss offer
+
+    -- Monetization: Limited Shop
+    "RequestLimitedShop",        -- Client -> Server: request today's limited items
+    "LimitedShopData",           -- Server -> Client: today's limited shop items
+    "LimitedShopUpdated",        -- Server -> Client: updated stock after purchase
+    "PurchaseLimitedItem",       -- Client -> Server: buy a limited item
+
+    -- Analytics
+    "AnalyticsEvent",            -- Client -> Server: client-side telemetry event
+
+    -- Boosts (HUD & refill)
+    "BoostsUpdated",             -- Server -> Client: full active boosts snapshot
+    "BoostRefillPrompt",         -- Server -> Client: prompt to refill an expiring boost
+    "PurchaseBoostRefill",       -- Client -> Server: buy a refill pack directly
+
+    -- Subscription / VIP
+    "SubscriptionStatus",        -- Server -> Client: subscription state on load
+    "PurchaseSubscription",      -- Client -> Server: prompt subscription gamepass
+
+    -- Event Shop
+    "RequestEventShop",          -- Client -> Server: request event shop data
+    "EventShopData",             -- Server -> Client: current event shop listings
+    "PurchaseEventItem",         -- Client -> Server: buy event shop item
+    "EventShopUpdated",          -- Server -> Client: updated after purchase
+    "EventCoinUpdated",          -- Server -> Client: player event currency changed
+
+    -- LiveOps event scheduler
+    "EventPhaseChanged",         -- Server -> Client: weekly phase/event type changed
+    "EventScheduleRequest",      -- Client -> Server: request current schedule
+    "EventScheduleData",         -- Server -> Client: full schedule snapshot
+
+    -- Evolution system
+    "RequestEvolutionData",      -- Client -> Server: refresh evolution state (on GUI open)
+    "EvolutionData",             -- Server -> Client: materials + eligible pets + phase
+    "EvolutionMaterialsUpdated", -- Server -> Client: incremental material balance update
+    "RequestEvolve",             -- Client -> Server: attempt evolution (uuid, path)
+    "EvolveResult",              -- Server -> Client: evolution outcome
+    "EvolveIntentRegistered",    -- Server -> Client: paid intent accepted; client opens dev product
+
+    -- Weekly Quests
+    "WeeklyQuestUpdated",        -- Server -> Client: weekly quest progress changed
+    "ClaimWeeklyQuestReward",    -- Client -> Server: claim weekly quest reward
+    "RerollDailyQuest",          -- Client -> Server: spend gems to reroll a quest
+    "QuestRerollResult",         -- Server -> Client: new quest after reroll
+
+    -- Nudge System
+    "NudgeShown",                -- Server -> Client: show a context nudge (upsell popup)
+    "DismissNudge",              -- Client -> Server: dismiss a nudge
+
+    -- Session / comeback
+    "SessionMilestone",          -- Server -> Client: milestone reward popup (playtime reward)
+
+    -- Evil Wizard
+    "WizardSpawned",             -- Server -> All: wizard appeared (zoneId, zoneName, position)
+    "WizardDespawned",           -- Server -> All: wizard vanished (cleared)
+    "WizardChasing",             -- Server -> Client: wizard is targeting this player
+    "WizardStole",               -- Server -> Client: wizard stole a pet (petName)
+    "WizardSurvived",            -- Server -> Client: player survived, bonus coins (amount)
+
+    -- Starter Pack (full-screen modal for new players)
+    "StarterOfferShown",         -- Server -> Client: show full-screen starter pack modal
+    "StarterOfferDismissed",     -- Client -> Server: player dismissed starter offer
+    "StarterOfferPurchased",     -- Server -> Client: starter pack purchase confirmed
+
+    -- First Session (fires exactly once per account on very first join)
+    "FirstSessionReward",        -- Server -> Client: { Coins, Gems, PetId, PetUUID }
+
+    -- Near-miss monetization
+    "NearMissHatch",             -- Server -> Client: genuine near-miss detected, enhanced animation
+
+    -- Economy pressure
+    "SoftShortage",              -- Server -> Client: player is close to affording next action, nudge shop
+
+    -- GamePass system
+    "PromptPassPurchase",        -- Client -> Server: request a gamepass purchase prompt
+    "GamepassStatus",            -- Server -> Client: full ownership snapshot { [passId]: bool }
+    "UpsellTrigger",             -- Server -> Client: debounced contextual upsell (passId, context)
+
+    -- Battle Pass (Season 1: Origins)
+    "BattlePassData",           -- Server -> Client: full pass snapshot on join / GUI open
+    "BattlePassXPGained",       -- Server -> Client: { XP, Tier, Added, Source }
+    "BattlePassTierUp",         -- Server -> Client: { NewTier, Source }
+    "RequestBattlePassData",    -- Client -> Server: refresh pass state (GUI open)
+    "PurchaseBattlePass",       -- Client -> Server: buy premium track (triggers dev product)
+
+    -- Auto release schedule
+    "LaunchFeaturesSnapshot",   -- Server -> Client: { Phase, Features, Monetization } on join / flag change
+
+    -- Pet Expeditions
+    "RequestExpeditionData",     -- Client -> Server: request current expedition state
+    "ExpeditionData",            -- Server -> Client: full expedition snapshot
+    "StartExpedition",           -- Client -> Server: { zoneId, tierId, petUUID }
+    "ClaimExpedition",           -- Client -> Server: { slotIndex }
+    "SkipExpedition",            -- Client -> Server: { slotIndex } (gem skip)
+    "ExpeditionUpdated",         -- Server -> Client: expedition state changed
 }
 
 -- All remote function names (for request-response patterns)

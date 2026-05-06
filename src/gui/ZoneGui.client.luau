@@ -103,6 +103,18 @@ local function refreshZones()
         end
     end
 
+    -- Find the next goal: first locked zone whose predecessor IS unlocked.
+    local nextGoalId = nil
+    for _, zone in ipairs(ZoneConfig.Zones) do
+        local isUnlocked = false
+        for _, id in ipairs(unlockedZones) do
+            if id == zone.Id then isUnlocked = true break end
+        end
+        if not isUnlocked and nextGoalId == nil then
+            nextGoalId = zone.Id
+        end
+    end
+
     for _, zone in ipairs(ZoneConfig.Zones) do
         local isUnlocked = false
         for _, id in ipairs(unlockedZones) do
@@ -112,10 +124,14 @@ local function refreshZones()
             end
         end
 
+        local isNextGoal = (zone.Id == nextGoalId)
+
         local card = Instance.new("Frame")
         card.Name = zone.Id
-        card.Size = UDim2.new(1, -20, 0, 90)
-        card.BackgroundColor3 = isUnlocked and Color3.fromRGB(35, 40, 55) or Color3.fromRGB(25, 25, 35)
+        card.Size = UDim2.new(1, -20, 0, isNextGoal and 100 or 90)
+        card.BackgroundColor3 = isUnlocked and Color3.fromRGB(35, 40, 55)
+            or isNextGoal and Color3.fromRGB(40, 35, 20)
+            or Color3.fromRGB(25, 25, 35)
         card.BorderSizePixel = 0
 
         local cCorner = Instance.new("UICorner")
@@ -123,9 +139,35 @@ local function refreshZones()
         cCorner.Parent = card
 
         local cStroke = Instance.new("UIStroke")
-        cStroke.Color = isUnlocked and zone.Color or Color3.fromRGB(50, 50, 50)
-        cStroke.Thickness = 2
+        cStroke.Color = isUnlocked and zone.Color
+            or isNextGoal and Color3.fromRGB(255, 210, 50)
+            or Color3.fromRGB(50, 50, 50)
+        cStroke.Thickness = isNextGoal and 2.5 or 2
         cStroke.Parent = card
+
+        -- "NEXT GOAL" badge on the next unlockable zone (top-right, above the action button)
+        if isNextGoal then
+            local badge = Instance.new("Frame")
+            badge.Size = UDim2.new(0, 90, 0, 22)
+            badge.Position = UDim2.new(1, -100, 0, 4)
+            badge.BackgroundColor3 = Color3.fromRGB(255, 210, 50)
+            badge.ZIndex = 3
+            badge.Parent = card
+
+            local badgeCorner = Instance.new("UICorner")
+            badgeCorner.CornerRadius = UDim.new(0, 6)
+            badgeCorner.Parent = badge
+
+            local badgeLabel = Instance.new("TextLabel")
+            badgeLabel.Size = UDim2.new(1, 0, 1, 0)
+            badgeLabel.BackgroundTransparency = 1
+            badgeLabel.Text = "⭐ NEXT GOAL"
+            badgeLabel.TextColor3 = Color3.fromRGB(30, 20, 0)
+            badgeLabel.Font = Enum.Font.GothamBlack
+            badgeLabel.TextSize = 9
+            badgeLabel.ZIndex = 3
+            badgeLabel.Parent = badge
+        end
 
         -- Color indicator
         local colorBar = Instance.new("Frame")
@@ -191,7 +233,7 @@ local function refreshZones()
         abCorner.Parent = actionBtn
 
         if isUnlocked then
-            actionBtn.Text = "🚀 Teleport"
+            actionBtn.Text = "🚀 Teleport (fee)"
             actionBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
 
             actionBtn.MouseButton1Click:Connect(function()

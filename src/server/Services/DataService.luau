@@ -27,6 +27,7 @@ local dataStore = DataStoreService:GetDataStore(DATA_STORE_NAME)
 local playerDataCache = {} -- [Player] = data
 local sessionLocks = {} -- [Player] = true
 local savingPlayers = {} -- [Player] = true (prevent double-save)
+local badLoadPlayers = {} -- [Player] = true (data load failed; block saves to prevent overwriting real data)
 
 -- Default data template for new players
 local DEFAULT_DATA = {
@@ -55,9 +56,75 @@ local DEFAULT_DATA = {
     PlayTime = 0,
     FirstPurchaseClaimed = false,
     ActiveBoosts = {},
+    BoostInventory = {},           -- { [boostType] = count } stored charges
     Achievements = {},
     TradesCompleted = 0,
     PetsFused = 0,
+    SpecialEggsClaimed = 0,
+    -- Achievement tracking counters (O(1) lookups; maintained by PetService.AddPet/RemovePet)
+    GoldenCount = 0,
+    RainbowCount = 0,
+    MythicCount = 0,
+    SecretCount = 0,
+    SecretTokens = {},
+    SecretTokensCount = 0,
+    OffersClaimed = {},
+    LimitedPurchases = {},
+    Consumables = {},
+    Materials = {},
+    TotalRobuxSpent = 0,
+    AnalyticsSummary = {},
+    -- Subscription / VIP
+    SubscriptionExpiry = 0,        -- os.time() when VIP subscription expires
+    SubscriptionTier = "none",     -- "none" | "basic" | "vip"
+    -- Weekly quests
+    WeeklyQuests = {},             -- { [questId] = { Progress, Completed, Claimed } }
+    WeeklyQuestReset = 0,          -- os.time() of last weekly reset
+    DailyQuestRerolls = 0,         -- rerolls used this day
+    DailyQuestRerollReset = 0,     -- os.time() of last reroll-count reset
+    -- Event shop
+    EventCoins = 0,                -- event-specific currency
+    EventProgress = {},            -- { [eventId] = progress }
+    EventPurchases = {},           -- { [itemId] = count }
+    -- LiveOps evolution system
+    EvolutionMaterials = { WynkShards = 0, MoonEssence = 0, StormCrystal = 0 },
+    EvoMissedWindows = 0,          -- consecutive evolution windows skipped (pity counter)
+    EventWindowHistory = {},       -- { [windowId] = { Attempted, Completed, HatchCount, QuestsDone } }
+    TotalEvolutions = 0,           -- lifetime evolutions completed
+    -- Session playtime milestones
+    SessionMilestonesClaimed = {}, -- { [minutesMilestone] = true }
+    -- Purchase history (last 50 products)
+    PurchaseHistory = {},
+    -- Starter Pack offer tracking
+    StarterPackShownAt = 0,        -- os.time() when last shown (0 = never)
+    StarterPackPurchased = false,  -- permanently true once purchased
+    -- First-session onboarding (fires exactly once, on the very first join)
+    FirstSessionClaimed = false,   -- true after starter gifts delivered
+    -- Pet Expeditions
+    Expeditions = {
+        Active = {},    -- { SlotIndex, ZoneId, TierId, PetUUID, PetPower, StartTime, Duration }
+        Completed = 0,  -- lifetime completed count
+    },
+    -- Collected Eggs (field collection → hatchery hatching)
+    CollectedEggs = {},           -- { [eggId] = count }
+    -- Lucky wheel state
+    Wheel = {
+        LastFreeSpinDay = "",
+        FreeSpinsUsedToday = 0,
+        PaidSpinsAvailable = 0,
+        TotalSpins = 0,
+    },
+    -- Wheel spin persistence (survive server restarts)
+    PendingWheelSpins = 0,         -- purchased spins not yet claimed
+    -- Progress reward rate-limiting
+    LastProgressRewardTime = 0,    -- os.time() of last ClaimProgressReward grant
+    -- Battle Pass (reset each season)
+    BattlePassSeason       = 0,    -- CurrentSeason number when progress was earned
+    BattlePassTier         = 0,    -- tier reached this season (0 = none, max 30)
+    BattlePassXP           = 0,    -- XP progress toward next tier
+    BattlePassPremium      = false, -- has purchased premium track this season
+    BattlePassTiersClaimedF = {},  -- { [tier] = true } free rewards claimed
+    BattlePassTiersClaimedP = {},  -- { [tier] = true } premium rewards claimed
     Version = 1,
 }
 
@@ -84,7 +151,7 @@ local function reconcileData(loaded, template)
     return data
 end
 
--- Retry wrapper for DataStore calls
+-- Retry wrapper for DataStore calls (fails fast on non-transient errors)
 local function retryAsync(func, ...)
     local args = { ... }
     for attempt = 1, MAX_RETRIES do
@@ -93,6 +160,12 @@ local function retryAsync(func, ...)
         end)
         if success then
             return true, result
+        end
+        -- Fail immediately on non-transient errors (game not published, Studio mode)
+        local errStr = tostring(result):lower()
+        if errStr:find("http") or errStr:find("publish") or errStr:find("api services") then
+            warn("[DataService] Non-transient DataStore error (game not published?): " .. tostring(result))
+            return false, result
         end
         if attempt < MAX_RETRIES then
             warn(string.format("[DataService] Attempt %d failed: %s. Retrying...", attempt, tostring(result)))
@@ -134,7 +207,9 @@ function DataService.LoadData(player: Player): boolean
         return true
     else
         warn(string.format("[DataService] Failed to load data for %s: %s", player.Name, tostring(data)))
-        -- Give them default data so they can still play
+        -- Give them default data so they can still play, but block auto-save
+        -- to prevent overwriting their real data if the DataStore recovers
+        badLoadPlayers[player] = true
         playerDataCache[player] = deepCopy(DEFAULT_DATA)
         playerDataCache[player].JoinTime = os.time()
         Network.FireClient("PlayerDataLoaded", player, playerDataCache[player])
@@ -146,6 +221,11 @@ end
 function DataService.SaveData(player: Player): boolean
     local data = playerDataCache[player]
     if not data then
+        return false
+    end
+
+    if badLoadPlayers[player] then
+        warn("[DataService] Skipping save for " .. player.Name .. " — load failed, refusing to overwrite real data")
         return false
     end
 
@@ -215,9 +295,10 @@ end
 -- Clean up on player leave
 function DataService.PlayerRemoving(player: Player)
     if playerDataCache[player] then
-        DataService.SaveData(player)
+        DataService.SaveData(player) -- no-op if badLoadPlayers[player]
         playerDataCache[player] = nil
         sessionLocks[player] = nil
+        badLoadPlayers[player] = nil
     end
 end
 
@@ -240,14 +321,31 @@ end
 -- Save all players on server shutdown
 function DataService.OnServerShutdown()
     game:BindToClose(function()
-        local threads = {}
+        -- Collect all players who still have data in cache
+        local pending = {}
         for player, _ in pairs(playerDataCache) do
-            table.insert(threads, task.spawn(function()
-                DataService.SaveData(player)
-            end))
+            table.insert(pending, player)
         end
-        -- Wait a bit for saves to complete
-        task.wait(5)
+
+        if #pending == 0 then return end
+
+        -- Save each player, tracking completion via a shared counter
+        local remaining = #pending
+        local allDone = Instance.new("BindableEvent")
+
+        for _, player in ipairs(pending) do
+            task.spawn(function()
+                DataService.SaveData(player)
+                remaining -= 1
+                if remaining <= 0 then
+                    allDone:Fire()
+                end
+            end)
+        end
+
+        -- Block BindToClose until all saves finish (Roblox gives ~30 s)
+        allDone.Event:Wait()
+        allDone:Destroy()
     end)
 end
 

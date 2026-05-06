@@ -1,0 +1,32 @@
+{
+  "rarity_common": {
+    "name": "rarity_common",
+    "rarity": "Common",
+    "assetId": "rbxassetid://132753308618061"
+  },
+  "rarity_rare": {
+    "name": "rarity_rare",
+    "rarity": "Rare",
+    "assetId": "rbxassetid://134902017080428"
+  },
+  "rarity_epic": {
+    "name": "rarity_epic",
+    "rarity": "Epic",
+    "assetId": "rbxassetid://74317533402827"
+  },
+  "rarity_legendary": {
+    "name": "rarity_legendary",
+    "rarity": "Legendary",
+    "assetId": "rbxassetid://72566182869720"
+  },
+  "rarity_mythic": {
+    "name": "rarity_mythic",
+    "rarity": "Mythic",
+    "assetId": "rbxassetid://101674687060438"
+  },
+  "rarity_secret": {
+    "name": "rarity_secret",
+    "rarity": "Secret",
+    "assetId": "rbxassetid://139962491081824"
+  }
+}
