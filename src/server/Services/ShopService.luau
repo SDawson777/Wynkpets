@@ -127,20 +127,6 @@ function ShopService.GrantProduct(player: Player, product): boolean
     local data = DataService.GetData(player)
     if not data then return false end
 
-    if product.Rewards and product.Rewards.WheelSpins then
-        data.Wheel = data.Wheel or {
-            LastFreeSpinDay = "",
-            FreeSpinsUsedToday = 0,
-            PaidSpinsAvailable = 0,
-            TotalSpins = 0,
-        }
-        data.Wheel.PaidSpinsAvailable = (data.Wheel.PaidSpinsAvailable or 0) + product.Rewards.WheelSpins
-        Network.FireClient("DataUpdated", player, "Wheel", data.Wheel)
-        Network.FireClient("ShowNotification", player,
-            "+" .. tostring(product.Rewards.WheelSpins) .. " Lucky Wheel spin credit!", "Success")
-        return true
-    end
-
     if product.Category == "Boost" then
         local duration = product.Duration or 1800
         local count = product.BoostCount or 1

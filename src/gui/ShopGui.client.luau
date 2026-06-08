@@ -688,7 +688,7 @@ local function renderVIP()
     if tier ~= "vip" then
         local vipPlusCard = createCard(
             "💜 VIP+ Monthly",
-            "25 daily Gems, +25% Coins, +15% Luck, +2 equip slots, exclusive pet, +1 wheel spin/day!\n30 days.",
+            "25 daily Gems, +25% Coins, +15% Luck, +2 equip slots, exclusive pet!\n30 days.",
             "R$ 499 / month", Color3.fromRGB(180, 100, 255),
             function() Network.FireServer("PurchaseSubscription", "vip") end
         )

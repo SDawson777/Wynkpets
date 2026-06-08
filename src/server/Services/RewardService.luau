@@ -20,7 +20,6 @@ local BattlePassService -- set via RewardService.SetBattlePassService
 -- Add new mappings here when new features / quest types are introduced.
 local FEATURE_QUEST_TYPES = {
     Fusion    = { "FusePets" },
-    Wheel     = { "WheelSpins" },
     Trading   = { "Trade" },
     Evolution = { "Evolution" },
 }

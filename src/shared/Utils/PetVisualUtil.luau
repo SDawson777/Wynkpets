@@ -5,9 +5,13 @@
     or procedurally unique fallback icons when images are placeholders.
 ]]
 
+local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local RarityConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RarityConfig"))
+
+local DEBUG_PET_IMAGES = RunService:IsStudio()
+local PetAssetManifest = require(Shared:WaitForChild("Pets"):WaitForChild("PetAssetManifest"))
 
 local PetVisualUtil = {}
 
@@ -65,6 +69,9 @@ end
 
 function PetVisualUtil.NormalizeImage(imageId: string?): string
     if not PetVisualUtil.IsValidAssetId(imageId) then
+        if DEBUG_PET_IMAGES then
+            print("[PetImage] NormalizeImage: INVALID input =", tostring(imageId), "→", INVALID_IMAGE)
+        end
         return INVALID_IMAGE
     end
     -- Use rbxassetid:// directly so the engine loads the texture from the Decal
@@ -72,9 +79,16 @@ function PetVisualUtil.NormalizeImage(imageId: string?): string
     -- for newly uploaded decals and shows a placeholder instead of the real image).
     local numericId = string.match(imageId, "%d+")
     if not numericId then
+        if DEBUG_PET_IMAGES then
+            print("[PetImage] NormalizeImage: no digits in =", tostring(imageId), "→", INVALID_IMAGE)
+        end
         return INVALID_IMAGE
     end
-    return "rbxassetid://" .. numericId
+    local result = "rbxassetid://" .. numericId
+    if DEBUG_PET_IMAGES then
+        print("[PetImage] NormalizeImage: raw =", tostring(imageId), "→ final =", result)
+    end
+    return result
 end
 
 function PetVisualUtil.NormalizeVariant(ownedPet)
@@ -96,19 +110,40 @@ function PetVisualUtil.GetPetImage(petInfo, ownedPet): string
     end
 
     local variant = PetVisualUtil.NormalizeVariant(ownedPet)
-    local chosenImage = petInfo.Image
+    local manifestEntry = PetAssetManifest.Get(petInfo.Id)
 
-    if variant == "Rainbow" and PetVisualUtil.IsValidAssetId(petInfo.RainbowImage) then
-        chosenImage = petInfo.RainbowImage
-    elseif variant == "Golden" and PetVisualUtil.IsValidAssetId(petInfo.GoldenImage) then
-        chosenImage = petInfo.GoldenImage
+    local chosenImage = petInfo.Image
+    if manifestEntry then
+        if variant == "Rainbow" then
+            chosenImage = manifestEntry.rainbow or manifestEntry.normal
+        elseif variant == "Golden" then
+            chosenImage = manifestEntry.golden or manifestEntry.normal
+        else
+            chosenImage = manifestEntry.normal
+        end
+    else
+        if variant == "Rainbow" and PetVisualUtil.IsValidAssetId(petInfo.RainbowImage) then
+            chosenImage = petInfo.RainbowImage
+        elseif variant == "Golden" and PetVisualUtil.IsValidAssetId(petInfo.GoldenImage) then
+            chosenImage = petInfo.GoldenImage
+        end
     end
 
     if not PetVisualUtil.IsValidAssetId(chosenImage) then
         chosenImage = petInfo.Image
     end
 
-    return PetVisualUtil.NormalizeImage(chosenImage)
+    local result = PetVisualUtil.NormalizeImage(chosenImage)
+    if DEBUG_PET_IMAGES then
+        print(string.format(
+            "[PetImage] GetPetImage: petId=%s variant=%s rawImage=%s → %s",
+            tostring(petInfo.Id),
+            tostring(variant),
+            tostring(chosenImage),
+            tostring(result)
+        ))
+    end
+    return result
 end
 
 -- Determine the correct image for a pet based on variants

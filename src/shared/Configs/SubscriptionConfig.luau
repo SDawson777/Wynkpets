@@ -58,7 +58,6 @@ SubscriptionConfig.Tiers = {
             VIPBadge       = true,
             ShopDiscount   = 0.10,            -- 10% off gem packs
             ExclusivePet   = true,            -- monthly subscriber exclusive pet
-            WheelBonusSpin = 1,               -- +1 free wheel spin per day
         },
     },
 }

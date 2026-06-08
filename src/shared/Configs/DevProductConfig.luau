@@ -196,18 +196,6 @@ DevProductConfig.Products = {
     -- ═══════════════════════════════
     -- LUCKY WHEEL
     -- ═══════════════════════════════
-    {
-        Id          = "wheel_spin",
-        Name        = "Wheel Spin",
-        ProductId   = 0,
-        Price       = 49,
-        Description = "Spin the Lucky Wheel for a bonus reward!",
-        Icon        = "rbxassetid://74651892029264",
-        Rewards     = { WheelSpins = 1 },
-        Category    = "Wheel",
-    },
-
-    -- ═══════════════════════════════
     -- STORAGE (stackable)
     -- ═══════════════════════════════
     {

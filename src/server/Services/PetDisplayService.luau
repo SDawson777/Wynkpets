@@ -1,7 +1,7 @@
 --[[
     PetDisplayService.luau
     Shows equipped pets orbiting around the player's character.
-    Creates Part-based pet models that follow the player.
+    Uses billboard sprite pets so in-world visuals match UI pet art.
 ]]
 
 local Players = game:GetService("Players")
@@ -12,7 +12,7 @@ local Network = require(Shared:WaitForChild("Network"))
 local PetConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetConfig"))
 local RarityConfig = require(Shared:WaitForChild("Configs"):WaitForChild("RarityConfig"))
 local PetLevelConfig = require(Shared:WaitForChild("Configs"):WaitForChild("PetLevelConfig"))
-local PetVisualUtil = require(Shared:WaitForChild("Utils"):WaitForChild("PetVisualUtil"))
+local BillboardPetRenderer = require(Shared:WaitForChild("Pets"):WaitForChild("BillboardPetRenderer"))
 
 local DataService
 
@@ -21,8 +21,6 @@ local PetDisplayService = {}
 local ORBIT_RADIUS = 5
 local ORBIT_SPEED = 1.5
 local ORBIT_HEIGHT = 2
-local PET_SIZE = Vector3.new(2.5, 2.5, 2.5)
-
 local playerPetModels = {} -- [Player] = { [UUID] = { model=Model, body=Part, sparkle=Part? } }
 local characterConnections = {} -- [Player] = RBXScriptConnection
 local playerVisualSignatures = {} -- [Player] = string signature of equipped pet visuals
@@ -70,49 +68,28 @@ local function buildVisualSignature(data)
 end
 
 local function createPetModel(petData, petInfo)
-    local model = Instance.new("Model")
-    model.Name = "EquippedPet_" .. petData.UUID
-
-    -- Pet body
-    local body = Instance.new("Part")
-    body.Name = "Body"
-    body.Size = PET_SIZE
-    body.Anchored = true
-    body.CanCollide = false
-
-    -- Use shared image resolver so orbit visuals match inventory/index/hatch visuals.
-    local petImage = PetVisualUtil.GetImage(petInfo, petData)
-
-    local hasImage = petImage ~= "rbxassetid://0"
-    local rarityColor = RARITY_COLORS[petInfo.Rarity] or RARITY_COLORS.Common
-
-    if hasImage then
-        -- Image-based pet: invisible anchor part + billboard sprite.
-        -- This avoids SurfaceGui face issues and keeps pets consistently 2D.
-        body.Shape = Enum.PartType.Ball
-        body.Material = Enum.Material.SmoothPlastic
-        body.Transparency = 1
-        body.Color = rarityColor
-
-        PetVisualUtil.CreateWorldBillboardImage(body, petImage, Vector2.new(3.2, 3.2))
-    else
-        -- Fallback: colored ball
-        body.Shape = Enum.PartType.Ball
-        body.Material = Enum.Material.SmoothPlastic
-
-        if petData.Rainbow then
-            body.Material = Enum.Material.Neon
-            body.Color = Color3.fromRGB(255, 100, 255)
-        elseif petData.Golden then
-            body.Material = Enum.Material.Neon
-            body.Color = Color3.fromRGB(255, 215, 0)
-        else
-            body.Color = rarityColor
-        end
+    local variant = "Normal"
+    if petData and petData.Rainbow then
+        variant = "Rainbow"
+    elseif petData and petData.Golden then
+        variant = "Golden"
     end
 
-    body.Parent = model
-    model.PrimaryPart = body
+    local model = BillboardPetRenderer.createPetModel(petInfo.Id, variant, {
+        widthStuds = 3.2,
+        heightStuds = 3.2,
+        studsOffsetY = 0.15,
+        maxDistance = 220,
+        showName = false,
+        showRarity = false,
+    })
+    if not model or not model.PrimaryPart then
+        return nil, nil, nil
+    end
+
+    model.Name = "EquippedPet_" .. petData.UUID
+    local body = model.PrimaryPart
+    local rarityColor = RARITY_COLORS[petInfo.Rarity] or RARITY_COLORS.Common
 
     -- Pet name label
     local billboard = Instance.new("BillboardGui")
@@ -149,25 +126,11 @@ local function createPetModel(petData, petInfo)
     if petData.Rainbow then power = math.floor(power * (RarityConfig.RainbowMultiplier or 5)) end
     powerLabel.Text = "x" .. power
 
-    -- Golden/Rainbow sparkle effect
-    if petData.Golden or petData.Rainbow then
-        local sparkle = Instance.new("Part")
-        sparkle.Name = "Sparkle"
-        sparkle.Shape = Enum.PartType.Ball
-        sparkle.Size = PET_SIZE * 1.3
-        sparkle.Anchored = true
-        sparkle.CanCollide = false
-        sparkle.Material = Enum.Material.Neon
-        sparkle.Transparency = 0.6
-        sparkle.Color = petData.Rainbow and Color3.fromRGB(255, 100, 255) or Color3.fromRGB(255, 215, 0)
-        sparkle.Parent = model
-    end
-
     -- Start hidden until first orbit tick positions it correctly
     body.CFrame = CFrame.new(0, -500, 0)
 
     -- Return model plus cached direct refs to avoid FindFirstChild in the orbit loop
-    local sparkleRef = model:FindFirstChild("Sparkle")
+    local sparkleRef = nil
     return model, body, sparkleRef
 end
 
@@ -210,8 +173,10 @@ local function updatePlayerPets(player)
             local petInfo = PetConfig.GetPet(ownedPet.PetId)
             if petInfo then
                 local model, body, sparkle = createPetModel(ownedPet, petInfo)
-                model.Parent = petsFolder
-                playerPetModels[player][uuid] = { model = model, body = body, sparkle = sparkle }
+                if model and body then
+                    model.Parent = petsFolder
+                    playerPetModels[player][uuid] = { model = model, body = body, sparkle = sparkle }
+                end
             end
         end
     end

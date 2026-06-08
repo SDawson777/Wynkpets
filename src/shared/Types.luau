@@ -115,13 +115,6 @@ export type PlayerData = {
     Achievements: { [string]: any },
     TradesCompleted: number,
     PetsFused: number,
-    WheelSpins: number,
-    Wheel: {
-        LastFreeSpinDay: string,
-        FreeSpinsUsedToday: number,
-        PaidSpinsAvailable: number,
-        TotalSpins: number,
-    },
     -- Subscription / VIP
     SubscriptionExpiry: number,
     SubscriptionTier: string,

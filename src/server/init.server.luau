@@ -51,7 +51,6 @@ local AchievementService = require(Services:WaitForChild("AchievementService"))
 local EventService = require(Services:WaitForChild("EventService"))
 local PetDisplayService = require(Services:WaitForChild("PetDisplayService"))
 local DailyRotationService = require(Services:WaitForChild("DailyRotationService"))
-local WheelService = require(Services:WaitForChild("WheelService"))
 local ObstacleService = require(Services:WaitForChild("ObstacleService"))
 local SpecialEggService = require(Services:WaitForChild("SpecialEggService"))
 local SecretService = require(Services:WaitForChild("SecretService"))
@@ -145,18 +144,6 @@ safeInit("LeaderboardService", function() LeaderboardService.Init(DataService) e
 safeInit("AchievementService", function() AchievementService.Init(DataService, CurrencyService) end)
 safeInit("EventService", function() EventService.Init(DataService) end)
 safeInit("PetDisplayService", function() PetDisplayService.Init(DataService) end)
-safeInit("WheelService", function()
-    WheelService.Init(
-        DataService,
-        CurrencyService,
-        AntiExploitService,
-        BoostService,
-        PetService,
-        RewardService,
-        AnalyticsService,
-        EvolutionService
-    )
-end)
 safeInit("ObstacleService", function() ObstacleService.Init(CurrencyService) end)
 safeInit("SpecialEggService", function() SpecialEggService.Init(DataService, PetService, CurrencyService, RewardService) end)
 safeInit("SecretService", function() SecretService.Init(DataService, CurrencyService, PetService, EggService, ZoneService, AntiExploitService) end)
@@ -317,7 +304,6 @@ Players.PlayerRemoving:Connect(function(player)
     PortalService.PlayerRemoving(player)
     LeaderboardService.PlayerRemoving(player)
     PetDisplayService.PlayerRemoving(player)
-    WheelService.PlayerRemoving(player)
     CoinSpawnerService.PlayerRemoving(player)
     ObstacleService.PlayerRemoving(player)
     SpecialEggService.PlayerRemoving(player)

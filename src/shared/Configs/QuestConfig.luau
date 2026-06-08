@@ -71,15 +71,6 @@ QuestConfig.DailyQuests = {
         RewardType = "Coins",
         RewardAmount = 3000,
     },
-    {
-        Id = "spin_wheel",
-        Name = "Lucky Spinner",
-        Description = "Spin the Lucky Wheel",
-        Type = "WheelSpins",
-        Target = 1,
-        RewardType = "Coins",
-        RewardAmount = 1500,
-    },
 }
 
 -- Number of daily quests to assign per day
@@ -153,15 +144,6 @@ QuestConfig.WeeklyQuests = {
         Target      = 5,
         RewardType  = "Gems",
         RewardAmount = 35,
-    },
-    {
-        Id          = "weekly_wheel_spins",
-        Name        = "Wheel of Fortune",
-        Description = "Spin the wheel 7 times",
-        Type        = "WheelSpins",
-        Target      = 7,
-        RewardType  = "Gems",
-        RewardAmount = 40,
     },
 }
 

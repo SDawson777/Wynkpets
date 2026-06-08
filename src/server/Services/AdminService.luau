@@ -20,7 +20,7 @@ local AdminService = {}
 
 -- Add your Roblox User IDs here
 local ADMIN_IDS = {
-    -- 12345678, -- Replace with your user ID
+    10730506790, -- SDawson777
 }
 
 local function isAdmin(player: Player): boolean

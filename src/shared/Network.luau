@@ -102,14 +102,6 @@ Network.Events = {
     "DailyRotation",             -- Server -> Client: today's rotation data
     "RequestDailyRotation",      -- Client -> Server: request current rotation
 
-    -- Lucky Wheel
-    "ClaimWheelSpin",            -- Client -> Server: claim spin reward
-    "WheelSpinResult",           -- Server -> Client: spin result confirmation
-    "RequestWheelSpin",          -- Client -> Server: request free or paid wheel spin
-    "WheelSpinRejected",         -- Server -> Client: wheel spin rejected with reason
-    "WheelRewardGranted",        -- Server -> Client: authoritative reward grant notification
-    "PurchaseWheelSpin",         -- Client -> Server: prompt wheel spin dev product purchase
-
     -- Engagement
     "ServerAnnouncement",        -- Server -> Client: ticker announcements
     "ClaimProgressReward",       -- Client -> Server: claim hatch progress reward

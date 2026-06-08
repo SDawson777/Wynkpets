@@ -138,12 +138,6 @@ function AnalyticsService.TrackBoostExpired(player: Player, boostType: string)
     AnalyticsService.LogEvent(player, "BoostExpired", { BoostType = boostType })
 end
 
-function AnalyticsService.TrackWheelSpin(player: Player, paid: boolean, prizeType: string, prizeValue: any)
-    AnalyticsService.LogEvent(player, "WheelSpin", {
-        Paid = paid, PrizeType = prizeType, PrizeValue = prizeValue
-    })
-end
-
 function AnalyticsService.TrackSubscription(player: Player, tier: string, action: string)
     -- action: "granted" | "renewed" | "expired"
     AnalyticsService.LogEvent(player, "Subscription", { Tier = tier, Action = action })

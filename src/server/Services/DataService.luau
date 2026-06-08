@@ -107,15 +107,6 @@ local DEFAULT_DATA = {
     },
     -- Collected Eggs (field collection → hatchery hatching)
     CollectedEggs = {},           -- { [eggId] = count }
-    -- Lucky wheel state
-    Wheel = {
-        LastFreeSpinDay = "",
-        FreeSpinsUsedToday = 0,
-        PaidSpinsAvailable = 0,
-        TotalSpins = 0,
-    },
-    -- Wheel spin persistence (survive server restarts)
-    PendingWheelSpins = 0,         -- purchased spins not yet claimed
     -- Progress reward rate-limiting
     LastProgressRewardTime = 0,    -- os.time() of last ClaimProgressReward grant
     -- Battle Pass (reset each season)
