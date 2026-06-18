@@ -17,7 +17,7 @@ EggConfig.Eggs = {
         Cost = 25,
         Currency = "Coins",
         HatchTime = 1.5,
-        Image = "rbxassetid://71530578168493",
+        Image = "rbxassetid://134964808640819",
         Pets = {
             { PetId = "whiskerling",  Weight = 40 },  -- Common 40%
             { PetId = "puddlejump",   Weight = 30 },  -- Common 30%
@@ -33,7 +33,7 @@ EggConfig.Eggs = {
         Cost = 120,
         Currency = "Coins",
         HatchTime = 2.0,
-        Image = "rbxassetid://107793415303146",
+        Image = "rbxassetid://98372036612374",
         Pets = {
             { PetId = "dottie",       Weight = 35 },  -- Common 35%
             { PetId = "specklefoot",  Weight = 25 },  -- Common 25%
@@ -54,7 +54,7 @@ EggConfig.Eggs = {
         Cost = 500,
         Currency = "Coins",
         HatchTime = 2.5,
-        Image = "rbxassetid://138135608847486",
+        Image = "rbxassetid://115588454016476",
         Pets = {
             { PetId = "leafling",     Weight = 35 },
             { PetId = "twigsnap",     Weight = 30 },
@@ -70,7 +70,7 @@ EggConfig.Eggs = {
         Cost = 2500,
         Currency = "Coins",
         HatchTime = 3.0,
-        Image = "rbxassetid://79266939756243",
+        Image = "rbxassetid://117384361622735",
         Pets = {
             { PetId = "pixiepuff",    Weight = 30 },
             { PetId = "willowisp",    Weight = 22 },
@@ -91,7 +91,7 @@ EggConfig.Eggs = {
         Cost = 8000,
         Currency = "Coins",
         HatchTime = 3.5,
-        Image = "rbxassetid://124181350534279",
+        Image = "rbxassetid://127950535727189",
         Pets = {
             { PetId = "gemshard",      Weight = 35 },
             { PetId = "quartzpaw",     Weight = 25 },
@@ -107,7 +107,7 @@ EggConfig.Eggs = {
         Cost = 40000,
         Currency = "Coins",
         HatchTime = 4.0,
-        Image = "rbxassetid://118573179077470",
+        Image = "rbxassetid://84497992632268",
         Pets = {
             { PetId = "rubyflare",     Weight = 35 },
             { PetId = "obsidianfang",  Weight = 28 },
@@ -127,7 +127,7 @@ EggConfig.Eggs = {
         Cost = 150000,
         Currency = "Coins",
         HatchTime = 4.0,
-        Image = "rbxassetid://116319066477642",
+        Image = "rbxassetid://110801181923148",
         Pets = {
             { PetId = "cinderkit",     Weight = 35 },
             { PetId = "scorchpup",     Weight = 28 },
@@ -143,7 +143,7 @@ EggConfig.Eggs = {
         Cost = 600000,
         Currency = "Coins",
         HatchTime = 4.5,
-        Image = "rbxassetid://134190647448034",
+        Image = "rbxassetid://117717387979919",
         Pets = {
             { PetId = "ashmote",       Weight = 30 },
             { PetId = "blazeclaw",     Weight = 25 },
@@ -163,7 +163,7 @@ EggConfig.Eggs = {
         Cost = 1500000,
         Currency = "Coins",
         HatchTime = 5.0,
-        Image = "rbxassetid://92851289431171",
+        Image = "rbxassetid://130683283265526",
         Pets = {
             { PetId = "snowpuff",      Weight = 35 },
             { PetId = "icepaw",        Weight = 28 },
@@ -179,7 +179,7 @@ EggConfig.Eggs = {
         Cost = 6000000,
         Currency = "Coins",
         HatchTime = 5.5,
-        Image = "rbxassetid://99383115331176",
+        Image = "rbxassetid://84375685586823",
         Pets = {
             { PetId = "sleetstep",     Weight = 30 },
             { PetId = "hailshard",     Weight = 25 },
@@ -199,7 +199,7 @@ EggConfig.Eggs = {
         Cost = 20000000,
         Currency = "Coins",
         HatchTime = 5.5,
-        Image = "rbxassetid://94643370466870",
+        Image = "rbxassetid://108068671849225",
         Pets = {
             { PetId = "petalwisp",         Weight = 35 },
             { PetId = "moonbloom",         Weight = 28 },
@@ -215,7 +215,7 @@ EggConfig.Eggs = {
         Cost = 75000000,
         Currency = "Coins",
         HatchTime = 6.0,
-        Image = "rbxassetid://126467663965792",
+        Image = "rbxassetid://133780889657681",
         Pets = {
             { PetId = "astralsprout",      Weight = 30 },
             { PetId = "galaxyvine",        Weight = 25 },
@@ -235,7 +235,7 @@ EggConfig.Eggs = {
         Cost = 250000000,
         Currency = "Coins",
         HatchTime = 6.0,
-        Image = "rbxassetid://101221483541198",
+        Image = "rbxassetid://130707775219069",
         Pets = {
             { PetId = "shadowmite",    Weight = 35 },
             { PetId = "nightcrawl",    Weight = 28 },
@@ -251,7 +251,7 @@ EggConfig.Eggs = {
         Cost = 1000000000,
         Currency = "Coins",
         HatchTime = 6.5,
-        Image = "rbxassetid://118466343085609",
+        Image = "rbxassetid://93002675609864",
         Pets = {
             { PetId = "darkwhisper",       Weight = 30 },
             { PetId = "phantomblade",      Weight = 25 },
@@ -271,7 +271,7 @@ EggConfig.Eggs = {
         Cost = 5000000000,
         Currency = "Coins",
         HatchTime = 7.0,
-        Image = "rbxassetid://122446887186873",
+        Image = "rbxassetid://98082356801950",
         Pets = {
             { PetId = "voidmote",      Weight = 35 },
             { PetId = "nebulawyrm",    Weight = 28 },
@@ -287,7 +287,7 @@ EggConfig.Eggs = {
         Cost = 25000000000,
         Currency = "Coins",
         HatchTime = 7.5,
-        Image = "rbxassetid://114904294170841",
+        Image = "rbxassetid://100668037152393",
         Pets = {
             { PetId = "starforger",        Weight = 30 },
             { PetId = "dimensionweaver",   Weight = 25 },
