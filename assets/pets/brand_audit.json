@@ -1,0 +1,5057 @@
+[
+  {
+    "file": "absolutezero.png",
+    "pet_id": "absolutezero",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=4,6,white=47.1%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "absolutezero_golden.png",
+    "pet_id": "absolutezero",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 45,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,4,white=70.7%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "absolutezero_rainbow.png",
+    "pet_id": "absolutezero",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 21,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=3,6,white=46.9%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "abyssalking.png",
+    "pet_id": "abyssalking",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=2,0,white=80.8%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "abyssalking_golden.png",
+    "pet_id": "abyssalking",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 29,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=0,3,white=75.7%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "abyssalking_rainbow.png",
+    "pet_id": "abyssalking",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=3,0,white=79.0%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "amethystine.png",
+    "pet_id": "amethystine",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 65,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,6,white=48.2%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "amethystine_golden.png",
+    "pet_id": "amethystine",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=3,6,white=56.6%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "amethystine_rainbow.png",
+    "pet_id": "amethystine",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,3,white=62.5%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "ashmote.png",
+    "pet_id": "ashmote",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 62,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "ashmote_golden.png",
+    "pet_id": "ashmote",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "ashmote_rainbow.png",
+    "pet_id": "ashmote",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 119,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,2,white=67.7%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "astralsprout.png",
+    "pet_id": "astralsprout",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=4,6,white=46.6%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "astralsprout_golden.png",
+    "pet_id": "astralsprout",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 32,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=2,6,white=79.9%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "astralsprout_rainbow.png",
+    "pet_id": "astralsprout",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 57,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,4,white=61.0%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "aurorabear.png",
+    "pet_id": "aurorabear",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=1,6,white=53.1%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "aurorabear_golden.png",
+    "pet_id": "aurorabear",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=4,6,white=52.0%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "aurorabear_rainbow.png",
+    "pet_id": "aurorabear",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=3,0,white=82.1%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bird.png",
+    "pet_id": "bird",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 90,
+    "grid_failing_cells": 2,
+    "issues": [
+      "bg_element(cell=4,6,white=91.5%,n=2cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bird_golden.png",
+    "pet_id": "bird",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 120,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=0,3,white=48.3%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bird_rainbow.png",
+    "pet_id": "bird",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 18,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,4,white=66.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "blazeclaw.png",
+    "pet_id": "blazeclaw",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 63,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "blazeclaw_golden.png",
+    "pet_id": "blazeclaw",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 65,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,2,white=61.6%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "blazeclaw_rainbow.png",
+    "pet_id": "blazeclaw",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 92,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,2,white=65.0%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "blizzardwolf.png",
+    "pet_id": "blizzardwolf",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 52,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=4,6,white=62.3%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "blizzardwolf_golden.png",
+    "pet_id": "blizzardwolf",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,1,white=74.8%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "blizzardwolf_rainbow.png",
+    "pet_id": "blizzardwolf",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 21,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=3,0,white=61.7%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bloom_sprite.png",
+    "pet_id": "bloom_sprite",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 33,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=2,6,white=46.6%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bloom_sprite_golden.png",
+    "pet_id": "bloom_sprite",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 44,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=2,6,white=46.6%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bloom_sprite_rainbow.png",
+    "pet_id": "bloom_sprite",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 56,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=6,3,white=49.6%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bunny.png",
+    "pet_id": "bunny",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 52,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=0,3,white=51.3%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bunny_golden.png",
+    "pet_id": "bunny",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=1,6,white=48.9%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "bunny_rainbow.png",
+    "pet_id": "bunny",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 23,
+    "issues": [
+      "bg_element(cell=6,4,white=48.2%,n=23cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cat.png",
+    "pet_id": "cat",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 93,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=4,6,white=55.4%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cat_golden.png",
+    "pet_id": "cat",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 20,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=75.3%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cat_rainbow.png",
+    "pet_id": "cat",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=0,4,white=53.5%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "celestial_herald.png",
+    "pet_id": "celestial_herald",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,2,white=62.6%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "celestial_herald_golden.png",
+    "pet_id": "celestial_herald",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=6,2,white=53.8%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "celestial_herald_rainbow.png",
+    "pet_id": "celestial_herald",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 58,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,4,white=80.4%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "celestialunicorn.png",
+    "pet_id": "celestialunicorn",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 86,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=5,0,white=62.7%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "celestialunicorn_golden.png",
+    "pet_id": "celestialunicorn",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,3,white=53.0%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "celestialunicorn_rainbow.png",
+    "pet_id": "celestialunicorn",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=6,3,white=49.4%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cinderkit.png",
+    "pet_id": "cinderkit",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 98,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=3,6,white=57.9%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cinderkit_golden.png",
+    "pet_id": "cinderkit",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 95,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=58.7%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cinderkit_rainbow.png",
+    "pet_id": "cinderkit",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 41,
+    "grid_failing_cells": 1,
+    "issues": [
+      "bg_element(cell=6,3,white=80.8%,n=1cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmicnova.png",
+    "pet_id": "cosmicnova",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 4,
+    "edge_min": 255,
+    "saturation": 76,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=2,6,white=66.2%,n=19cells)",
+      "multi_blob(4)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmicnova_golden.png",
+    "pet_id": "cosmicnova",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,3,white=71.1%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmicnova_rainbow.png",
+    "pet_id": "cosmicnova",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=3,6,white=58.0%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmicreaper.png",
+    "pet_id": "cosmicreaper",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 85,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,4,white=60.5%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmicreaper_golden.png",
+    "pet_id": "cosmicreaper",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "cosmicreaper_rainbow.png",
+    "pet_id": "cosmicreaper",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 1,
+    "issues": [
+      "bg_element(cell=0,3,white=92.3%,n=1cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmos_herald.png",
+    "pet_id": "cosmos_herald",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 90,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=4,6,white=67.6%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmos_herald_golden.png",
+    "pet_id": "cosmos_herald",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 65,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,4,white=49.4%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmos_herald_rainbow.png",
+    "pet_id": "cosmos_herald",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 33,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,4,white=50.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmosdragon.png",
+    "pet_id": "cosmosdragon",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 22,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=6,3,white=67.4%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmosdragon_golden.png",
+    "pet_id": "cosmosdragon",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 77,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=6,5,white=50.0%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "cosmosdragon_rainbow.png",
+    "pet_id": "cosmosdragon",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 28,
+    "grid_failing_cells": 1,
+    "issues": [
+      "bg_element(cell=3,6,white=83.1%,n=1cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "crystal_keeper.png",
+    "pet_id": "crystal_keeper",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 45,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "crystal_keeper_golden.png",
+    "pet_id": "crystal_keeper",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 2,
+    "issues": [
+      "bg_element(cell=6,2,white=77.7%,n=2cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "crystal_keeper_rainbow.png",
+    "pet_id": "crystal_keeper",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 25,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,3,white=88.4%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "darkwhisper.png",
+    "pet_id": "darkwhisper",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 85,
+    "grid_failing_cells": 1,
+    "issues": [
+      "bg_element(cell=3,6,white=87.2%,n=1cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "darkwhisper_golden.png",
+    "pet_id": "darkwhisper",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 67,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,3,white=50.7%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "darkwhisper_rainbow.png",
+    "pet_id": "darkwhisper",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "diamondwing.png",
+    "pet_id": "diamondwing",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,6,white=52.9%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "diamondwing_golden.png",
+    "pet_id": "diamondwing",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,3,white=68.3%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "diamondwing_rainbow.png",
+    "pet_id": "diamondwing",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=51.2%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dimensionweaver.png",
+    "pet_id": "dimensionweaver",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 29,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=0,3,white=67.9%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dimensionweaver_golden.png",
+    "pet_id": "dimensionweaver",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 72,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,4,white=80.3%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dimensionweaver_rainbow.png",
+    "pet_id": "dimensionweaver",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 23,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=0,1,white=59.0%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dottie.png",
+    "pet_id": "dottie",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 65,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "dottie_golden.png",
+    "pet_id": "dottie",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 64,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=1,6,white=58.9%,n=19cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dottie_rainbow.png",
+    "pet_id": "dottie",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 63,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=2,6,white=46.9%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dragon.png",
+    "pet_id": "dragon",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=4,6,white=56.5%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dragon_golden.png",
+    "pet_id": "dragon",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 75,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,3,white=63.4%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dragon_rainbow.png",
+    "pet_id": "dragon",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 55,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,3,white=55.1%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dreadlord.png",
+    "pet_id": "dreadlord",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,4,white=54.6%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dreadlord_golden.png",
+    "pet_id": "dreadlord",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 107,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,3,white=50.5%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "dreadlord_rainbow.png",
+    "pet_id": "dreadlord",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 38,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=57.7%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "elderoak.png",
+    "pet_id": "elderoak",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,3,white=46.3%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "elderoak_golden.png",
+    "pet_id": "elderoak",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 62,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,6,white=57.4%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "elderoak_rainbow.png",
+    "pet_id": "elderoak",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 29,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,6,white=69.3%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "ember_wisp.png",
+    "pet_id": "ember_wisp",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 122,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=1,6,white=59.0%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "ember_wisp_golden.png",
+    "pet_id": "ember_wisp",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 97,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=4,6,white=49.5%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "ember_wisp_rainbow.png",
+    "pet_id": "ember_wisp",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 97,
+    "grid_failing_cells": 21,
+    "issues": [
+      "bg_element(cell=5,0,white=47.5%,n=21cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "emeraldwyrm.png",
+    "pet_id": "emeraldwyrm",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,2,white=48.1%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "emeraldwyrm_golden.png",
+    "pet_id": "emeraldwyrm",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 25,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,4,white=54.2%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "emeraldwyrm_rainbow.png",
+    "pet_id": "emeraldwyrm",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 55,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=0,4,white=50.2%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "etherealphoenix.png",
+    "pet_id": "etherealphoenix",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 34,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,3,white=64.6%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "etherealphoenix_golden.png",
+    "pet_id": "etherealphoenix",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 43,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=3,0,white=55.6%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "etherealphoenix_rainbow.png",
+    "pet_id": "etherealphoenix",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 44,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=3,6,white=53.5%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fernshade.png",
+    "pet_id": "fernshade",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 32,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,4,white=65.2%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fernshade_golden.png",
+    "pet_id": "fernshade",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 31,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "fernshade_rainbow.png",
+    "pet_id": "fernshade",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 2,
+    "issues": [
+      "bg_element(cell=2,6,white=79.9%,n=2cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "flamefang.png",
+    "pet_id": "flamefang",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 86,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=2,6,white=46.2%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "flamefang_golden.png",
+    "pet_id": "flamefang",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 102,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=1,0,white=48.1%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "flamefang_rainbow.png",
+    "pet_id": "flamefang",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "fluffnose.png",
+    "pet_id": "fluffnose",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 38,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=1,0,white=53.3%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fluffnose_golden.png",
+    "pet_id": "fluffnose",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 49,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,3,white=59.9%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fluffnose_rainbow.png",
+    "pet_id": "fluffnose",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 39,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=4,6,white=61.4%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "forest_spirit.png",
+    "pet_id": "forest_spirit",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 60,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=46.2%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "forest_spirit_golden.png",
+    "pet_id": "forest_spirit",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 63,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "forest_spirit_rainbow.png",
+    "pet_id": "forest_spirit",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 69,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=4,6,white=84.9%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fox.png",
+    "pet_id": "fox",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 90,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=3,6,white=48.5%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fox_golden.png",
+    "pet_id": "fox",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=0,4,white=59.9%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "fox_rainbow.png",
+    "pet_id": "fox",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 90,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=0,5,white=60.7%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frost_cub.png",
+    "pet_id": "frost_cub",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 15,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,4,white=83.2%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frost_cub_golden.png",
+    "pet_id": "frost_cub",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,3,white=63.1%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frost_cub_rainbow.png",
+    "pet_id": "frost_cub",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 36,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=4,0,white=49.9%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frost_sentinel.png",
+    "pet_id": "frost_sentinel",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 52,
+    "grid_failing_cells": 2,
+    "issues": [
+      "bg_element(cell=0,3,white=86.5%,n=2cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frost_sentinel_golden.png",
+    "pet_id": "frost_sentinel",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "frost_sentinel_rainbow.png",
+    "pet_id": "frost_sentinel",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 56,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,4,white=56.4%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frostbite.png",
+    "pet_id": "frostbite",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 70,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=3,6,white=57.5%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frostbite_golden.png",
+    "pet_id": "frostbite",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=1,6,white=46.9%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "frostbite_rainbow.png",
+    "pet_id": "frostbite",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 57,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=2,6,white=57.9%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "galaxyvine.png",
+    "pet_id": "galaxyvine",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 36,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,4,white=76.9%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "galaxyvine_golden.png",
+    "pet_id": "galaxyvine",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=2,6,white=50.2%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "galaxyvine_rainbow.png",
+    "pet_id": "galaxyvine",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 67,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "gemshard.png",
+    "pet_id": "gemshard",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 91,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=2,0,white=51.5%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "gemshard_golden.png",
+    "pet_id": "gemshard",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 33,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "gemshard_rainbow.png",
+    "pet_id": "gemshard",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 78,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=3,0,white=75.9%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glacierheart.png",
+    "pet_id": "glacierheart",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 78,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=6,3,white=46.3%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glacierheart_golden.png",
+    "pet_id": "glacierheart",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=2,0,white=53.7%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glacierheart_rainbow.png",
+    "pet_id": "glacierheart",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 71,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=1,0,white=53.2%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glimmerfox.png",
+    "pet_id": "glimmerfox",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=4,0,white=49.5%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glimmerfox_golden.png",
+    "pet_id": "glimmerfox",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 88,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=6,2,white=56.6%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glimmerfox_rainbow.png",
+    "pet_id": "glimmerfox",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 94,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=2,6,white=49.9%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "gloomfang.png",
+    "pet_id": "gloomfang",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,2,white=62.7%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "gloomfang_golden.png",
+    "pet_id": "gloomfang",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "gloomfang_rainbow.png",
+    "pet_id": "gloomfang",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 72,
+    "grid_failing_cells": 18,
+    "issues": [
+      "bg_element(cell=4,6,white=48.9%,n=18cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glowbug.png",
+    "pet_id": "glowbug",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 49,
+    "grid_failing_cells": 21,
+    "issues": [
+      "bg_element(cell=0,5,white=47.9%,n=21cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glowbug_golden.png",
+    "pet_id": "glowbug",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=2,6,white=47.1%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "glowbug_rainbow.png",
+    "pet_id": "glowbug",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "golden_bunny.png",
+    "pet_id": "golden_bunny",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=0,4,white=63.3%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_bunny_golden.png",
+    "pet_id": "golden_bunny",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,2,white=62.0%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_bunny_rainbow.png",
+    "pet_id": "golden_bunny",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 112,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=0,2,white=54.8%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_cat.png",
+    "pet_id": "golden_cat",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 107,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=3,6,white=69.0%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_cat_golden.png",
+    "pet_id": "golden_cat",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 108,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=52.8%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_cat_rainbow.png",
+    "pet_id": "golden_cat",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 112,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=6,2,white=52.0%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_dragon.png",
+    "pet_id": "golden_dragon",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 20,
+    "issues": [
+      "bg_element(cell=6,3,white=56.3%,n=20cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_dragon_golden.png",
+    "pet_id": "golden_dragon",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 36,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "golden_dragon_rainbow.png",
+    "pet_id": "golden_dragon",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 57,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=4,6,white=47.4%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_shark.png",
+    "pet_id": "golden_shark",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 69,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=3,0,white=55.1%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_shark_golden.png",
+    "pet_id": "golden_shark",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=2,0,white=52.1%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "golden_shark_rainbow.png",
+    "pet_id": "golden_shark",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=2,0,white=48.0%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "hailshard.png",
+    "pet_id": "hailshard",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 18,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "hailshard_golden.png",
+    "pet_id": "hailshard",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 49,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,4,white=67.0%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "hailshard_rainbow.png",
+    "pet_id": "hailshard",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 91,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,3,white=65.4%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "icepaw.png",
+    "pet_id": "icepaw",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 44,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "icepaw_golden.png",
+    "pet_id": "icepaw",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=3,6,white=51.1%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "icepaw_rainbow.png",
+    "pet_id": "icepaw",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=0,4,white=59.2%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "inferno_bear.png",
+    "pet_id": "inferno_bear",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 101,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,2,white=47.7%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "inferno_bear_golden.png",
+    "pet_id": "inferno_bear",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 86,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,3,white=82.7%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "inferno_bear_rainbow.png",
+    "pet_id": "inferno_bear",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 78,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,4,white=63.2%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "infernotitan.png",
+    "pet_id": "infernotitan",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 90,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,4,white=59.5%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "infernotitan_golden.png",
+    "pet_id": "infernotitan",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 102,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=6,2,white=63.2%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "infernotitan_rainbow.png",
+    "pet_id": "infernotitan",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=79.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "infinitybeast.png",
+    "pet_id": "infinitybeast",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 80,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,4,white=89.8%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "infinitybeast_golden.png",
+    "pet_id": "infinitybeast",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 104,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=0,5,white=68.4%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "infinitybeast_rainbow.png",
+    "pet_id": "infinitybeast",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 100,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=4,6,white=55.8%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "leafling.png",
+    "pet_id": "leafling",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 83,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=1,6,white=48.3%,n=19cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "leafling_golden.png",
+    "pet_id": "leafling",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,4,white=59.7%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "leafling_rainbow.png",
+    "pet_id": "leafling",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 45,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=48.1%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "leviathan.png",
+    "pet_id": "leviathan",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 25,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,3,white=48.8%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "leviathan_golden.png",
+    "pet_id": "leviathan",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=4,6,white=48.8%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "leviathan_rainbow.png",
+    "pet_id": "leviathan",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 24,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,3,white=69.3%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "magma_guardian.png",
+    "pet_id": "magma_guardian",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 57,
+    "grid_failing_cells": 1,
+    "issues": [
+      "bg_element(cell=0,4,white=83.6%,n=1cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "magma_guardian_golden.png",
+    "pet_id": "magma_guardian",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=3,6,white=47.7%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "magma_guardian_rainbow.png",
+    "pet_id": "magma_guardian",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 133,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=0,3,white=60.4%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "magmahowl.png",
+    "pet_id": "magmahowl",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 75,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,3,white=73.8%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "magmahowl_golden.png",
+    "pet_id": "magmahowl",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 104,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=4,6,white=53.0%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "magmahowl_rainbow.png",
+    "pet_id": "magmahowl",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 86,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=3,6,white=47.2%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "meadow_guardian.png",
+    "pet_id": "meadow_guardian",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 117,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,4,white=55.0%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "meadow_guardian_golden.png",
+    "pet_id": "meadow_guardian",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=3,0,white=51.3%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "meadow_guardian_rainbow.png",
+    "pet_id": "meadow_guardian",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 62,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=2,0,white=81.0%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_bird.png",
+    "pet_id": "mega_bird",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 30,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=3,6,white=46.4%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_bird_golden.png",
+    "pet_id": "mega_bird",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=3,0,white=58.2%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_bird_rainbow.png",
+    "pet_id": "mega_bird",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 36,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,3,white=59.6%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_bunny.png",
+    "pet_id": "mega_bunny",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 56,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=58.2%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_bunny_golden.png",
+    "pet_id": "mega_bunny",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,3,white=69.0%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_bunny_rainbow.png",
+    "pet_id": "mega_bunny",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 33,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,3,white=70.4%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_cat.png",
+    "pet_id": "mega_cat",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 106,
+    "grid_failing_cells": 20,
+    "issues": [
+      "bg_element(cell=6,3,white=47.0%,n=20cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_cat_golden.png",
+    "pet_id": "mega_cat",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 84,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=0,4,white=53.9%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_cat_rainbow.png",
+    "pet_id": "mega_cat",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 32,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "mega_dragon.png",
+    "pet_id": "mega_dragon",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 34,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=3,6,white=48.6%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_dragon_golden.png",
+    "pet_id": "mega_dragon",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 36,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,3,white=76.1%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_dragon_rainbow.png",
+    "pet_id": "mega_dragon",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "mega_fox.png",
+    "pet_id": "mega_fox",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 63,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,6,white=47.5%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_fox_golden.png",
+    "pet_id": "mega_fox",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 23,
+    "issues": [
+      "bg_element(cell=3,0,white=49.2%,n=23cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_fox_rainbow.png",
+    "pet_id": "mega_fox",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=2,6,white=46.0%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_inferno_bear.png",
+    "pet_id": "mega_inferno_bear",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 105,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=0,3,white=60.4%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_inferno_bear_golden.png",
+    "pet_id": "mega_inferno_bear",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 58,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,2,white=57.5%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_inferno_bear_rainbow.png",
+    "pet_id": "mega_inferno_bear",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,2,white=61.1%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_leviathan.png",
+    "pet_id": "mega_leviathan",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 69,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,3,white=48.8%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_leviathan_golden.png",
+    "pet_id": "mega_leviathan",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 71,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=6,4,white=49.5%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_leviathan_rainbow.png",
+    "pet_id": "mega_leviathan",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 93,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=6,3,white=59.9%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_phoenix.png",
+    "pet_id": "mega_phoenix",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 70,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,1,white=47.8%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_phoenix_golden.png",
+    "pet_id": "mega_phoenix",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 63,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=6,3,white=46.7%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_phoenix_rainbow.png",
+    "pet_id": "mega_phoenix",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 98,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,3,white=59.6%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_seal.png",
+    "pet_id": "mega_seal",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 39,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=6,4,white=55.6%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_seal_golden.png",
+    "pet_id": "mega_seal",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 41,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,3,white=65.9%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_seal_rainbow.png",
+    "pet_id": "mega_seal",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,4,white=71.6%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_shark.png",
+    "pet_id": "mega_shark",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 97,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,3,white=51.8%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_shark_golden.png",
+    "pet_id": "mega_shark",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "mega_shark_rainbow.png",
+    "pet_id": "mega_shark",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 74,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=3,6,white=52.3%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_tiger.png",
+    "pet_id": "mega_tiger",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 92,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=0,1,white=51.5%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_tiger_golden.png",
+    "pet_id": "mega_tiger",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 55,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=4,6,white=53.5%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_tiger_rainbow.png",
+    "pet_id": "mega_tiger",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=6,4,white=58.2%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_wolf.png",
+    "pet_id": "mega_wolf",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 78,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=0,4,white=76.8%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_wolf_golden.png",
+    "pet_id": "mega_wolf",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,6,white=51.9%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mega_wolf_rainbow.png",
+    "pet_id": "mega_wolf",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=3,6,white=46.8%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "moltendrake.png",
+    "pet_id": "moltendrake",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 93,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=2,6,white=47.3%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "moltendrake_golden.png",
+    "pet_id": "moltendrake",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 81,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=6,4,white=51.7%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "moltendrake_rainbow.png",
+    "pet_id": "moltendrake",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 97,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "moonbloom.png",
+    "pet_id": "moonbloom",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=61.7%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "moonbloom_golden.png",
+    "pet_id": "moonbloom",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=1,6,white=47.3%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "moonbloom_rainbow.png",
+    "pet_id": "moonbloom",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "moonlark.png",
+    "pet_id": "moonlark",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 19,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "moonlark_golden.png",
+    "pet_id": "moonlark",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 28,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,0,white=59.3%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "moonlark_rainbow.png",
+    "pet_id": "moonlark",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 49,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=3,6,white=47.3%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mosswhisker.png",
+    "pet_id": "mosswhisker",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 69,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,6,white=47.7%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mosswhisker_golden.png",
+    "pet_id": "mosswhisker",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 44,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=3,6,white=46.6%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "mosswhisker_rainbow.png",
+    "pet_id": "mosswhisker",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 70,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=0,4,white=60.1%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nebulafawn.png",
+    "pet_id": "nebulafawn",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 41,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=1,6,white=61.3%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nebulafawn_golden.png",
+    "pet_id": "nebulafawn",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 41,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=4,6,white=46.6%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nebulafawn_rainbow.png",
+    "pet_id": "nebulafawn",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=3,6,white=51.5%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nebulawyrm.png",
+    "pet_id": "nebulawyrm",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 65,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=3,6,white=58.0%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nebulawyrm_golden.png",
+    "pet_id": "nebulawyrm",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "nebulawyrm_rainbow.png",
+    "pet_id": "nebulawyrm",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=0,5,white=72.9%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nightcrawl.png",
+    "pet_id": "nightcrawl",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 60,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=2,0,white=58.4%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "nightcrawl_golden.png",
+    "pet_id": "nightcrawl",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 45,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "nightcrawl_rainbow.png",
+    "pet_id": "nightcrawl",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 64,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=0,1,white=62.9%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "oblivionserpent.png",
+    "pet_id": "oblivionserpent",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,3,white=50.7%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "oblivionserpent_golden.png",
+    "pet_id": "oblivionserpent",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 89,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,2,white=66.7%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "oblivionserpent_rainbow.png",
+    "pet_id": "oblivionserpent",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 52,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=67.1%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "obsidianfang.png",
+    "pet_id": "obsidianfang",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 70,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=0,3,white=49.5%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "obsidianfang_golden.png",
+    "pet_id": "obsidianfang",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 40,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,4,white=50.7%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "obsidianfang_rainbow.png",
+    "pet_id": "obsidianfang",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,3,white=59.5%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "omnigod.png",
+    "pet_id": "omnigod",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 74,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,3,white=63.7%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "omnigod_golden.png",
+    "pet_id": "omnigod",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 22,
+    "grid_failing_cells": 2,
+    "issues": [
+      "bg_element(cell=3,0,white=90.3%,n=2cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "omnigod_rainbow.png",
+    "pet_id": "omnigod",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 58,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,3,white=48.4%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "patchwhirl.png",
+    "pet_id": "patchwhirl",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 75,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=2,6,white=83.4%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "patchwhirl_golden.png",
+    "pet_id": "patchwhirl",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 71,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,3,white=74.3%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "patchwhirl_rainbow.png",
+    "pet_id": "patchwhirl",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 72,
+    "grid_failing_cells": 22,
+    "issues": [
+      "bg_element(cell=1,6,white=49.5%,n=22cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "permafrost.png",
+    "pet_id": "permafrost",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 44,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=1,0,white=47.6%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "permafrost_golden.png",
+    "pet_id": "permafrost",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=59.3%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "permafrost_rainbow.png",
+    "pet_id": "permafrost",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "petalwisp.png",
+    "pet_id": "petalwisp",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 52,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=2,6,white=49.8%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "petalwisp_golden.png",
+    "pet_id": "petalwisp",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=2,6,white=46.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "petalwisp_rainbow.png",
+    "pet_id": "petalwisp",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 33,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,3,white=80.3%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "phantomblade.png",
+    "pet_id": "phantomblade",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=0,2,white=59.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "phantomblade_golden.png",
+    "pet_id": "phantomblade",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=1,6,white=49.9%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "phantomblade_rainbow.png",
+    "pet_id": "phantomblade",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=6,4,white=54.4%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "phoenix.png",
+    "pet_id": "phoenix",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 95,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "phoenix_golden.png",
+    "pet_id": "phoenix",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 81,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=6,3,white=53.6%,n=19cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "phoenix_rainbow.png",
+    "pet_id": "phoenix",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 55,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "pixiepuff.png",
+    "pet_id": "pixiepuff",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "pixiepuff_golden.png",
+    "pet_id": "pixiepuff",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 69,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,0,white=49.2%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "pixiepuff_rainbow.png",
+    "pet_id": "pixiepuff",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 80,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=0,5,white=58.8%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "prismapaw.png",
+    "pet_id": "prismapaw",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 69,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=4,6,white=67.1%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "prismapaw_golden.png",
+    "pet_id": "prismapaw",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=2,0,white=53.6%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "prismapaw_rainbow.png",
+    "pet_id": "prismapaw",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 75,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=2,6,white=88.4%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "puddlejump.png",
+    "pet_id": "puddlejump",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=4,0,white=56.9%,n=19cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "puddlejump_golden.png",
+    "pet_id": "puddlejump",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=1,6,white=50.2%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "puddlejump_rainbow.png",
+    "pet_id": "puddlejump",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 70,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=1,6,white=76.2%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "pyronix.png",
+    "pet_id": "pyronix",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 70,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=3,0,white=57.6%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "pyronix_golden.png",
+    "pet_id": "pyronix",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 32,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,3,white=77.0%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "pyronix_rainbow.png",
+    "pet_id": "pyronix",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 41,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=2,0,white=74.7%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "quantumwolf.png",
+    "pet_id": "quantumwolf",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 64,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=0,3,white=62.7%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "quantumwolf_golden.png",
+    "pet_id": "quantumwolf",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,2,white=52.2%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "quantumwolf_rainbow.png",
+    "pet_id": "quantumwolf",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 92,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,2,white=48.8%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "quartzpaw.png",
+    "pet_id": "quartzpaw",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 25,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,2,white=59.9%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "quartzpaw_golden.png",
+    "pet_id": "quartzpaw",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 52,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=2,6,white=45.3%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "quartzpaw_rainbow.png",
+    "pet_id": "quartzpaw",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=0,5,white=54.9%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "radiantdot.png",
+    "pet_id": "radiantdot",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 1,
+    "issues": [
+      "bg_element(cell=6,4,white=89.7%,n=1cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "radiantdot_golden.png",
+    "pet_id": "radiantdot",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=1,6,white=53.4%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "radiantdot_rainbow.png",
+    "pet_id": "radiantdot",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 39,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,4,white=50.1%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "realityshatter.png",
+    "pet_id": "realityshatter",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 86,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,4,white=86.2%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "realityshatter_golden.png",
+    "pet_id": "realityshatter",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 29,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=48.6%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "realityshatter_rainbow.png",
+    "pet_id": "realityshatter",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=0,4,white=92.3%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "rubyflare.png",
+    "pet_id": "rubyflare",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 104,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=69.6%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "rubyflare_golden.png",
+    "pet_id": "rubyflare",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 107,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=4,6,white=63.7%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "rubyflare_rainbow.png",
+    "pet_id": "rubyflare",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 65,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,4,white=76.2%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sapphireclaw.png",
+    "pet_id": "sapphireclaw",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 20,
+    "issues": [
+      "bg_element(cell=1,6,white=46.7%,n=20cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sapphireclaw_golden.png",
+    "pet_id": "sapphireclaw",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 75,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=1,6,white=65.4%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sapphireclaw_rainbow.png",
+    "pet_id": "sapphireclaw",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 68,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=1,6,white=49.8%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "scorchpup.png",
+    "pet_id": "scorchpup",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 81,
+    "grid_failing_cells": 10,
+    "issues": [
+      "bg_element(cell=4,6,white=58.7%,n=10cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "scorchpup_golden.png",
+    "pet_id": "scorchpup",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 78,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=6,3,white=49.7%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "scorchpup_rainbow.png",
+    "pet_id": "scorchpup",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 83,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=6,3,white=55.3%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "seal.png",
+    "pet_id": "seal",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=3,0,white=77.8%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "seal_golden.png",
+    "pet_id": "seal",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=6,3,white=59.3%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "seal_rainbow.png",
+    "pet_id": "seal",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 81,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=3,6,white=60.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shadowmite.png",
+    "pet_id": "shadowmite",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 43,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=3,6,white=46.8%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shadowmite_golden.png",
+    "pet_id": "shadowmite",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 57,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,3,white=66.3%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shadowmite_rainbow.png",
+    "pet_id": "shadowmite",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 28,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "shadowmonarch.png",
+    "pet_id": "shadowmonarch",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 22,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,4,white=77.0%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shadowmonarch_golden.png",
+    "pet_id": "shadowmonarch",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 67,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,2,white=57.2%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shadowmonarch_rainbow.png",
+    "pet_id": "shadowmonarch",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 95,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,2,white=87.2%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shark.png",
+    "pet_id": "shark",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 49,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=0,3,white=72.0%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shark_golden.png",
+    "pet_id": "shark",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=4,0,white=56.8%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shark_rainbow.png",
+    "pet_id": "shark",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,2,white=55.3%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shimmerspot.png",
+    "pet_id": "shimmerspot",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 72,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=2,6,white=50.7%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shimmerspot_golden.png",
+    "pet_id": "shimmerspot",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 74,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,3,white=45.9%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "shimmerspot_rainbow.png",
+    "pet_id": "shimmerspot",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 76,
+    "grid_failing_cells": 13,
+    "issues": [
+      "bg_element(cell=6,3,white=60.4%,n=13cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "singularity.png",
+    "pet_id": "singularity",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 45,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,3,white=47.6%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "singularity_golden.png",
+    "pet_id": "singularity",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 24,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "singularity_rainbow.png",
+    "pet_id": "singularity",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 38,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,4,white=52.4%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sleetstep.png",
+    "pet_id": "sleetstep",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,2,white=54.8%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sleetstep_golden.png",
+    "pet_id": "sleetstep",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 18,
+    "issues": [
+      "bg_element(cell=2,0,white=53.1%,n=18cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sleetstep_rainbow.png",
+    "pet_id": "sleetstep",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=3,0,white=48.5%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "snowpuff.png",
+    "pet_id": "snowpuff",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 33,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,2,white=71.8%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "snowpuff_golden.png",
+    "pet_id": "snowpuff",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 3,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=0,1,white=56.2%,n=19cells)",
+      "multi_blob(3)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "snowpuff_rainbow.png",
+    "pet_id": "snowpuff",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 29,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,3,white=89.4%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "solarflare.png",
+    "pet_id": "solarflare",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 49,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=6,3,white=58.0%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "solarflare_golden.png",
+    "pet_id": "solarflare",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=0,3,white=65.7%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "solarflare_rainbow.png",
+    "pet_id": "solarflare",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 64,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=1,0,white=53.5%,n=19cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sparkletail.png",
+    "pet_id": "sparkletail",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=2,6,white=47.1%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "sparkletail_golden.png",
+    "pet_id": "sparkletail",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "sparkletail_rainbow.png",
+    "pet_id": "sparkletail",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 34,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,4,white=67.2%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "specklefoot.png",
+    "pet_id": "specklefoot",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 40,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=6,3,white=49.6%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "specklefoot_golden.png",
+    "pet_id": "specklefoot",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=6,3,white=59.3%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "specklefoot_rainbow.png",
+    "pet_id": "specklefoot",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 72,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=4,6,white=48.9%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "stardust.png",
+    "pet_id": "stardust",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 53,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=70.9%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "stardust_golden.png",
+    "pet_id": "stardust",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 57,
+    "grid_failing_cells": 9,
+    "issues": [
+      "bg_element(cell=0,3,white=67.3%,n=9cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "stardust_rainbow.png",
+    "pet_id": "stardust",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,3,white=74.4%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "starforger.png",
+    "pet_id": "starforger",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 60,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=0,3,white=57.3%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "starforger_golden.png",
+    "pet_id": "starforger",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 48,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=6,3,white=46.7%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "starforger_rainbow.png",
+    "pet_id": "starforger",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 23,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=6,4,white=80.1%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "starweaver.png",
+    "pet_id": "starweaver",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 36,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=2,0,white=51.9%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "starweaver_golden.png",
+    "pet_id": "starweaver",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 17,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,2,white=73.5%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "starweaver_rainbow.png",
+    "pet_id": "starweaver",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 45,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=1,0,white=48.4%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "storm_pup.png",
+    "pet_id": "storm_pup",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 67,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,3,white=50.1%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "storm_pup_golden.png",
+    "pet_id": "storm_pup",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 43,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=6,2,white=58.5%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "storm_pup_rainbow.png",
+    "pet_id": "storm_pup",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=4,0,white=78.9%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "thornbloom.png",
+    "pet_id": "thornbloom",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 83,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,6,white=66.0%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "thornbloom_golden.png",
+    "pet_id": "thornbloom",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 3,
+    "edge_min": 255,
+    "saturation": 58,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=6,2,white=63.0%,n=19cells)",
+      "multi_blob(3)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "thornbloom_rainbow.png",
+    "pet_id": "thornbloom",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 38,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=4,0,white=73.2%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "tiger.png",
+    "pet_id": "tiger",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 58,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=6,4,white=54.7%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "tiger_golden.png",
+    "pet_id": "tiger",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 64,
+    "grid_failing_cells": 15,
+    "issues": [
+      "bg_element(cell=6,2,white=54.7%,n=15cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "tiger_rainbow.png",
+    "pet_id": "tiger",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 97,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=0,3,white=82.7%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "topazstrike.png",
+    "pet_id": "topazstrike",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 50,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "topazstrike_golden.png",
+    "pet_id": "topazstrike",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 4,
+    "issues": [
+      "bg_element(cell=3,6,white=51.7%,n=4cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "topazstrike_rainbow.png",
+    "pet_id": "topazstrike",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 35,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,6,white=53.7%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "twigsnap.png",
+    "pet_id": "twigsnap",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 51,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,0,white=49.8%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "twigsnap_golden.png",
+    "pet_id": "twigsnap",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 44,
+    "grid_failing_cells": 14,
+    "issues": [
+      "bg_element(cell=0,3,white=46.9%,n=14cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "twigsnap_rainbow.png",
+    "pet_id": "twigsnap",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 54,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "void_watcher.png",
+    "pet_id": "void_watcher",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 73,
+    "grid_failing_cells": 0,
+    "issues": [],
+    "pass": true
+  },
+  {
+    "file": "void_watcher_golden.png",
+    "pet_id": "void_watcher",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 2,
+    "edge_min": 255,
+    "saturation": 34,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=53.1%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "void_watcher_rainbow.png",
+    "pet_id": "void_watcher",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 29,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=3,0,white=81.5%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "voidhound.png",
+    "pet_id": "voidhound",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 79,
+    "grid_failing_cells": 2,
+    "issues": [
+      "bg_element(cell=2,0,white=88.0%,n=2cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "voidhound_golden.png",
+    "pet_id": "voidhound",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 37,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=0,5,white=70.9%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "voidhound_rainbow.png",
+    "pet_id": "voidhound",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 75,
+    "grid_failing_cells": 19,
+    "issues": [
+      "bg_element(cell=1,6,white=54.1%,n=19cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "voidmote.png",
+    "pet_id": "voidmote",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 59,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=0,3,white=48.8%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "voidmote_golden.png",
+    "pet_id": "voidmote",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 84,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=1,0,white=54.0%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "voidmote_rainbow.png",
+    "pet_id": "voidmote",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 64,
+    "grid_failing_cells": 3,
+    "issues": [
+      "bg_element(cell=6,2,white=79.6%,n=3cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "volcanowyrm.png",
+    "pet_id": "volcanowyrm",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 107,
+    "grid_failing_cells": 17,
+    "issues": [
+      "bg_element(cell=6,2,white=49.7%,n=17cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "volcanowyrm_golden.png",
+    "pet_id": "volcanowyrm",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 86,
+    "grid_failing_cells": 6,
+    "issues": [
+      "bg_element(cell=6,3,white=62.5%,n=6cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "volcanowyrm_rainbow.png",
+    "pet_id": "volcanowyrm",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 93,
+    "grid_failing_cells": 24,
+    "issues": [
+      "bg_element(cell=4,6,white=52.7%,n=24cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "whiskerling.png",
+    "pet_id": "whiskerling",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 77,
+    "grid_failing_cells": 16,
+    "issues": [
+      "bg_element(cell=0,1,white=51.9%,n=16cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "whiskerling_golden.png",
+    "pet_id": "whiskerling",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 8,
+    "issues": [
+      "bg_element(cell=2,6,white=49.2%,n=8cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "whiskerling_rainbow.png",
+    "pet_id": "whiskerling",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 61,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,4,white=71.4%,n=7cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "willowisp.png",
+    "pet_id": "willowisp",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 47,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=3,6,white=47.5%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "willowisp_golden.png",
+    "pet_id": "willowisp",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 34,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=1,6,white=45.6%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "willowisp_rainbow.png",
+    "pet_id": "willowisp",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 46,
+    "grid_failing_cells": 5,
+    "issues": [
+      "bg_element(cell=6,3,white=70.3%,n=5cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "wolf.png",
+    "pet_id": "wolf",
+    "variant": "base",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 42,
+    "grid_failing_cells": 11,
+    "issues": [
+      "bg_element(cell=6,3,white=48.6%,n=11cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "wolf_golden.png",
+    "pet_id": "wolf",
+    "variant": "golden",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 25,
+    "grid_failing_cells": 12,
+    "issues": [
+      "bg_element(cell=6,3,white=53.3%,n=12cells)"
+    ],
+    "pass": false
+  },
+  {
+    "file": "wolf_rainbow.png",
+    "pet_id": "wolf",
+    "variant": "rainbow",
+    "resolution": "1024x1024",
+    "blobs": 1,
+    "edge_min": 255,
+    "saturation": 27,
+    "grid_failing_cells": 7,
+    "issues": [
+      "bg_element(cell=6,2,white=70.7%,n=7cells)"
+    ],
+    "pass": false
+  }
+]

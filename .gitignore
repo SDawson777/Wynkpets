@@ -1,0 +1,11 @@
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+.DS_Store
+Thumbs.db
+*.lock
+.env
+.env.*
+__pycache__/
+*.pyc
